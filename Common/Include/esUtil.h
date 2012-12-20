@@ -32,8 +32,13 @@ extern "C" {
 ///
 //  Macros
 //
-#define ESUTIL_API  __cdecl
-#define ESCALLBACK  __cdecl
+#ifdef WIN32
+   #define ESUTIL_API  __cdecl
+   #define ESCALLBACK  __cdecl
+#else
+   #define ESUTIL_API
+   #define ESCALLBACK
+#endif
 
 
 /// esCreateWindow flag - RGB color buffer
@@ -51,6 +56,12 @@ extern "C" {
 ///
 // Types
 //
+#ifndef FALSE
+#define FALSE 0
+#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
 
 typedef struct
 {
@@ -68,8 +79,11 @@ typedef struct
    /// Window height
    GLint       height;
 
+   /// Display handle
+   EGLNativeDisplayType eglNativeDisplay;
+
    /// Window handle
-   EGLNativeWindowType  hWnd;
+   EGLNativeWindowType  eglNativeWindow;
 
    /// EGL display
    EGLDisplay  eglDisplay;

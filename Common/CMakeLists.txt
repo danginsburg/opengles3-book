@@ -7,7 +7,7 @@ set ( common_src Source/esShader.c
 if(WIN32)
 	set( common_platform_src Source/Win32/esUtil_win32.c )
 else()
-	message( FATAL_ERROR "Unsupported platform" )
+	set( common_platform_src Source/LinuxX11/esUtil_X11.c )
 endif()
 
              

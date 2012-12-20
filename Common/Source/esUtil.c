@@ -20,6 +20,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
 #include "esUtil.h"
@@ -61,8 +62,8 @@ typedef struct
 //
 //    Creates an EGL rendering context and all associated elements
 //
-EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,
-                              EGLContext* eglContext, EGLSurface* eglSurface,
+EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay, 
+                              EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface,
                               EGLint attribList[])
 {
    EGLint numConfigs;
@@ -75,7 +76,7 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,
    EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
 
    // Get Display
-   display = eglGetDisplay(GetDC(hWnd));
+   display = eglGetDisplay(eglNativeDisplay);
    if ( display == EGL_NO_DISPLAY )
    {
       return EGL_FALSE;
@@ -100,7 +101,7 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,
    }
 
    // Create a surface
-   surface = eglCreateWindowSurface(display, config, (EGLNativeWindowType)hWnd, NULL);
+   surface = eglCreateWindowSurface(display, config, eglNativeWindow, NULL);
    if ( surface == EGL_NO_SURFACE )
    {
       return EGL_FALSE;
@@ -185,7 +186,8 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
    }
 
   
-   if ( !CreateEGLContext ( esContext->hWnd,
+   if ( !CreateEGLContext ( esContext->eglNativeWindow,
+                            esContext->eglNativeDisplay,
                             &esContext->eglDisplay,
                             &esContext->eglContext,
                             &esContext->eglSurface,
@@ -237,7 +239,7 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
     char buf[BUFSIZ];
 
     va_start ( params, formatStr );
-    vsprintf_s ( buf, sizeof(buf),  formatStr, params );
+    vsprintf ( buf, formatStr, params );
     
     printf ( "%s", buf );
     
