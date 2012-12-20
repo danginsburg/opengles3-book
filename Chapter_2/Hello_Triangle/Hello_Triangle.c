@@ -175,20 +175,16 @@ void Draw ( ESContext *esContext )
 }
 
 
-int main ( int argc, char *argv[] )
+int esMain( ESContext *esContext )
 {
-   ESContext esContext;
-   UserData  userData;
+   esContext->userData = malloc ( sizeof( UserData ) );
 
-   esInitContext ( &esContext );
-   esContext.userData = &userData;
-
-   esCreateWindow ( &esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
+   esCreateWindow ( esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
    
-   if ( !Init ( &esContext ) )
-      return 0;
+   if ( !Init ( esContext ) )
+      return GL_FALSE;
 
-   esRegisterDrawFunc ( &esContext, Draw );
+   esRegisterDrawFunc ( esContext, Draw );
    
-   esMainLoop ( &esContext );
+   return GL_TRUE;
 }

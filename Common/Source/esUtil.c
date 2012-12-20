@@ -25,7 +25,35 @@
 #include "esUtil.h"
 #include "esUtil_win.h"
 
+///
+//  Macros
+//
+#define INVERTED_BIT            (1 << 5)
 
+///
+//  Types
+//
+#pragma pack(push,x1)                            // Byte alignment (8-bit)
+#pragma pack(1)
+
+typedef struct
+{
+   unsigned char  IdSize,
+                  MapType,
+                  ImageType;
+   unsigned short PaletteStart,
+                  PaletteSize;
+   unsigned char  PaletteEntryDepth;
+   unsigned short X,
+                  Y,
+                  Width,
+                  Height;
+   unsigned char  ColorDepth,
+                  Descriptor;
+         
+} TGA_HEADER;
+
+#pragma pack(pop,x1)
 
 
 ///
@@ -171,17 +199,6 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
 }
 
 ///
-//  esMainLoop()
-//
-//    Start the main loop for the OpenGL ES application
-//
-void ESUTIL_API esMainLoop ( ESContext *esContext )
-{
-   WinLoop ( esContext );
-}
-
-
-///
 //  esRegisterDrawFunc()
 //
 void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
@@ -235,12 +252,32 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
 //
 char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )
 {
-   char *buffer;
+   char        *buffer;
+   FILE        *fp;
+   TGA_HEADER   Header;
 
-   if ( WinTGALoad ( fileName, &buffer, width, height ) )
+   if ( ( fp = fopen ( fileName, "rb" ) ) != 0 )
    {
-      return buffer;
+      return NULL;
    }
 
-   return NULL;
+   fread ( &Header, sizeof(TGA_HEADER), 1, fp );
+
+   *width = Header.Width;
+   *height = Header.Height;
+   
+   if ( Header.ColorDepth == 24 )
+   {
+      buffer = (char*)malloc(sizeof(char) * 3 * (*width) * (*height));
+
+      if (buffer)
+      {
+         fread(buffer, sizeof(char) * 3, (*width) * (*height), fp);
+
+         fclose(fp);
+         return(buffer);
+      }		
+   }
+
+   return(NULL);
 }

@@ -18,6 +18,7 @@
 //
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdlib.h>
 #include "esUtil.h"
 
 //////////////////////////////////////////////////////////////////
@@ -144,7 +145,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
 }
 
 ///
-//  winLoop()
+//  WinLoop()
 //
 //      Start main windows loop
 //
@@ -180,4 +181,32 @@ void WinLoop ( ESContext *esContext )
       if ( esContext->updateFunc != NULL )
          esContext->updateFunc ( esContext, deltaTime );
    }
+}
+
+///
+//  Global extern.  The application must declsare this function
+//  that runs the application.
+//
+extern int esMain( ESContext *esContext );
+
+///
+//  main()
+//
+//      Main entrypoint for application
+//
+int main ( int argc, char *argv[] )
+{
+   ESContext esContext;
+   
+   esInitContext ( &esContext );
+
+   if ( esMain ( &esContext ) != GL_TRUE )
+      return 1;   
+   
+   WinLoop ( &esContext );
+
+   if ( esContext.userData != NULL )
+	   free ( esContext.userData );
+
+   return 0;
 }

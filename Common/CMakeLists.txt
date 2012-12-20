@@ -5,8 +5,7 @@ set ( common_src Source/esShader.c
 
 # Win32 Platform files
 if(WIN32)
-	set( common_platform_src Source/Win32/esUtil_TGA.c 
-							 Source/Win32/esUtil_win32.c )
+	set( common_platform_src Source/Win32/esUtil_win32.c )
 else()
 	message( FATAL_ERROR "Unsupported platform" )
 endif()

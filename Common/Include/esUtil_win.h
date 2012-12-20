@@ -44,20 +44,6 @@ extern "C" {
 //
 GLboolean WinCreate ( ESContext *esContext, const char *title );
 
-///
-//  WinLoop()
-//
-//      Start main windows loop
-//
-void WinLoop ( ESContext *esContext );
-
-///
-//  WinTGALoad()
-//    
-//      TGA loader win32 implementation
-//
-int WinTGALoad ( const char *fileName, char **buffer, int *width, int *height );
-
 #ifdef __cplusplus
 }
 #endif
