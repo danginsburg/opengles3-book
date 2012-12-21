@@ -79,17 +79,20 @@ int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
    GLbyte vShaderStr[] =  
-      "attribute vec4 vPosition;    \n"
+      "#version 300 es				\n"
+      "in vec4 vPosition;           \n"
       "void main()                  \n"
       "{                            \n"
       "   gl_Position = vPosition;  \n"
       "}                            \n";
    
    GLbyte fShaderStr[] =  
-      "precision mediump float;\n"\
+      "#version 300 es				                \n"    
+      "precision mediump float;						\n"
+      "out vec4 fragColor;							\n"
       "void main()                                  \n"
       "{                                            \n"
-      "  gl_FragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );\n"
+      "  fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );   \n"
       "}                                            \n";
 
    GLuint vertexShader;
