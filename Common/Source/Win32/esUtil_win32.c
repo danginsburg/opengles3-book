@@ -103,7 +103,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
    wndclass.lpfnWndProc   = (WNDPROC)ESWindowProc; 
    wndclass.hInstance     = hInstance; 
    wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH); 
-   wndclass.lpszClassName = "opengles2.0"; 
+   wndclass.lpszClassName = "opengles3.0"; 
 
    if (!RegisterClass (&wndclass) ) 
       return FALSE; 
@@ -122,7 +122,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
 
 
    esContext->eglNativeWindow = CreateWindow(
-                         "opengles2.0",
+                         "opengles3.0",
                          title,
                          wStyle,
                          0,
