@@ -14,7 +14,6 @@
 //    a minimal vertex/fragment shader.  The purpose of this 
 //    example is to demonstrate the basic concepts of 
 //    OpenGL ES 2.0 rendering.
-#include <stdlib.h>
 #include "esUtil.h"
 
 typedef struct
@@ -37,7 +36,7 @@ GLuint LoadShader ( GLenum type, const char *shaderSrc )
    shader = glCreateShader ( type );
 
    if ( shader == 0 )
-   	return 0;
+    return 0;
 
    // Load the shader source
    glShaderSource ( shader, 1, &shaderSrc, NULL );
@@ -79,7 +78,7 @@ int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
    GLbyte vShaderStr[] =  
-      "#version 300 es				\n"
+      "#version 300 es              \n"
       "in vec4 vPosition;           \n"
       "void main()                  \n"
       "{                            \n"
@@ -87,12 +86,12 @@ int Init ( ESContext *esContext )
       "}                            \n";
    
    GLbyte fShaderStr[] =  
-      "#version 300 es				                \n"    
-      "precision mediump float;						\n"
-      "out vec4 fragColor;							\n"
+      "#version 300 es                              \n"
+      "precision mediump float;                     \n"
+      "out vec4 fragColor;                          \n"
       "void main()                                  \n"
       "{                                            \n"
-      "  fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );   \n"
+      "   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
       "}                                            \n";
 
    GLuint vertexShader;
