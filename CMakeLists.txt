@@ -15,4 +15,5 @@ SUBDIRS( Common
          Chapter_2/Hello_Triangle
          Chapter_6/Example_6_3 
          Chapter_6/Example_6_6
+         Chapter_6/VertexArrayObjects
          Chapter_6/VertexBufferObjects )	
