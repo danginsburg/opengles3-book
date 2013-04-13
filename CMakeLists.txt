@@ -12,4 +12,5 @@ find_library( OPENGLES3_LIBRARY GLESv2 "OpenGL ES v3.0 library")
 find_library( EGL_LIBRARY EGL "EGL 1.4 library" )
  
 SUBDIRS( Common
-         Chapter_2/Hello_Triangle )	
+         Chapter_2/Hello_Triangle
+         Chapter_6/Example_6_3 )	
