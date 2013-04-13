@@ -97,6 +97,7 @@ typedef struct
 
    /// Callbacks
    void (ESCALLBACK *drawFunc) ( void* );
+   void (ESCALLBACK *shutdownFunc) ( void* );
    void (ESCALLBACK *keyFunc) ( void*, unsigned char, int, int );
    void (ESCALLBACK *updateFunc) ( void*, float deltaTime );
 } ESContext;
@@ -134,6 +135,13 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, G
 /// \param drawFunc Draw callback function that will be used to render the scene
 //
 void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) );
+
+//
+/// \brief Register a callback function to be called on shutdown
+/// \param esContext Application context
+/// \param drawFunc Shutdown callback function
+//
+void ESUTIL_API esRegisterShutdownFunc ( ESContext *esContext, void (ESCALLBACK *shutdownFunc) ( ESContext* ) );
 
 //
 /// \brief Register an update callback function to be used to update on each time step

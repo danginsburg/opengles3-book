@@ -142,7 +142,7 @@ void ESUTIL_API esInitContext ( ESContext *esContext )
 {
    if ( esContext != NULL )
    {
-      memset( esContext, 0, sizeof( ESContext) );
+      memset( esContext, 0, sizeof( ESContext ) );
    }
 }
 
@@ -209,6 +209,13 @@ void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *dra
    esContext->drawFunc = drawFunc;
 }
 
+///
+//  esRegisterShutdownFunc()
+//
+void ESUTIL_API esRegisterShutdownFunc ( ESContext *esContext, void (ESCALLBACK *shutdownFunc) ( ESContext* ) )
+{
+   esContext->shutdownFunc = shutdownFunc;
+}
 
 ///
 //  esRegisterUpdateFunc()

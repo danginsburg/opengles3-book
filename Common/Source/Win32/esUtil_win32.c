@@ -208,6 +208,9 @@ int main ( int argc, char *argv[] )
    
    WinLoop ( &esContext );
 
+   if ( esContext.shutdownFunc != NULL )
+      esContext.shutdownFunc( &esContext );
+
    if ( esContext.userData != NULL )
 	   free ( esContext.userData );
 

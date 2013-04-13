@@ -174,6 +174,12 @@ void Draw ( ESContext *esContext )
    glDrawArrays ( GL_TRIANGLES, 0, 3 );
 }
 
+void Shutdown ( ESContext *esContext )
+{
+   UserData *userData = esContext->userData;
+
+   glDeleteProgram( userData->programObject );
+}
 
 int esMain( ESContext *esContext )
 {
@@ -184,6 +190,7 @@ int esMain( ESContext *esContext )
    if ( !Init ( esContext ) )
       return GL_FALSE;
 
+   esRegisterShutdownFunc( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
    
    return GL_TRUE;
