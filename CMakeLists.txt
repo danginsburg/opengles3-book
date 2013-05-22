@@ -18,4 +18,8 @@ SUBDIRS( Common
          Chapter_6/MapBuffers
          Chapter_6/VertexArrayObjects
          Chapter_6/VertexBufferObjects
-         Chapter_8/Simple_VertexShader )	
+         Chapter_8/Simple_VertexShader
+         Chapter_9/Simple_Texture2D 
+         Chapter_9/Simple_TextureCubemap
+         Chapter_9/MipMap2D
+         Chapter_9/TextureWrap )	
