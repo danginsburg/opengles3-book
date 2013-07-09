@@ -266,7 +266,7 @@ char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )
    FILE        *fp;
    TGA_HEADER   Header;
 
-   if ( ( fp = fopen ( fileName, "rb" ) ) != 0 )
+   if ( ( fp = fopen ( fileName, "rb" ) ) == 0 )
    {
       return NULL;
    }

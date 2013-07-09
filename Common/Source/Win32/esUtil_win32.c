@@ -67,8 +67,8 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
             GetCursorPos( &point );
 
             if ( esContext && esContext->keyFunc )
-	            esContext->keyFunc ( esContext, (unsigned char) wParam, 
-		                             (int) point.x, (int) point.y );
+               esContext->keyFunc ( esContext, (unsigned char) wParam, 
+                                    (int) point.x, (int) point.y );
 }
          break;
          
