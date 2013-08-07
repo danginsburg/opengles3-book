@@ -66,7 +66,7 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
                               EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface,
                               EGLint attribList[])
 {
-   EGLint numConfigs;
+   EGLint numConfigs = 0;
    EGLint majorVersion;
    EGLint minorVersion;
    EGLDisplay display;
@@ -88,14 +88,13 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
       return EGL_FALSE;
    }
 
-   // Get configs
-   if ( !eglGetConfigs(display, NULL, 0, &numConfigs) )
+   // Choose config
+   if ( !eglChooseConfig(display, attribList, &config, 1, &numConfigs) )
    {
       return EGL_FALSE;
    }
 
-   // Choose config
-   if ( !eglChooseConfig(display, attribList, &config, 1, &numConfigs) )
+   if ( numConfigs < 1 )
    {
       return EGL_FALSE;
    }
