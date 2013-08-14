@@ -69,7 +69,9 @@ typedef struct
     GLfloat   m[4][4];
 } ESMatrix;
 
-typedef struct
+typedef struct ESContext ESContext;
+
+struct ESContext
 {
    /// Put your user data here...
    void*       userData;
@@ -96,11 +98,11 @@ typedef struct
    EGLSurface  eglSurface;
 
    /// Callbacks
-   void (ESCALLBACK *drawFunc) ( void* );
-   void (ESCALLBACK *shutdownFunc) ( void* );
-   void (ESCALLBACK *keyFunc) ( void*, unsigned char, int, int );
-   void (ESCALLBACK *updateFunc) ( void*, float deltaTime );
-} ESContext;
+   void (ESCALLBACK *drawFunc) ( ESContext* );
+   void (ESCALLBACK *shutdownFunc) ( ESContext* );
+   void (ESCALLBACK *keyFunc) ( ESContext*, unsigned char, int, int );
+   void (ESCALLBACK *updateFunc) ( ESContext*, float deltaTime );
+};
 
 
 ///

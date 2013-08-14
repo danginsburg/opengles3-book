@@ -26,6 +26,10 @@
 #include "esUtil.h"
 #include "esUtil_win.h"
 
+#ifdef ANDROID
+#include <android_native_app_glue.h>
+#endif // ANDROID
+
 ///
 //  Macros
 //
@@ -98,6 +102,15 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
    {
       return EGL_FALSE;
    }
+
+#ifdef ANDROID
+   // For Android, need to get the EGL_NATIVE_VISUAL_ID and set it using ANativeWindow_setBuffersGeometry
+   {
+      EGLint format = 0;
+      eglGetConfigAttrib( display, config, EGL_NATIVE_VISUAL_ID, &format );
+      ANativeWindow_setBuffersGeometry ( eglNativeWindow, 0, 0, format );
+   }
+#endif // ANDROID
 
    // Create a surface
    surface = eglCreateWindowSurface(display, config, eglNativeWindow, NULL);
@@ -177,10 +190,17 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
       return GL_FALSE;
    }
 
+#ifdef ANDROID
+   // For Android, get the width/height from the window rather than what the 
+   // application requested.
+   esContext->width = ANativeWindow_getWidth ( esContext->eglNativeWindow );
+   esContext->height = ANativeWindow_getHeight ( esContext->eglNativeWindow );
+#else
    esContext->width = width;
    esContext->height = height;
+#endif
 
-   if ( !WinCreate ( esContext, title) )
+   if ( !WinCreate ( esContext, title ) )
    {
       return GL_FALSE;
    }
@@ -203,7 +223,7 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
 ///
 //  esRegisterDrawFunc()
 //
-void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
+void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) )
 {
    esContext->drawFunc = drawFunc;
 }
@@ -229,7 +249,7 @@ void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *u
 //  esRegisterKeyFunc()
 //
 void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
-                                    void (ESCALLBACK *keyFunc) (ESContext*, unsigned char, int, int ) )
+                                    void (ESCALLBACK *keyFunc) ( ESContext*, unsigned char, int, int ) )
 {
    esContext->keyFunc = keyFunc;
 }
