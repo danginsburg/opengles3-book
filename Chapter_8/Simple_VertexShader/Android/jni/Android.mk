@@ -6,7 +6,7 @@ COMMON_SRC_PATH		:= $(COMMON_PATH)/Source
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := Hello_Triangle
+LOCAL_MODULE    := Simple_VertexShader
 LOCAL_CFLAGS    += -DANDROID
 
 
@@ -15,7 +15,7 @@ LOCAL_SRC_FILES := $(COMMON_SRC_PATH)/esShader.c \
 				   $(COMMON_SRC_PATH)/esTransform.c \
 				   $(COMMON_SRC_PATH)/esUtil.c \
 				   $(COMMON_SRC_PATH)/Android/esUtil_Android.c \
-				   $(SRC_PATH)/Hello_Triangle.c
+				   $(SRC_PATH)/Simple_VertexShader.c
 				   
 				   
 				   

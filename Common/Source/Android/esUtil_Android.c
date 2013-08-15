@@ -35,8 +35,8 @@
 static float GetCurrentTime()
 {
    struct timespec clockRealTime;
-   clock_gettime ( CLOCK_REALTIME, &clockRealTime );
-   double curTimeInSeconds = clockRealTime.tv_sec + (double) clockRealTime.tv_nsec / 1e6;
+   clock_gettime ( CLOCK_MONOTONIC, &clockRealTime );
+   double curTimeInSeconds = clockRealTime.tv_sec + (double) clockRealTime.tv_nsec / 1e9;
    return ( float ) curTimeInSeconds;
 }
 
@@ -71,6 +71,8 @@ static void HandleCommand( struct android_app *pApp, int32_t cmd )
          
          if ( esContext->userData != NULL )
             free ( esContext->userData );
+
+         memset ( esContext, 0, sizeof( ESContext ) );
          break;
       case APP_CMD_LOST_FOCUS:
          // if the app lost focus, avoid unnecessary processing (like monitoring the accelerometer)
@@ -121,8 +123,7 @@ void android_main ( struct android_app *pApp )
 
       while ( ( ident = ALooper_pollAll(0, NULL, &events, (void**)&pSource) ) >= 0 )
       {
-         float curTime;
-         float deltaTime;
+         
          if (pSource != NULL)
          {
             pSource->process( pApp, pSource );
@@ -133,19 +134,24 @@ void android_main ( struct android_app *pApp )
             return;
          }
 
-         curTime = GetCurrentTime();
-         deltaTime =  ( curTime - lastTime );
+      }
+
+      if ( esContext.eglNativeWindow == NULL )
+         continue;
+
+      // Call app update function
+      if ( esContext.updateFunc != NULL )
+      {
+         float curTime = GetCurrentTime();
+         float deltaTime =  ( curTime - lastTime );
          lastTime = curTime;
+         esContext.updateFunc ( &esContext, deltaTime );
+      }
 
-         // Call app update function
-         if ( esContext.updateFunc != NULL )
-            esContext.updateFunc ( &esContext, deltaTime );
-
-         if ( esContext.drawFunc != NULL )
-         {
-            esContext.drawFunc( &esContext );
-            eglSwapBuffers( esContext.eglDisplay, esContext.eglSurface );
-         }
+      if ( esContext.drawFunc != NULL )
+      {
+         esContext.drawFunc( &esContext );
+         eglSwapBuffers( esContext.eglDisplay, esContext.eglSurface );
       }
    }
 }

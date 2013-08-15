@@ -27,6 +27,7 @@
 #include "esUtil_win.h"
 
 #ifdef ANDROID
+#include <android/log.h>
 #include <android_native_app_glue.h>
 #endif // ANDROID
 
@@ -268,7 +269,11 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
     va_start ( params, formatStr );
     vsprintf ( buf, formatStr, params );
     
+#ifdef ANDROID
+    __android_log_print( ANDROID_LOG_INFO, "esUtil" , "%s", buf );
+#else
     printf ( "%s", buf );
+#endif
     
     va_end ( params );
 }
