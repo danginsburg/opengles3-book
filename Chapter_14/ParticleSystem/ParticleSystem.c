@@ -119,7 +119,7 @@ int Init ( ESContext *esContext )
       "void main()                                          \n"
       "{                                                    \n"
       "  vec4 texColor;                                     \n"
-      "  texColor = texture2D( s_texture, gl_PointCoord );  \n"
+      "  texColor = texture( s_texture, gl_PointCoord );    \n"
       "  fragColor = vec4( u_color ) * texColor;            \n"
       "  fragColor.a *= v_lifetime;                         \n"
       "}                                                    \n";
