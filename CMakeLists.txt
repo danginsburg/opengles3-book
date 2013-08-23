@@ -23,4 +23,5 @@ SUBDIRS( Common
          Chapter_9/Simple_TextureCubemap
          Chapter_9/MipMap2D
          Chapter_9/TextureWrap
-         Chapter_10/MultiTexture )	
+         Chapter_10/MultiTexture
+         Chapter_14/ParticleSystem )	
