@@ -20,6 +20,10 @@
 #include <stdlib.h>
 #include "esUtil.h"
 
+#ifdef _WIN64
+#define GWL_USERDATA GWLP_USERDATA
+#endif
+
 //////////////////////////////////////////////////////////////////
 //
 //  Private Functions

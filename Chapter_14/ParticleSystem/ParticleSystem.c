@@ -17,19 +17,18 @@
 #include <math.h>
 #include "esUtil.h"
 
-#define NUM_PARTICLES	1000
+#define NUM_PARTICLES   1000
 #define PARTICLE_SIZE   7
+
+#define ATTRIBUTE_LIFETIME_LOCATION       0
+#define ATTRIBUTE_STARTPOSITION_LOCATION  1
+#define ATTRIBUTE_ENDPOSITION_LOCATION    2
 
 typedef struct
 {
    // Handle to a program object
    GLuint programObject;
 
-   // Attribute locations
-   GLint  lifetimeLoc;
-   GLint  startPositionLoc;
-   GLint  endPositionLoc;
-   
    // Uniform location
    GLint timeLoc;
    GLint colorLoc;
@@ -111,7 +110,7 @@ int Init ( ESContext *esContext )
       "}";
       
    GLbyte fShaderStr[] =  
-      "#version 300 es                                      \n"      
+      "#version 300 es                                      \n"
       "precision mediump float;                             \n"
       "uniform vec4 u_color;                                \n"
       "in float v_lifetime;                                 \n"
@@ -127,11 +126,6 @@ int Init ( ESContext *esContext )
 
    // Load the shaders and get a linked program object
    userData->programObject = esLoadProgram ( vShaderStr, fShaderStr );
-
-   // Get the attribute locations
-   userData->lifetimeLoc = glGetAttribLocation ( userData->programObject, "a_lifetime" );
-   userData->startPositionLoc = glGetAttribLocation ( userData->programObject, "a_startPosition" );
-   userData->endPositionLoc = glGetAttribLocation ( userData->programObject, "a_endPosition" );
    
    // Get the uniform locations
    userData->timeLoc = glGetUniformLocation ( userData->programObject, "u_time" );
@@ -183,6 +177,8 @@ void Update ( ESContext *esContext, float deltaTime )
   
    userData->time += deltaTime;
 
+   glUseProgram ( userData->programObject );
+
    if ( userData->time >= 1.0f )
    {
       float centerPos[3];
@@ -227,22 +223,23 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex attributes
-   glVertexAttribPointer ( userData->lifetimeLoc, 1, GL_FLOAT, 
+   glVertexAttribPointer ( ATTRIBUTE_LIFETIME_LOCATION, 1, GL_FLOAT, 
                            GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat), 
                            userData->particleData );
    
-   glVertexAttribPointer ( userData->endPositionLoc, 3, GL_FLOAT,
+   glVertexAttribPointer ( ATTRIBUTE_ENDPOSITION_LOCATION, 3, GL_FLOAT,
                            GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat),
                            &userData->particleData[1] );
 
-   glVertexAttribPointer ( userData->startPositionLoc, 3, GL_FLOAT,
+   glVertexAttribPointer ( ATTRIBUTE_STARTPOSITION_LOCATION, 3, GL_FLOAT,
                            GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat),
                            &userData->particleData[4] );
 
    
-   glEnableVertexAttribArray ( userData->lifetimeLoc );
-   glEnableVertexAttribArray ( userData->endPositionLoc );
-   glEnableVertexAttribArray ( userData->startPositionLoc );
+   glEnableVertexAttribArray ( ATTRIBUTE_LIFETIME_LOCATION );
+   glEnableVertexAttribArray ( ATTRIBUTE_ENDPOSITION_LOCATION );
+   glEnableVertexAttribArray ( ATTRIBUTE_STARTPOSITION_LOCATION );
+
    // Blend particles
    glEnable ( GL_BLEND );
    glBlendFunc ( GL_SRC_ALPHA, GL_ONE );
@@ -250,14 +247,11 @@ void Draw ( ESContext *esContext )
    // Bind the texture
    glActiveTexture ( GL_TEXTURE0 );
    glBindTexture ( GL_TEXTURE_2D, userData->textureId );
-   glEnable ( GL_TEXTURE_2D );
 
    // Set the sampler texture unit to 0
    glUniform1i ( userData->samplerLoc, 0 );
 
    glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
-   
-   eglSwapBuffers ( esContext->eglDisplay, esContext->eglSurface );
 }
 
 ///
