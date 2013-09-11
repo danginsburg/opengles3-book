@@ -17,9 +17,10 @@
 #include <math.h>
 #include <stddef.h>
 #include "esUtil.h"
+#include "Noise3D.h"
 
-#define NUM_PARTICLES   200
-#define EMISSION_RATE   0.1f 
+#define NUM_PARTICLES   500
+#define EMISSION_RATE   0.3f 
 #define ACCELERATION    -9.8f // Gravity
 
 #define ATTRIBUTE_POSITION      0
@@ -46,14 +47,17 @@ typedef struct
    // Emit shader uniform locations
    GLint emitTimeLoc;
    GLint emitEmissionRateLoc;
-
+   GLint emitNoiseSamplerLoc;
+   
    // Draw shader uniform location
    GLint drawTimeLoc;
    GLint drawColorLoc;
+   GLint drawAccelerationLoc;
    GLint samplerLoc;
 
-   // Texture handle
+   // Texture handles
    GLuint textureId;
+   GLuint noiseTextureId;
 
    // Particle vertex data
    Particle particleData[ NUM_PARTICLES ];
@@ -106,6 +110,7 @@ void InitEmitParticles ( ESContext *esContext )
  
    char vShaderStr[] =
       "#version 300 es                                                     \n"
+      "#define NUM_PARTICLES           500.0                               \n"
       "#define ATTRIBUTE_POSITION      0                                   \n"
       "#define ATTRIBUTE_VELOCITY      1                                   \n"
       "#define ATTRIBUTE_SIZE          2                                   \n"
@@ -113,6 +118,7 @@ void InitEmitParticles ( ESContext *esContext )
       "#define ATTRIBUTE_LIFETIME      4                                   \n"
       "uniform float u_time;                                               \n"
       "uniform float u_emissionRate;                                       \n"
+      "uniform sampler3D s_noiseTex;                                       \n"
       "                                                                    \n"
       "layout(location = ATTRIBUTE_POSITION) in vec2 a_position;           \n"
       "layout(location = ATTRIBUTE_VELOCITY) in vec2 a_velocity;           \n"
@@ -126,28 +132,22 @@ void InitEmitParticles ( ESContext *esContext )
       "out float v_curtime;                                                \n"
       "out float v_lifetime;                                               \n"
       "                                                                    \n"
-"const float UINT_MAX = 4294967295.0;\n"
-"uint randhash(uint seed)\n"
-"{\n"
-"    uint i=(seed^12345391u)*2654435769u;\n"
-"    i^=(i<<6u)^(i>>26u);\n"
-"    i*=2654435769u;\n"
-"    i+=(i<<5u)^(i>>12u);\n"
-"    return i;\n"
-"}\n"
-"float randhashf(uint seed)\n"
-"{\n"
-"    return float(randhash(seed)) / UINT_MAX;\n"
-"}\n"
-      "void main()                                                         \n"
+      "float randomValue( inout float seed )                               \n"
       "{                                                                   \n"
-      "  uint seed = uint(u_time * 1000.0) + uint(gl_VertexID);            \n"
-      "  if( randhashf(seed++) < u_emissionRate )                          \n"
+      "   float vertexId = float( gl_VertexID ) / NUM_PARTICLES;           \n"
+      "   vec3 texCoord = vec3( u_time, vertexId, seed );                  \n"
+      "   seed += 0.1;                                                     \n"
+      "   return texture( s_noiseTex, texCoord ).r;                        \n"
+      "}                                                                   \n"
+      "void main()                                                         \n"
+      "{                                                                   \n"      
+      "  float seed = u_time;                                              \n"
+      "  if( randomValue(seed) < u_emissionRate )                          \n"
       "  {                                                                 \n"
-      "     v_position = vec2( 0.0, -1.0 );                                \n"
-      "     v_velocity = vec2( randhashf(seed++) * 2.0 - 1.0,              \n"
-      "                        randhashf(seed++) * 2.0 + 5.0 );            \n"
-      "     v_size = randhashf(seed++) * 2.5 + 20.0;                       \n"
+      "     v_position = vec2( randomValue(seed) * 0.1 - 0.05, -1.0 );     \n"
+      "     v_velocity = vec2( randomValue(seed) * 2.0 - 1.0,              \n"
+      "                        randomValue(seed) * 4.0 + 4.0 );            \n"
+      "     v_size = randomValue(seed) * 2.5 + 20.0;                       \n"
       "     v_curtime = u_time;                                            \n"
       "     v_lifetime = 2.0;                                              \n"
       "  }                                                                 \n"
@@ -159,7 +159,6 @@ void InitEmitParticles ( ESContext *esContext )
       "     v_curtime = a_curtime;                                         \n"
       "     v_lifetime = a_lifetime;                                       \n"
       "  }                                                                 \n"
-      "  gl_Position = vec4( v_position, 0.0, 1.0 );                       \n"
       "}                                                                   \n";
 
    char fShaderStr[] =  
@@ -173,7 +172,6 @@ void InitEmitParticles ( ESContext *esContext )
 
    userData->emitProgramObject = esLoadProgram( vShaderStr, fShaderStr );
    
-   // Set the vertex shader outputs as transform feedback varyings
    {
       char* feedbackVaryings[5] = 
       {
@@ -184,14 +182,18 @@ void InitEmitParticles ( ESContext *esContext )
          "v_lifetime"
       };
 
+      // Set the vertex shader outputs as transform feedback varyings
       glTransformFeedbackVaryings ( userData->emitProgramObject, 5, feedbackVaryings, GL_INTERLEAVED_ATTRIBS );
 
       // Link program must occur after calling glTransformFeedbackVaryings
       glLinkProgram( userData->emitProgramObject );
 
-      // Get the uniform locations
+      // Get the uniform locations - this also needs to happen after glLinkProgram is called again so
+      // that the uniforms that output to varyings are active
       userData->emitTimeLoc = glGetUniformLocation ( userData->emitProgramObject, "u_time" );
       userData->emitEmissionRateLoc = glGetUniformLocation ( userData->emitProgramObject, "u_emissionRate" );
+      userData->emitNoiseSamplerLoc = glGetUniformLocation ( userData->emitProgramObject, "s_noiseTex" );
+      
    }
 }
 
@@ -219,13 +221,14 @@ int Init ( ESContext *esContext )
       "layout(location = ATTRIBUTE_LIFETIME) in float a_lifetime;          \n"
       "                                                                    \n"
       "uniform float u_time;                                               \n"
+      "uniform vec2 u_acceleration;                                        \n"
       "                                                                    \n"      
       "void main()                                                         \n"
       "{                                                                   \n"
       "  float deltaTime = u_time - a_curtime;                             \n"
       "  if ( deltaTime <= a_lifetime )                                    \n"
       "  {                                                                 \n"
-      "     vec2 velocity = a_velocity + deltaTime * vec2( 0.0, -9.8 );    \n"
+      "     vec2 velocity = a_velocity + deltaTime * u_acceleration;       \n"
       "     vec2 position = a_position + deltaTime * velocity;             \n"
       "     gl_Position = vec4( position, 0.0, 1.0 );                      \n"
       "     gl_PointSize = a_size;                                         \n"
@@ -258,6 +261,7 @@ int Init ( ESContext *esContext )
    // Get the uniform locations
    userData->drawTimeLoc = glGetUniformLocation ( userData->drawProgramObject, "u_time" );
    userData->drawColorLoc = glGetUniformLocation ( userData->drawProgramObject, "u_color" );
+   userData->drawAccelerationLoc = glGetUniformLocation ( userData->drawProgramObject, "u_acceleration" );
    userData->samplerLoc = glGetUniformLocation ( userData->drawProgramObject, "s_texture" );
 
    userData->time = 0.0f;
@@ -270,6 +274,9 @@ int Init ( ESContext *esContext )
    {
       return FALSE;
    }
+
+   // Create a 3D nosie texture for random values
+   userData->noiseTextureId = Create3DNoiseTexture( 256, 50.0 );
 
    // Initialize particle data
    for ( i = 0; i < NUM_PARTICLES; i++ )
@@ -346,6 +353,11 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    glUniform1f( userData->emitTimeLoc, userData->time );
    glUniform1f( userData->emitEmissionRateLoc, EMISSION_RATE );
 
+   // Bind the 3D nosei texture
+   glActiveTexture( GL_TEXTURE0 );
+   glBindTexture( GL_TEXTURE_3D, userData->noiseTextureId );
+   glUniform1i( userData->emitNoiseSamplerLoc, 0 );
+
    // Emit particles using transform feedback
    glBeginTransformFeedback( GL_POINTS );
       glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
@@ -356,61 +368,12 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
 
    glBindBufferBase ( GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0 );
 
+   glBindTexture( GL_TEXTURE_3D, 0 );
+
    // Ping pong the buffers
    userData->curSrcIndex = ( userData->curSrcIndex + 1 ) % 2;
-
-   /*
-   userData->emissionTime += deltaTime;
-   while ( userData->emissionTime > EMISSION_RATE )
-   {
-      if ( userData->numParticles < NUM_PARTICLES )
-      {
-         Particle *particle = &userData->particleData[ userData->numParticles ];
-         userData->numParticles++;
-
-         particle->velocity[0] = ( rand() % 1000 ) / 1000.0f * 1.0f - 0.5f;
-         particle->velocity[1] = ( rand() % 1000 ) / 1000.0f * 2.0f + 3.0f;
-
-         particle->position[0] = 0.0f;
-         particle->position[1] = -1.0f;
-
-         particle->size = ( rand() % 1000 ) / 1000.0f * 2.5f + 15.0f;
-
-         particle->curtime = 0.0f;
-         particle->lifetime = 2.0f;
-      }
-      userData->emissionTime -= EMISSION_RATE;
-   }
-   */
 }
 
-void UpdateParticles( ESContext *esContext, float deltaTime )
-{
-   /*
-   UserData *userData = (UserData*) esContext->userData;
-   int i;
-   for( i = 0; i < userData->numParticles; i++ )
-   {
-      Particle *particle = &userData->particleData[i];
-
-      particle->curtime += deltaTime;
-      if ( particle->curtime > particle->lifetime )
-      {
-         if ( i < ( userData->numParticles - 1 ) )
-         {
-            userData->particleData[i] = userData->particleData[userData->numParticles-1];
-         }
-         userData->numParticles--;
-      }
-      else
-      {
-         particle->velocity[1] = particle->velocity[1] + deltaTime * ACCELERATION;
-
-         particle->position[0] = particle->position[0] + deltaTime * particle->velocity[0];
-         particle->position[1] = particle->position[1] + deltaTime * particle->velocity[1];
-      }
-   }*/
-}
 
 ///
 //  Update time-based variables
@@ -421,35 +384,7 @@ void Update ( ESContext *esContext, float deltaTime )
   
    userData->time += deltaTime;
 
-   EmitParticles ( esContext, deltaTime );
-
-   /*glUseProgram ( userData->programObject );
-
-   if ( userData->time >= 1.0f )
-   {
-      float centerPos[3];
-      float color[4];
-
-      userData->time = 0.0f;
-
-      // Pick a new start location and color
-      centerPos[0] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      centerPos[1] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      centerPos[2] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      
-      glUniform3fv ( userData->centerPositionLoc, 1, &centerPos[0] );
-
-      // Random color
-      color[0] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
-      color[1] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
-      color[2] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
-      color[3] = 0.5;
-
-      glUniform4fv ( userData->colorLoc, 1, &color[0] );
-   }
-
-   // Load uniform time variable
-   glUniform1f ( userData->timeLoc, userData->time );*/
+   EmitParticles ( esContext, deltaTime );   
 }
 
 ///
@@ -474,6 +409,7 @@ void Draw ( ESContext *esContext )
    // Set uniforms
    glUniform1f( userData->drawTimeLoc, userData->time );
    glUniform4f( userData->drawColorLoc, 1.0f, 0.25f, 0.0f, 1.0f );
+   glUniform2f( userData->drawAccelerationLoc, 0.0f, ACCELERATION );
 
    // Blend particles
    glEnable ( GL_BLEND );
