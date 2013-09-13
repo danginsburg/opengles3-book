@@ -19,9 +19,9 @@
 #include "esUtil.h"
 #include "Noise3D.h"
 
-#define NUM_PARTICLES   500
+#define NUM_PARTICLES   200
 #define EMISSION_RATE   0.3f 
-#define ACCELERATION    -9.8f // Gravity
+#define ACCELERATION   -1.0f 
 
 #define ATTRIBUTE_POSITION      0
 #define ATTRIBUTE_VELOCITY      1
@@ -110,7 +110,7 @@ void InitEmitParticles ( ESContext *esContext )
  
    char vShaderStr[] =
       "#version 300 es                                                     \n"
-      "#define NUM_PARTICLES           500.0                               \n"
+      "#define NUM_PARTICLES           200                                 \n"
       "#define ATTRIBUTE_POSITION      0                                   \n"
       "#define ATTRIBUTE_VELOCITY      1                                   \n"
       "#define ATTRIBUTE_SIZE          2                                   \n"
@@ -134,7 +134,7 @@ void InitEmitParticles ( ESContext *esContext )
       "                                                                    \n"
       "float randomValue( inout float seed )                               \n"
       "{                                                                   \n"
-      "   float vertexId = float( gl_VertexID ) / NUM_PARTICLES;           \n"
+      "   float vertexId = float( gl_VertexID ) / float( NUM_PARTICLES );  \n"
       "   vec3 texCoord = vec3( u_time, vertexId, seed );                  \n"
       "   seed += 0.1;                                                     \n"
       "   return texture( s_noiseTex, texCoord ).r;                        \n"
@@ -142,12 +142,13 @@ void InitEmitParticles ( ESContext *esContext )
       "void main()                                                         \n"
       "{                                                                   \n"      
       "  float seed = u_time;                                              \n"
-      "  if( randomValue(seed) < u_emissionRate )                          \n"
+      "  float lifetime = a_curtime - u_time;                              \n"
+      "  if( lifetime <= 0.0 && randomValue(seed) < u_emissionRate )       \n"
       "  {                                                                 \n"
-      "     v_position = vec2( randomValue(seed) * 0.1 - 0.05, -1.0 );     \n"
-      "     v_velocity = vec2( randomValue(seed) * 2.0 - 1.0,              \n"
-      "                        randomValue(seed) * 4.0 + 4.0 );            \n"
-      "     v_size = randomValue(seed) * 2.5 + 20.0;                       \n"
+      "     v_position = vec2( 0.0, -1.0 );                                \n"
+      "     v_velocity = vec2( randomValue(seed) * 2.0 - 1.00,             \n"
+      "                        randomValue(seed) * 0.4 + 2.0 );            \n"
+      "     v_size = randomValue(seed) * 20.0 + 60.0;                      \n"
       "     v_curtime = u_time;                                            \n"
       "     v_lifetime = 2.0;                                              \n"
       "  }                                                                 \n"
@@ -231,7 +232,7 @@ int Init ( ESContext *esContext )
       "     vec2 velocity = a_velocity + deltaTime * u_acceleration;       \n"
       "     vec2 position = a_position + deltaTime * velocity;             \n"
       "     gl_Position = vec4( position, 0.0, 1.0 );                      \n"
-      "     gl_PointSize = a_size;                                         \n"
+      "     gl_PointSize = a_size * ( 1.0 - deltaTime / a_lifetime );      \n"
       "  }                                                                 \n"
       "  else                                                              \n"
       "  {                                                                 \n"
@@ -346,14 +347,14 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    // Set transform feedback buffer
    glBindBufferBase( GL_TRANSFORM_FEEDBACK_BUFFER, 0, dstVBO );
 
-   // Turn off rasterization -we are not drawing
+   // Turn off rasterization - we are not drawing
    glEnable( GL_RASTERIZER_DISCARD );
 
    // Set uniforms
    glUniform1f( userData->emitTimeLoc, userData->time );
    glUniform1f( userData->emitEmissionRateLoc, EMISSION_RATE );
 
-   // Bind the 3D nosei texture
+   // Bind the 3D noise texture
    glActiveTexture( GL_TEXTURE0 );
    glBindTexture( GL_TEXTURE_3D, userData->noiseTextureId );
    glUniform1i( userData->emitNoiseSamplerLoc, 0 );
@@ -363,11 +364,10 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
       glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
    glEndTransformFeedback();
 
+   // Restore state
    glDisable( GL_RASTERIZER_DISCARD );
    glUseProgram ( 0 );
-
    glBindBufferBase ( GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0 );
-
    glBindTexture( GL_TEXTURE_3D, 0 );
 
    // Ping pong the buffers
@@ -408,7 +408,7 @@ void Draw ( ESContext *esContext )
    
    // Set uniforms
    glUniform1f( userData->drawTimeLoc, userData->time );
-   glUniform4f( userData->drawColorLoc, 1.0f, 0.25f, 0.0f, 1.0f );
+   glUniform4f( userData->drawColorLoc, 1.0f, 1.0f, 1.0f, 1.0f );
    glUniform2f( userData->drawAccelerationLoc, 0.0f, ACCELERATION );
 
    // Blend particles
