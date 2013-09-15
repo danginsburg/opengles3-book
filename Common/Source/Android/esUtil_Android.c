@@ -111,6 +111,8 @@ void android_main ( struct android_app *pApp )
    // Initialize the context
    esInitContext( &esContext );
 
+   esContext.platformData = (void *) pApp->activity->assetManager;
+   
    pApp->onAppCmd = HandleCommand;
    pApp->userData = &esContext;
 
