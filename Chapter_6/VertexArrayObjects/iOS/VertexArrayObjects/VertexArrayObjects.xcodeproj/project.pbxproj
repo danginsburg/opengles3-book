@@ -1,0 +1,530 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76DAB1BB17F11C9B0056026D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1BA17F11C9B0056026D /* Foundation.framework */; };
+		76DAB1BD17F11C9B0056026D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1BC17F11C9B0056026D /* CoreGraphics.framework */; };
+		76DAB1BF17F11C9B0056026D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1BE17F11C9B0056026D /* UIKit.framework */; };
+		76DAB1C117F11C9B0056026D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1C017F11C9B0056026D /* GLKit.framework */; };
+		76DAB1C317F11C9B0056026D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1C217F11C9B0056026D /* OpenGLES.framework */; };
+		76DAB1C917F11C9B0056026D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76DAB1C717F11C9B0056026D /* InfoPlist.strings */; };
+		76DAB1D217F11C9B0056026D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76DAB1D017F11C9B0056026D /* Main_iPhone.storyboard */; };
+		76DAB1D517F11C9B0056026D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76DAB1D317F11C9B0056026D /* Main_iPad.storyboard */; };
+		76DAB1DE17F11C9B0056026D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DAB1DD17F11C9B0056026D /* Images.xcassets */; };
+		76DAB1E517F11C9B0056026D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1E417F11C9B0056026D /* XCTest.framework */; };
+		76DAB1E617F11C9B0056026D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1BA17F11C9B0056026D /* Foundation.framework */; };
+		76DAB1E717F11C9B0056026D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DAB1BE17F11C9B0056026D /* UIKit.framework */; };
+		76DAB1EF17F11C9B0056026D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76DAB1ED17F11C9B0056026D /* InfoPlist.strings */; };
+		76DAB1F117F11C9B0056026D /* VertexArrayObjectsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB1F017F11C9B0056026D /* VertexArrayObjectsTests.m */; };
+		76DAB21317F11CDD0056026D /* esShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB20917F11CDD0056026D /* esShader.c */; };
+		76DAB21417F11CDD0056026D /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB20A17F11CDD0056026D /* esShapes.c */; };
+		76DAB21517F11CDD0056026D /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB20B17F11CDD0056026D /* esTransform.c */; };
+		76DAB21617F11CDD0056026D /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB20C17F11CDD0056026D /* esUtil.c */; };
+		76DAB21717F11CDD0056026D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB20F17F11CDD0056026D /* AppDelegate.m */; };
+		76DAB21817F11CDD0056026D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB21017F11CDD0056026D /* main.m */; };
+		76DAB21917F11CDD0056026D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB21217F11CDD0056026D /* ViewController.m */; };
+		76DAB22B17F11D090056026D /* VertexArrayObjects.c in Sources */ = {isa = PBXBuildFile; fileRef = 76DAB22A17F11D090056026D /* VertexArrayObjects.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76DAB1E817F11C9B0056026D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76DAB1AF17F11C9B0056026D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76DAB1B617F11C9B0056026D;
+			remoteInfo = VertexArrayObjects;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		76DAB1B717F11C9B0056026D /* VertexArrayObjects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VertexArrayObjects.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76DAB1BA17F11C9B0056026D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		76DAB1BC17F11C9B0056026D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		76DAB1BE17F11C9B0056026D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		76DAB1C017F11C9B0056026D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		76DAB1C217F11C9B0056026D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		76DAB1C617F11C9B0056026D /* VertexArrayObjects-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VertexArrayObjects-Info.plist"; sourceTree = "<group>"; };
+		76DAB1C817F11C9B0056026D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		76DAB1CC17F11C9B0056026D /* VertexArrayObjects-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VertexArrayObjects-Prefix.pch"; sourceTree = "<group>"; };
+		76DAB1D117F11C9B0056026D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		76DAB1D417F11C9B0056026D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		76DAB1DD17F11C9B0056026D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		76DAB1E317F11C9B0056026D /* VertexArrayObjectsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VertexArrayObjectsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76DAB1E417F11C9B0056026D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		76DAB1EC17F11C9B0056026D /* VertexArrayObjectsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VertexArrayObjectsTests-Info.plist"; sourceTree = "<group>"; };
+		76DAB1EE17F11C9B0056026D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		76DAB1F017F11C9B0056026D /* VertexArrayObjectsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VertexArrayObjectsTests.m; sourceTree = "<group>"; };
+		76DAB20917F11CDD0056026D /* esShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShader.c; path = ../../../../../Common/Source/esShader.c; sourceTree = "<group>"; };
+		76DAB20A17F11CDD0056026D /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
+		76DAB20B17F11CDD0056026D /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
+		76DAB20C17F11CDD0056026D /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
+		76DAB20E17F11CDD0056026D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		76DAB20F17F11CDD0056026D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		76DAB21017F11CDD0056026D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		76DAB21117F11CDD0056026D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		76DAB21217F11CDD0056026D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76DAB22917F11CFF0056026D /* esUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = esUtil.h; path = ../../../../../Common/Include/esUtil.h; sourceTree = "<group>"; };
+		76DAB22A17F11D090056026D /* VertexArrayObjects.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = VertexArrayObjects.c; path = ../../../VertexArrayObjects.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76DAB1B417F11C9B0056026D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB1C317F11C9B0056026D /* OpenGLES.framework in Frameworks */,
+				76DAB1BD17F11C9B0056026D /* CoreGraphics.framework in Frameworks */,
+				76DAB1BF17F11C9B0056026D /* UIKit.framework in Frameworks */,
+				76DAB1C117F11C9B0056026D /* GLKit.framework in Frameworks */,
+				76DAB1BB17F11C9B0056026D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76DAB1E017F11C9B0056026D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB1E517F11C9B0056026D /* XCTest.framework in Frameworks */,
+				76DAB1E717F11C9B0056026D /* UIKit.framework in Frameworks */,
+				76DAB1E617F11C9B0056026D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76DAB1AE17F11C9B0056026D = {
+			isa = PBXGroup;
+			children = (
+				76DAB1C417F11C9B0056026D /* VertexArrayObjects */,
+				76DAB1EA17F11C9B0056026D /* VertexArrayObjectsTests */,
+				76DAB1B917F11C9B0056026D /* Frameworks */,
+				76DAB1B817F11C9B0056026D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76DAB1B817F11C9B0056026D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB1B717F11C9B0056026D /* VertexArrayObjects.app */,
+				76DAB1E317F11C9B0056026D /* VertexArrayObjectsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76DAB1B917F11C9B0056026D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB1BA17F11C9B0056026D /* Foundation.framework */,
+				76DAB1BC17F11C9B0056026D /* CoreGraphics.framework */,
+				76DAB1BE17F11C9B0056026D /* UIKit.framework */,
+				76DAB1C017F11C9B0056026D /* GLKit.framework */,
+				76DAB1C217F11C9B0056026D /* OpenGLES.framework */,
+				76DAB1E417F11C9B0056026D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		76DAB1C417F11C9B0056026D /* VertexArrayObjects */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB22A17F11D090056026D /* VertexArrayObjects.c */,
+				76DAB22917F11CFF0056026D /* esUtil.h */,
+				76DAB20917F11CDD0056026D /* esShader.c */,
+				76DAB20A17F11CDD0056026D /* esShapes.c */,
+				76DAB20B17F11CDD0056026D /* esTransform.c */,
+				76DAB20C17F11CDD0056026D /* esUtil.c */,
+				76DAB20D17F11CDD0056026D /* iOS */,
+				76DAB1D017F11C9B0056026D /* Main_iPhone.storyboard */,
+				76DAB1D317F11C9B0056026D /* Main_iPad.storyboard */,
+				76DAB1DD17F11C9B0056026D /* Images.xcassets */,
+				76DAB1C517F11C9B0056026D /* Supporting Files */,
+			);
+			path = VertexArrayObjects;
+			sourceTree = "<group>";
+		};
+		76DAB1C517F11C9B0056026D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB1C617F11C9B0056026D /* VertexArrayObjects-Info.plist */,
+				76DAB1C717F11C9B0056026D /* InfoPlist.strings */,
+				76DAB1CC17F11C9B0056026D /* VertexArrayObjects-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76DAB1EA17F11C9B0056026D /* VertexArrayObjectsTests */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB1F017F11C9B0056026D /* VertexArrayObjectsTests.m */,
+				76DAB1EB17F11C9B0056026D /* Supporting Files */,
+			);
+			path = VertexArrayObjectsTests;
+			sourceTree = "<group>";
+		};
+		76DAB1EB17F11C9B0056026D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB1EC17F11C9B0056026D /* VertexArrayObjectsTests-Info.plist */,
+				76DAB1ED17F11C9B0056026D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76DAB20D17F11CDD0056026D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				76DAB20E17F11CDD0056026D /* AppDelegate.h */,
+				76DAB20F17F11CDD0056026D /* AppDelegate.m */,
+				76DAB21017F11CDD0056026D /* main.m */,
+				76DAB21117F11CDD0056026D /* ViewController.h */,
+				76DAB21217F11CDD0056026D /* ViewController.m */,
+			);
+			name = iOS;
+			path = ../../../../../Common/Source/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76DAB1B617F11C9B0056026D /* VertexArrayObjects */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76DAB1F417F11C9B0056026D /* Build configuration list for PBXNativeTarget "VertexArrayObjects" */;
+			buildPhases = (
+				76DAB1B317F11C9B0056026D /* Sources */,
+				76DAB1B417F11C9B0056026D /* Frameworks */,
+				76DAB1B517F11C9B0056026D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VertexArrayObjects;
+			productName = VertexArrayObjects;
+			productReference = 76DAB1B717F11C9B0056026D /* VertexArrayObjects.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76DAB1E217F11C9B0056026D /* VertexArrayObjectsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76DAB1F717F11C9B0056026D /* Build configuration list for PBXNativeTarget "VertexArrayObjectsTests" */;
+			buildPhases = (
+				76DAB1DF17F11C9B0056026D /* Sources */,
+				76DAB1E017F11C9B0056026D /* Frameworks */,
+				76DAB1E117F11C9B0056026D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76DAB1E917F11C9B0056026D /* PBXTargetDependency */,
+			);
+			name = VertexArrayObjectsTests;
+			productName = VertexArrayObjectsTests;
+			productReference = 76DAB1E317F11C9B0056026D /* VertexArrayObjectsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76DAB1AF17F11C9B0056026D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Daniel Ginsburg";
+				TargetAttributes = {
+					76DAB1E217F11C9B0056026D = {
+						TestTargetID = 76DAB1B617F11C9B0056026D;
+					};
+				};
+			};
+			buildConfigurationList = 76DAB1B217F11C9B0056026D /* Build configuration list for PBXProject "VertexArrayObjects" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76DAB1AE17F11C9B0056026D;
+			productRefGroup = 76DAB1B817F11C9B0056026D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76DAB1B617F11C9B0056026D /* VertexArrayObjects */,
+				76DAB1E217F11C9B0056026D /* VertexArrayObjectsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76DAB1B517F11C9B0056026D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB1D517F11C9B0056026D /* Main_iPad.storyboard in Resources */,
+				76DAB1D217F11C9B0056026D /* Main_iPhone.storyboard in Resources */,
+				76DAB1DE17F11C9B0056026D /* Images.xcassets in Resources */,
+				76DAB1C917F11C9B0056026D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76DAB1E117F11C9B0056026D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB1EF17F11C9B0056026D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76DAB1B317F11C9B0056026D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB21917F11CDD0056026D /* ViewController.m in Sources */,
+				76DAB21317F11CDD0056026D /* esShader.c in Sources */,
+				76DAB21417F11CDD0056026D /* esShapes.c in Sources */,
+				76DAB21517F11CDD0056026D /* esTransform.c in Sources */,
+				76DAB22B17F11D090056026D /* VertexArrayObjects.c in Sources */,
+				76DAB21617F11CDD0056026D /* esUtil.c in Sources */,
+				76DAB21817F11CDD0056026D /* main.m in Sources */,
+				76DAB21717F11CDD0056026D /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76DAB1DF17F11C9B0056026D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DAB1F117F11C9B0056026D /* VertexArrayObjectsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76DAB1E917F11C9B0056026D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76DAB1B617F11C9B0056026D /* VertexArrayObjects */;
+			targetProxy = 76DAB1E817F11C9B0056026D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76DAB1C717F11C9B0056026D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76DAB1C817F11C9B0056026D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		76DAB1D017F11C9B0056026D /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76DAB1D117F11C9B0056026D /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		76DAB1D317F11C9B0056026D /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76DAB1D417F11C9B0056026D /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		76DAB1ED17F11C9B0056026D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76DAB1EE17F11C9B0056026D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76DAB1F217F11C9B0056026D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76DAB1F317F11C9B0056026D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76DAB1F517F11C9B0056026D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VertexArrayObjects/VertexArrayObjects-Prefix.pch";
+				INFOPLIST_FILE = "VertexArrayObjects/VertexArrayObjects-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		76DAB1F617F11C9B0056026D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VertexArrayObjects/VertexArrayObjects-Prefix.pch";
+				INFOPLIST_FILE = "VertexArrayObjects/VertexArrayObjects-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		76DAB1F817F11C9B0056026D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VertexArrayObjects.app/VertexArrayObjects";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VertexArrayObjects/VertexArrayObjects-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VertexArrayObjectsTests/VertexArrayObjectsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		76DAB1F917F11C9B0056026D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VertexArrayObjects.app/VertexArrayObjects";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VertexArrayObjects/VertexArrayObjects-Prefix.pch";
+				INFOPLIST_FILE = "VertexArrayObjectsTests/VertexArrayObjectsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76DAB1B217F11C9B0056026D /* Build configuration list for PBXProject "VertexArrayObjects" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DAB1F217F11C9B0056026D /* Debug */,
+				76DAB1F317F11C9B0056026D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76DAB1F417F11C9B0056026D /* Build configuration list for PBXNativeTarget "VertexArrayObjects" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DAB1F517F11C9B0056026D /* Debug */,
+				76DAB1F617F11C9B0056026D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		76DAB1F717F11C9B0056026D /* Build configuration list for PBXNativeTarget "VertexArrayObjectsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DAB1F817F11C9B0056026D /* Debug */,
+				76DAB1F917F11C9B0056026D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76DAB1AF17F11C9B0056026D /* Project object */;
+}
