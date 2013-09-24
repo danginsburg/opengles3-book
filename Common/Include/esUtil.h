@@ -21,9 +21,13 @@
 //  Includes
 //
 #include <stdlib.h>
+
+#ifdef __APPLE__
+#include <OpenGLES/ES3/gl.h>
+#else
 #include <GLES3/gl3.h>
 #include <EGL/egl.h>
-
+#endif
 #ifdef __cplusplus
 
 extern "C" {
@@ -82,6 +86,7 @@ struct ESContext
    /// Window height
    GLint       height;
 
+#ifndef __APPLE__
    /// Display handle
    EGLNativeDisplayType eglNativeDisplay;
 
@@ -96,7 +101,8 @@ struct ESContext
 
    /// EGL surface
    EGLSurface  eglSurface;
-
+#endif
+    
    /// Callbacks
    void (ESCALLBACK *drawFunc) ( ESContext* );
    void (ESCALLBACK *shutdownFunc) ( ESContext* );

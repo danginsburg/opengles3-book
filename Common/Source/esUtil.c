@@ -12,7 +12,7 @@
 //
 //    A utility library for OpenGL ES.  This library provides a
 //    basic common framework for the example applications in the
-//    OpenGL ES 2.0 Programming Guide.
+//    OpenGL ES 3.0 Programming Guide.
 //
 
 ///
@@ -21,8 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <GLES3/gl3.h>
-#include <EGL/egl.h>
+#include <string.h>
 #include "esUtil.h"
 #include "esUtil_win.h"
 
@@ -39,10 +38,15 @@
 ///
 //  Types
 //
+#ifndef __APPLE__
 #pragma pack(push,x1)                            // Byte alignment (8-bit)
 #pragma pack(1)
+#endif
 
 typedef struct
+#ifdef __APPLE__
+__attribute__((packed))
+#endif
 {
    unsigned char  IdSize,
                   MapType,
@@ -59,15 +63,17 @@ typedef struct
          
 } TGA_HEADER;
 
+#ifndef __APPLE__
 #pragma pack(pop,x1)
+#endif
 
-
+#ifndef __APPLE__
 ///
 // CreateEGLContext()
 //
 //    Creates an EGL rendering context and all associated elements
 //
-EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay, 
+EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay,
                               EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface,
                               EGLint attribList[])
 {
@@ -137,7 +143,8 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
    *eglSurface = surface;
    *eglContext = context;
    return EGL_TRUE;
-} 
+}
+#endif
 
 //////////////////////////////////////////////////////////////////
 //
@@ -173,6 +180,7 @@ void ESUTIL_API esInitContext ( ESContext *esContext )
 //
 GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, GLint width, GLint height, GLuint flags )
 {
+#ifndef __APPLE__
    EGLint attribList[] =
    {
        EGL_RED_SIZE,       5,
@@ -216,6 +224,7 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
    {
       return GL_FALSE;
    }
+#endif // #ifndef __APPLE__
    
 
    return GL_TRUE;

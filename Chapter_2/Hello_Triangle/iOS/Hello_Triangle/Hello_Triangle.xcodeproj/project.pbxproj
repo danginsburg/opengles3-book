@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7626523617F10E6C007CCD43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523517F10E6C007CCD43 /* Foundation.framework */; };
+		7626523817F10E6C007CCD43 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523717F10E6C007CCD43 /* CoreGraphics.framework */; };
+		7626523A17F10E6C007CCD43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523917F10E6C007CCD43 /* UIKit.framework */; };
+		7626523C17F10E6C007CCD43 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523B17F10E6C007CCD43 /* GLKit.framework */; };
+		7626523E17F10E6C007CCD43 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523D17F10E6C007CCD43 /* OpenGLES.framework */; };
+		7626524417F10E6C007CCD43 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7626524217F10E6C007CCD43 /* InfoPlist.strings */; };
+		7626524D17F10E6C007CCD43 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7626524B17F10E6C007CCD43 /* Main_iPhone.storyboard */; };
+		7626525017F10E6C007CCD43 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7626524E17F10E6C007CCD43 /* Main_iPad.storyboard */; };
+		7626525917F10E6C007CCD43 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7626525817F10E6C007CCD43 /* Images.xcassets */; };
+		7626526017F10E6C007CCD43 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626525F17F10E6C007CCD43 /* XCTest.framework */; };
+		7626526117F10E6C007CCD43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523517F10E6C007CCD43 /* Foundation.framework */; };
+		7626526217F10E6C007CCD43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523917F10E6C007CCD43 /* UIKit.framework */; };
+		7626526A17F10E6C007CCD43 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7626526817F10E6C007CCD43 /* InfoPlist.strings */; };
+		7626526C17F10E6C007CCD43 /* Hello_TriangleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626526B17F10E6C007CCD43 /* Hello_TriangleTests.m */; };
+		7626527E17F10EE6007CCD43 /* esShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527517F10EE6007CCD43 /* esShader.c */; };
+		7626527F17F10EE6007CCD43 /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527617F10EE6007CCD43 /* esShapes.c */; };
+		7626528017F10EE6007CCD43 /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527717F10EE6007CCD43 /* esTransform.c */; };
+		7626528117F10EE6007CCD43 /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527817F10EE6007CCD43 /* esUtil.c */; };
+		7626528217F10EE6007CCD43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527A17F10EE6007CCD43 /* AppDelegate.m */; };
+		7626528317F10EE6007CCD43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527B17F10EE6007CCD43 /* main.m */; };
+		7626528417F10EE6007CCD43 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527D17F10EE6007CCD43 /* ViewController.m */; };
+		7626528617F10FAD007CCD43 /* Hello_Triangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626528517F10FAD007CCD43 /* Hello_Triangle.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7626526317F10E6C007CCD43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7626522A17F10E6C007CCD43 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7626523117F10E6C007CCD43;
+			remoteInfo = Hello_Triangle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7626523217F10E6C007CCD43 /* Hello_Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hello_Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7626523517F10E6C007CCD43 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7626523717F10E6C007CCD43 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7626523917F10E6C007CCD43 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7626523B17F10E6C007CCD43 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		7626523D17F10E6C007CCD43 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7626524117F10E6C007CCD43 /* Hello_Triangle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hello_Triangle-Info.plist"; sourceTree = "<group>"; };
+		7626524317F10E6C007CCD43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7626524717F10E6C007CCD43 /* Hello_Triangle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hello_Triangle-Prefix.pch"; sourceTree = "<group>"; };
+		7626524C17F10E6C007CCD43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		7626524F17F10E6C007CCD43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		7626525817F10E6C007CCD43 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7626525E17F10E6C007CCD43 /* Hello_TriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hello_TriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7626525F17F10E6C007CCD43 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7626526717F10E6C007CCD43 /* Hello_TriangleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hello_TriangleTests-Info.plist"; sourceTree = "<group>"; };
+		7626526917F10E6C007CCD43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7626526B17F10E6C007CCD43 /* Hello_TriangleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hello_TriangleTests.m; sourceTree = "<group>"; };
+		7626527517F10EE6007CCD43 /* esShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShader.c; path = ../../../../../Common/Source/esShader.c; sourceTree = "<group>"; };
+		7626527617F10EE6007CCD43 /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
+		7626527717F10EE6007CCD43 /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
+		7626527817F10EE6007CCD43 /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
+		7626527917F10EE6007CCD43 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../../../../Common/Source/iOS/AppDelegate.h; sourceTree = "<group>"; };
+		7626527A17F10EE6007CCD43 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../../../../Common/Source/iOS/AppDelegate.m; sourceTree = "<group>"; };
+		7626527B17F10EE6007CCD43 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../../../Common/Source/iOS/main.m; sourceTree = "<group>"; };
+		7626527C17F10EE6007CCD43 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../../../../../Common/Source/iOS/ViewController.h; sourceTree = "<group>"; };
+		7626527D17F10EE6007CCD43 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../../../../../Common/Source/iOS/ViewController.m; sourceTree = "<group>"; };
+		7626528517F10FAD007CCD43 /* Hello_Triangle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Hello_Triangle.c; path = ../../../Hello_Triangle.c; sourceTree = "<group>"; };
+		7626528717F110A5007CCD43 /* esUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = esUtil.h; path = ../../../../../Common/Include/esUtil.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7626522F17F10E6C007CCD43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626523E17F10E6C007CCD43 /* OpenGLES.framework in Frameworks */,
+				7626523817F10E6C007CCD43 /* CoreGraphics.framework in Frameworks */,
+				7626523A17F10E6C007CCD43 /* UIKit.framework in Frameworks */,
+				7626523C17F10E6C007CCD43 /* GLKit.framework in Frameworks */,
+				7626523617F10E6C007CCD43 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7626525B17F10E6C007CCD43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626526017F10E6C007CCD43 /* XCTest.framework in Frameworks */,
+				7626526217F10E6C007CCD43 /* UIKit.framework in Frameworks */,
+				7626526117F10E6C007CCD43 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7626522917F10E6C007CCD43 = {
+			isa = PBXGroup;
+			children = (
+				7626523F17F10E6C007CCD43 /* Hello_Triangle */,
+				7626526517F10E6C007CCD43 /* Hello_TriangleTests */,
+				7626523417F10E6C007CCD43 /* Frameworks */,
+				7626523317F10E6C007CCD43 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7626523317F10E6C007CCD43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7626523217F10E6C007CCD43 /* Hello_Triangle.app */,
+				7626525E17F10E6C007CCD43 /* Hello_TriangleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7626523417F10E6C007CCD43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7626523517F10E6C007CCD43 /* Foundation.framework */,
+				7626523717F10E6C007CCD43 /* CoreGraphics.framework */,
+				7626523917F10E6C007CCD43 /* UIKit.framework */,
+				7626523B17F10E6C007CCD43 /* GLKit.framework */,
+				7626523D17F10E6C007CCD43 /* OpenGLES.framework */,
+				7626525F17F10E6C007CCD43 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7626523F17F10E6C007CCD43 /* Hello_Triangle */ = {
+			isa = PBXGroup;
+			children = (
+				7626528717F110A5007CCD43 /* esUtil.h */,
+				7626528517F10FAD007CCD43 /* Hello_Triangle.c */,
+				7626527517F10EE6007CCD43 /* esShader.c */,
+				7626527617F10EE6007CCD43 /* esShapes.c */,
+				7626527717F10EE6007CCD43 /* esTransform.c */,
+				7626527817F10EE6007CCD43 /* esUtil.c */,
+				7626527917F10EE6007CCD43 /* AppDelegate.h */,
+				7626527A17F10EE6007CCD43 /* AppDelegate.m */,
+				7626527B17F10EE6007CCD43 /* main.m */,
+				7626527C17F10EE6007CCD43 /* ViewController.h */,
+				7626527D17F10EE6007CCD43 /* ViewController.m */,
+				7626524B17F10E6C007CCD43 /* Main_iPhone.storyboard */,
+				7626524E17F10E6C007CCD43 /* Main_iPad.storyboard */,
+				7626525817F10E6C007CCD43 /* Images.xcassets */,
+				7626524017F10E6C007CCD43 /* Supporting Files */,
+			);
+			path = Hello_Triangle;
+			sourceTree = "<group>";
+		};
+		7626524017F10E6C007CCD43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7626524117F10E6C007CCD43 /* Hello_Triangle-Info.plist */,
+				7626524217F10E6C007CCD43 /* InfoPlist.strings */,
+				7626524717F10E6C007CCD43 /* Hello_Triangle-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7626526517F10E6C007CCD43 /* Hello_TriangleTests */ = {
+			isa = PBXGroup;
+			children = (
+				7626526B17F10E6C007CCD43 /* Hello_TriangleTests.m */,
+				7626526617F10E6C007CCD43 /* Supporting Files */,
+			);
+			path = Hello_TriangleTests;
+			sourceTree = "<group>";
+		};
+		7626526617F10E6C007CCD43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7626526717F10E6C007CCD43 /* Hello_TriangleTests-Info.plist */,
+				7626526817F10E6C007CCD43 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7626523117F10E6C007CCD43 /* Hello_Triangle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7626526F17F10E6C007CCD43 /* Build configuration list for PBXNativeTarget "Hello_Triangle" */;
+			buildPhases = (
+				7626522E17F10E6C007CCD43 /* Sources */,
+				7626522F17F10E6C007CCD43 /* Frameworks */,
+				7626523017F10E6C007CCD43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hello_Triangle;
+			productName = Hello_Triangle;
+			productReference = 7626523217F10E6C007CCD43 /* Hello_Triangle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7626525D17F10E6C007CCD43 /* Hello_TriangleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7626527217F10E6C007CCD43 /* Build configuration list for PBXNativeTarget "Hello_TriangleTests" */;
+			buildPhases = (
+				7626525A17F10E6C007CCD43 /* Sources */,
+				7626525B17F10E6C007CCD43 /* Frameworks */,
+				7626525C17F10E6C007CCD43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7626526417F10E6C007CCD43 /* PBXTargetDependency */,
+			);
+			name = Hello_TriangleTests;
+			productName = Hello_TriangleTests;
+			productReference = 7626525E17F10E6C007CCD43 /* Hello_TriangleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7626522A17F10E6C007CCD43 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Daniel Ginsburg";
+				TargetAttributes = {
+					7626525D17F10E6C007CCD43 = {
+						TestTargetID = 7626523117F10E6C007CCD43;
+					};
+				};
+			};
+			buildConfigurationList = 7626522D17F10E6C007CCD43 /* Build configuration list for PBXProject "Hello_Triangle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7626522917F10E6C007CCD43;
+			productRefGroup = 7626523317F10E6C007CCD43 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7626523117F10E6C007CCD43 /* Hello_Triangle */,
+				7626525D17F10E6C007CCD43 /* Hello_TriangleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7626523017F10E6C007CCD43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626525017F10E6C007CCD43 /* Main_iPad.storyboard in Resources */,
+				7626524D17F10E6C007CCD43 /* Main_iPhone.storyboard in Resources */,
+				7626525917F10E6C007CCD43 /* Images.xcassets in Resources */,
+				7626524417F10E6C007CCD43 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7626525C17F10E6C007CCD43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626526A17F10E6C007CCD43 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7626522E17F10E6C007CCD43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626528417F10EE6007CCD43 /* ViewController.m in Sources */,
+				7626527E17F10EE6007CCD43 /* esShader.c in Sources */,
+				7626528617F10FAD007CCD43 /* Hello_Triangle.c in Sources */,
+				7626527F17F10EE6007CCD43 /* esShapes.c in Sources */,
+				7626528017F10EE6007CCD43 /* esTransform.c in Sources */,
+				7626528117F10EE6007CCD43 /* esUtil.c in Sources */,
+				7626528317F10EE6007CCD43 /* main.m in Sources */,
+				7626528217F10EE6007CCD43 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7626525A17F10E6C007CCD43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7626526C17F10E6C007CCD43 /* Hello_TriangleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7626526417F10E6C007CCD43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7626523117F10E6C007CCD43 /* Hello_Triangle */;
+			targetProxy = 7626526317F10E6C007CCD43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7626524217F10E6C007CCD43 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7626524317F10E6C007CCD43 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7626524B17F10E6C007CCD43 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7626524C17F10E6C007CCD43 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		7626524E17F10E6C007CCD43 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7626524F17F10E6C007CCD43 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		7626526817F10E6C007CCD43 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7626526917F10E6C007CCD43 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7626526D17F10E6C007CCD43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7626526E17F10E6C007CCD43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7626527017F10E6C007CCD43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hello_Triangle/Hello_Triangle-Prefix.pch";
+				INFOPLIST_FILE = "Hello_Triangle/Hello_Triangle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7626527117F10E6C007CCD43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hello_Triangle/Hello_Triangle-Prefix.pch";
+				INFOPLIST_FILE = "Hello_Triangle/Hello_Triangle-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7626527317F10E6C007CCD43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hello_Triangle.app/Hello_Triangle";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hello_Triangle/Hello_Triangle-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Hello_TriangleTests/Hello_TriangleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7626527417F10E6C007CCD43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hello_Triangle.app/Hello_Triangle";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hello_Triangle/Hello_Triangle-Prefix.pch";
+				INFOPLIST_FILE = "Hello_TriangleTests/Hello_TriangleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7626522D17F10E6C007CCD43 /* Build configuration list for PBXProject "Hello_Triangle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7626526D17F10E6C007CCD43 /* Debug */,
+				7626526E17F10E6C007CCD43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7626526F17F10E6C007CCD43 /* Build configuration list for PBXNativeTarget "Hello_Triangle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7626527017F10E6C007CCD43 /* Debug */,
+				7626527117F10E6C007CCD43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7626527217F10E6C007CCD43 /* Build configuration list for PBXNativeTarget "Hello_TriangleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7626527317F10E6C007CCD43 /* Debug */,
+				7626527417F10E6C007CCD43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7626522A17F10E6C007CCD43 /* Project object */;
+}

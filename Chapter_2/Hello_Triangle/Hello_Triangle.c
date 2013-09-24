@@ -77,7 +77,7 @@ GLuint LoadShader ( GLenum type, const char *shaderSrc )
 int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLbyte vShaderStr[] =  
+   char vShaderStr[] =
       "#version 300 es              \n"
       "in vec4 vPosition;           \n"
       "void main()                  \n"
@@ -85,7 +85,7 @@ int Init ( ESContext *esContext )
       "   gl_Position = vPosition;  \n"
       "}                            \n";
    
-   GLbyte fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                              \n"
       "precision mediump float;                     \n"
       "out vec4 fragColor;                          \n"

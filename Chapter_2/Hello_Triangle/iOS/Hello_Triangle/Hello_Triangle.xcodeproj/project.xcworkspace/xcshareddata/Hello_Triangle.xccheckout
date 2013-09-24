@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>56E8436A-CEC6-44A3-B5A0-7AA9396154C7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Hello_Triangle</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>841560CE-6BF1-49AE-A07F-FF6771E734F9</key>
+		<string>ssh://github.com/danginsburg/opengles-book.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ES30/Code/Chapter_2/Hello_Triangle/iOS/Hello_Triangle/Hello_Triangle.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>841560CE-6BF1-49AE-A07F-FF6771E734F9</key>
+		<string>../../../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/danginsburg/opengles-book.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>841560CE-6BF1-49AE-A07F-FF6771E734F9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>841560CE-6BF1-49AE-A07F-FF6771E734F9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>opengles-book</string>
+		</dict>
+	</array>
+</dict>
+</plist>
