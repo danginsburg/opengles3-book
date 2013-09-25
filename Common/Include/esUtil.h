@@ -226,7 +226,7 @@ int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals,
 /// \param height Height of loaded image in pixels
 ///  \return Pointer to loaded image.  NULL on failure. 
 //
-char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height );
+char* ESUTIL_API esLoadTGA ( const char *fileName, int *width, int *height );
 
 
 //

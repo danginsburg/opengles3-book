@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7625BC3E17F32A780019C421 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3817F32A780019C421 /* AppDelegate.m */; };
+		7625BC3F17F32A780019C421 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3A17F32A780019C421 /* FileWrapper.m */; };
+		7625BC4017F32A780019C421 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3B17F32A780019C421 /* main.m */; };
+		7625BC4117F32A780019C421 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3D17F32A780019C421 /* ViewController.m */; };
 		7626523617F10E6C007CCD43 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523517F10E6C007CCD43 /* Foundation.framework */; };
 		7626523817F10E6C007CCD43 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523717F10E6C007CCD43 /* CoreGraphics.framework */; };
 		7626523A17F10E6C007CCD43 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7626523917F10E6C007CCD43 /* UIKit.framework */; };
@@ -25,9 +29,6 @@
 		7626527F17F10EE6007CCD43 /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527617F10EE6007CCD43 /* esShapes.c */; };
 		7626528017F10EE6007CCD43 /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527717F10EE6007CCD43 /* esTransform.c */; };
 		7626528117F10EE6007CCD43 /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626527817F10EE6007CCD43 /* esUtil.c */; };
-		7626528217F10EE6007CCD43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527A17F10EE6007CCD43 /* AppDelegate.m */; };
-		7626528317F10EE6007CCD43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527B17F10EE6007CCD43 /* main.m */; };
-		7626528417F10EE6007CCD43 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7626527D17F10EE6007CCD43 /* ViewController.m */; };
 		7626528617F10FAD007CCD43 /* Hello_Triangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 7626528517F10FAD007CCD43 /* Hello_Triangle.c */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7625BC3717F32A780019C421 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7625BC3817F32A780019C421 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7625BC3917F32A780019C421 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		7625BC3A17F32A780019C421 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
+		7625BC3B17F32A780019C421 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7625BC3C17F32A780019C421 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7625BC3D17F32A780019C421 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7626523217F10E6C007CCD43 /* Hello_Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hello_Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7626523517F10E6C007CCD43 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7626523717F10E6C007CCD43 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,11 +71,6 @@
 		7626527617F10EE6007CCD43 /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
 		7626527717F10EE6007CCD43 /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
 		7626527817F10EE6007CCD43 /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
-		7626527917F10EE6007CCD43 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../../../../Common/Source/iOS/AppDelegate.h; sourceTree = "<group>"; };
-		7626527A17F10EE6007CCD43 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../../../../Common/Source/iOS/AppDelegate.m; sourceTree = "<group>"; };
-		7626527B17F10EE6007CCD43 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../../../Common/Source/iOS/main.m; sourceTree = "<group>"; };
-		7626527C17F10EE6007CCD43 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../../../../../Common/Source/iOS/ViewController.h; sourceTree = "<group>"; };
-		7626527D17F10EE6007CCD43 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../../../../../Common/Source/iOS/ViewController.m; sourceTree = "<group>"; };
 		7626528517F10FAD007CCD43 /* Hello_Triangle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Hello_Triangle.c; path = ../../../Hello_Triangle.c; sourceTree = "<group>"; };
 		7626528717F110A5007CCD43 /* esUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = esUtil.h; path = ../../../../../Common/Include/esUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +101,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7625BC3617F32A780019C421 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7625BC3917F32A780019C421 /* FileWrapper.h */,
+				7625BC3A17F32A780019C421 /* FileWrapper.m */,
+				7625BC3717F32A780019C421 /* AppDelegate.h */,
+				7625BC3817F32A780019C421 /* AppDelegate.m */,
+				7625BC3B17F32A780019C421 /* main.m */,
+				7625BC3C17F32A780019C421 /* ViewController.h */,
+				7625BC3D17F32A780019C421 /* ViewController.m */,
+			);
+			name = iOS;
+			path = ../../../../../Common/Source/iOS;
+			sourceTree = "<group>";
+		};
 		7626522917F10E6C007CCD43 = {
 			isa = PBXGroup;
 			children = (
@@ -133,17 +151,13 @@
 		7626523F17F10E6C007CCD43 /* Hello_Triangle */ = {
 			isa = PBXGroup;
 			children = (
-				7626528717F110A5007CCD43 /* esUtil.h */,
 				7626528517F10FAD007CCD43 /* Hello_Triangle.c */,
+				7626528717F110A5007CCD43 /* esUtil.h */,
 				7626527517F10EE6007CCD43 /* esShader.c */,
 				7626527617F10EE6007CCD43 /* esShapes.c */,
 				7626527717F10EE6007CCD43 /* esTransform.c */,
 				7626527817F10EE6007CCD43 /* esUtil.c */,
-				7626527917F10EE6007CCD43 /* AppDelegate.h */,
-				7626527A17F10EE6007CCD43 /* AppDelegate.m */,
-				7626527B17F10EE6007CCD43 /* main.m */,
-				7626527C17F10EE6007CCD43 /* ViewController.h */,
-				7626527D17F10EE6007CCD43 /* ViewController.m */,
+				7625BC3617F32A780019C421 /* iOS */,
 				7626524B17F10E6C007CCD43 /* Main_iPhone.storyboard */,
 				7626524E17F10E6C007CCD43 /* Main_iPad.storyboard */,
 				7626525817F10E6C007CCD43 /* Images.xcassets */,
@@ -278,14 +292,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7626528417F10EE6007CCD43 /* ViewController.m in Sources */,
 				7626527E17F10EE6007CCD43 /* esShader.c in Sources */,
+				7625BC3E17F32A780019C421 /* AppDelegate.m in Sources */,
 				7626528617F10FAD007CCD43 /* Hello_Triangle.c in Sources */,
 				7626527F17F10EE6007CCD43 /* esShapes.c in Sources */,
 				7626528017F10EE6007CCD43 /* esTransform.c in Sources */,
+				7625BC4117F32A780019C421 /* ViewController.m in Sources */,
 				7626528117F10EE6007CCD43 /* esUtil.c in Sources */,
-				7626528317F10EE6007CCD43 /* main.m in Sources */,
-				7626528217F10EE6007CCD43 /* AppDelegate.m in Sources */,
+				7625BC4017F32A780019C421 /* main.m in Sources */,
+				7625BC3F17F32A780019C421 /* FileWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +521,7 @@
 				7626527117F10E6C007CCD43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7626527217F10E6C007CCD43 /* Build configuration list for PBXNativeTarget "Hello_TriangleTests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +530,7 @@
 				7626527417F10E6C007CCD43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

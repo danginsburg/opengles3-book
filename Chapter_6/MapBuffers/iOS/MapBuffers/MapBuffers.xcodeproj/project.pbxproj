@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		762F299717F328B4003C92E4 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F299617F328B4003C92E4 /* FileWrapper.m */; };
 		76E4DECC17F26023003CF865 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DECB17F26023003CF865 /* Foundation.framework */; };
 		76E4DECE17F26023003CF865 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DECD17F26023003CF865 /* CoreGraphics.framework */; };
 		76E4DED017F26023003CF865 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DECF17F26023003CF865 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		762F299517F328B4003C92E4 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		762F299617F328B4003C92E4 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
 		76E4DEC817F26023003CF865 /* MapBuffers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapBuffers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E4DECB17F26023003CF865 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76E4DECD17F26023003CF865 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,6 +180,8 @@
 		76E4DF0F17F26047003CF865 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				762F299517F328B4003C92E4 /* FileWrapper.h */,
+				762F299617F328B4003C92E4 /* FileWrapper.m */,
 				76E4DF1017F26047003CF865 /* AppDelegate.h */,
 				76E4DF1117F26047003CF865 /* AppDelegate.m */,
 				76E4DF1217F26047003CF865 /* main.m */,
@@ -288,6 +293,7 @@
 				76E4DF1D17F26051003CF865 /* MapBuffers.c in Sources */,
 				76E4DF1B17F26047003CF865 /* ViewController.m in Sources */,
 				76E4DF1517F26047003CF865 /* esShader.c in Sources */,
+				762F299717F328B4003C92E4 /* FileWrapper.m in Sources */,
 				76E4DF1617F26047003CF865 /* esShapes.c in Sources */,
 				76E4DF1717F26047003CF865 /* esTransform.c in Sources */,
 				76E4DF1817F26047003CF865 /* esUtil.c in Sources */,
@@ -513,6 +519,7 @@
 				76E4DF0717F26023003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76E4DF0817F26023003CF865 /* Build configuration list for PBXNativeTarget "MapBuffersTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +528,7 @@
 				76E4DF0A17F26023003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

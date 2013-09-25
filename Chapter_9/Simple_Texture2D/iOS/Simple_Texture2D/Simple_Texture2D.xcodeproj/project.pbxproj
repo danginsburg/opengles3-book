@@ -29,6 +29,7 @@
 		762F286B17F26220003C92E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F286317F26220003C92E4 /* main.m */; };
 		762F286C17F26220003C92E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F286517F26220003C92E4 /* ViewController.m */; };
 		762F286E17F26229003C92E4 /* Simple_Texture2D.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F286D17F26229003C92E4 /* Simple_Texture2D.c */; };
+		762F299D17F32958003C92E4 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F299C17F32958003C92E4 /* FileWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		762F286417F26220003C92E4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		762F286517F26220003C92E4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		762F286D17F26229003C92E4 /* Simple_Texture2D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Simple_Texture2D.c; path = ../../../Simple_Texture2D.c; sourceTree = "<group>"; };
+		762F299B17F32958003C92E4 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		762F299C17F32958003C92E4 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,8 @@
 		762F286017F26220003C92E4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				762F299B17F32958003C92E4 /* FileWrapper.h */,
+				762F299C17F32958003C92E4 /* FileWrapper.m */,
 				762F286117F26220003C92E4 /* AppDelegate.h */,
 				762F286217F26220003C92E4 /* AppDelegate.m */,
 				762F286317F26220003C92E4 /* main.m */,
@@ -288,6 +293,7 @@
 				762F286C17F26220003C92E4 /* ViewController.m in Sources */,
 				762F286617F26220003C92E4 /* esShader.c in Sources */,
 				762F286717F26220003C92E4 /* esShapes.c in Sources */,
+				762F299D17F32958003C92E4 /* FileWrapper.m in Sources */,
 				762F286E17F26229003C92E4 /* Simple_Texture2D.c in Sources */,
 				762F286817F26220003C92E4 /* esTransform.c in Sources */,
 				762F286917F26220003C92E4 /* esUtil.c in Sources */,
@@ -513,6 +519,7 @@
 				762F285817F26200003C92E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		762F285917F26200003C92E4 /* Build configuration list for PBXNativeTarget "Simple_Texture2DTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +528,7 @@
 				762F285B17F26200003C92E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

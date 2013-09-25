@@ -30,6 +30,10 @@
 #include <android_native_app_glue.h>
 #endif // ANDROID
 
+#ifdef __APPLE__
+#include "FileWrapper.h"
+#endif
+
 ///
 //  Macros
 //
@@ -293,11 +297,16 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
 //
 //    Loads a 24-bit TGA image from a file
 //
-char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )
+char* ESUTIL_API esLoadTGA ( const char *fileName, int *width, int *height )
 {
    char        *buffer;
    FILE        *fp;
    TGA_HEADER   Header;
+    
+#ifdef __APPLE__
+    // iOS: Remap the filename to a path that can be opened from the bundle.
+    fileName = GetBundleFileName( fileName );
+#endif
 
    if ( ( fp = fopen ( fileName, "rb" ) ) == 0 )
    {

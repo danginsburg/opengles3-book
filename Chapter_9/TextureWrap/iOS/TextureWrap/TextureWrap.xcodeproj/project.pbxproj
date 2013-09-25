@@ -29,6 +29,7 @@
 		762F292917F26300003C92E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F292117F26300003C92E4 /* main.m */; };
 		762F292A17F26300003C92E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F292317F26300003C92E4 /* ViewController.m */; };
 		762F292C17F26308003C92E4 /* TextureWrap.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F292B17F26308003C92E4 /* TextureWrap.c */; };
+		762F29A317F32989003C92E4 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F29A217F32989003C92E4 /* FileWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		762F292217F26300003C92E4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		762F292317F26300003C92E4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		762F292B17F26308003C92E4 /* TextureWrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TextureWrap.c; path = ../../../TextureWrap.c; sourceTree = "<group>"; };
+		762F29A117F32989003C92E4 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		762F29A217F32989003C92E4 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +180,8 @@
 		762F291E17F26300003C92E4 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				762F29A117F32989003C92E4 /* FileWrapper.h */,
+				762F29A217F32989003C92E4 /* FileWrapper.m */,
 				762F291F17F26300003C92E4 /* AppDelegate.h */,
 				762F292017F26300003C92E4 /* AppDelegate.m */,
 				762F292117F26300003C92E4 /* main.m */,
@@ -288,6 +293,7 @@
 				762F292A17F26300003C92E4 /* ViewController.m in Sources */,
 				762F292C17F26308003C92E4 /* TextureWrap.c in Sources */,
 				762F292417F26300003C92E4 /* esShader.c in Sources */,
+				762F29A317F32989003C92E4 /* FileWrapper.m in Sources */,
 				762F292517F26300003C92E4 /* esShapes.c in Sources */,
 				762F292617F26300003C92E4 /* esTransform.c in Sources */,
 				762F292717F26300003C92E4 /* esUtil.c in Sources */,
@@ -513,6 +519,7 @@
 				762F291617F262DC003C92E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		762F291717F262DC003C92E4 /* Build configuration list for PBXNativeTarget "TextureWrapTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +528,7 @@
 				762F291917F262DC003C92E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

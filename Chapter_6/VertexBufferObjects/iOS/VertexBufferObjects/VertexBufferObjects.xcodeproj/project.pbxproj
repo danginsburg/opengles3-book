@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7625BC3517F32A540019C421 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3417F32A540019C421 /* FileWrapper.m */; };
 		76E4DDAE17F11DA3003CF865 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DDAD17F11DA3003CF865 /* Foundation.framework */; };
 		76E4DDB017F11DA3003CF865 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DDAF17F11DA3003CF865 /* CoreGraphics.framework */; };
 		76E4DDB217F11DA3003CF865 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DDB117F11DA3003CF865 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7625BC3317F32A540019C421 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		7625BC3417F32A540019C421 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
 		76E4DDAA17F11DA3003CF865 /* VertexBufferObjects.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VertexBufferObjects.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E4DDAD17F11DA3003CF865 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76E4DDAF17F11DA3003CF865 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -179,6 +182,8 @@
 		76E4DDF117F11DC7003CF865 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7625BC3317F32A540019C421 /* FileWrapper.h */,
+				7625BC3417F32A540019C421 /* FileWrapper.m */,
 				76E4DDF217F11DC7003CF865 /* AppDelegate.h */,
 				76E4DDF317F11DC7003CF865 /* AppDelegate.m */,
 				76E4DDF417F11DC7003CF865 /* main.m */,
@@ -290,6 +295,7 @@
 				76E4DE0017F11DDC003CF865 /* VertexBufferObjects.c in Sources */,
 				76E4DDFD17F11DC7003CF865 /* ViewController.m in Sources */,
 				76E4DDF717F11DC7003CF865 /* esShader.c in Sources */,
+				7625BC3517F32A540019C421 /* FileWrapper.m in Sources */,
 				76E4DDF817F11DC7003CF865 /* esShapes.c in Sources */,
 				76E4DDF917F11DC7003CF865 /* esTransform.c in Sources */,
 				76E4DDFA17F11DC7003CF865 /* esUtil.c in Sources */,
@@ -515,6 +521,7 @@
 				76E4DDE917F11DA3003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76E4DDEA17F11DA3003CF865 /* Build configuration list for PBXNativeTarget "VertexBufferObjectsTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +530,7 @@
 				76E4DDEC17F11DA3003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

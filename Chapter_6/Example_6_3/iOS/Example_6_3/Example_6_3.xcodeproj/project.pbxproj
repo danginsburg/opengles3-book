@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7625BC3217F32A140019C421 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BC3117F32A140019C421 /* FileWrapper.m */; };
 		76E4DE0E17F25EFD003CF865 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DE0D17F25EFD003CF865 /* Foundation.framework */; };
 		76E4DE1017F25EFD003CF865 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DE0F17F25EFD003CF865 /* CoreGraphics.framework */; };
 		76E4DE1217F25EFD003CF865 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76E4DE1117F25EFD003CF865 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7625BC3017F32A140019C421 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		7625BC3117F32A140019C421 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
 		76E4DE0A17F25EFD003CF865 /* Example_6_3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example_6_3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76E4DE0D17F25EFD003CF865 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		76E4DE0F17F25EFD003CF865 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -177,6 +180,8 @@
 		76E4DE5317F25F3A003CF865 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7625BC3017F32A140019C421 /* FileWrapper.h */,
+				7625BC3117F32A140019C421 /* FileWrapper.m */,
 				76E4DE5417F25F3A003CF865 /* AppDelegate.h */,
 				76E4DE5517F25F3A003CF865 /* AppDelegate.m */,
 				76E4DE5617F25F3A003CF865 /* main.m */,
@@ -288,6 +293,7 @@
 				76E4DE5917F25F3A003CF865 /* esShader.c in Sources */,
 				76E4DE4E17F25F24003CF865 /* Example_6_3.c in Sources */,
 				76E4DE5F17F25F3A003CF865 /* ViewController.m in Sources */,
+				7625BC3217F32A140019C421 /* FileWrapper.m in Sources */,
 				76E4DE5D17F25F3A003CF865 /* AppDelegate.m in Sources */,
 				76E4DE5B17F25F3A003CF865 /* esTransform.c in Sources */,
 				76E4DE5A17F25F3A003CF865 /* esShapes.c in Sources */,
@@ -513,6 +519,7 @@
 				76E4DE4917F25EFD003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		76E4DE4A17F25EFD003CF865 /* Build configuration list for PBXNativeTarget "Example_6_3Tests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +528,7 @@
 				76E4DE4C17F25EFD003CF865 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
