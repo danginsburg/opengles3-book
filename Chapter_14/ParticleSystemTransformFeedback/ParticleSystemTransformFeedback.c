@@ -118,7 +118,7 @@ void InitEmitParticles ( ESContext *esContext )
       "#define ATTRIBUTE_LIFETIME      4                                   \n"
       "uniform float u_time;                                               \n"
       "uniform float u_emissionRate;                                       \n"
-      "uniform sampler3D s_noiseTex;                                       \n"
+      "uniform mediump sampler3D s_noiseTex;                               \n"
       "                                                                    \n"
       "layout(location = ATTRIBUTE_POSITION) in vec2 a_position;           \n"
       "layout(location = ATTRIBUTE_VELOCITY) in vec2 a_velocity;           \n"
@@ -147,7 +147,7 @@ void InitEmitParticles ( ESContext *esContext )
       "  {                                                                 \n"
       "     v_position = vec2( 0.0, -1.0 );                                \n"
       "     v_velocity = vec2( randomValue(seed) * 2.0 - 1.00,             \n"
-      "                        randomValue(seed) * 0.4 + 2.0 );            \n"
+      "                        randomValue(seed) * 1.4 + 1.0 );            \n"
       "     v_size = randomValue(seed) * 20.0 + 60.0;                      \n"
       "     v_curtime = u_time;                                            \n"
       "     v_lifetime = 2.0;                                              \n"
@@ -174,7 +174,7 @@ void InitEmitParticles ( ESContext *esContext )
    userData->emitProgramObject = esLoadProgram( vShaderStr, fShaderStr );
    
    {
-      char* feedbackVaryings[5] = 
+      const char* feedbackVaryings[5] =
       {
          "v_position",
          "v_velocity",

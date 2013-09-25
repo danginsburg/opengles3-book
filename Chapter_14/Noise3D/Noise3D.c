@@ -205,7 +205,8 @@ void Create3DNoiseTexture( ESContext *esContext )
    UserData *userData = (UserData*) esContext->userData;
    int textureSize = 256; // Size of the 3D nosie texture
    float frequency = 5.0f; // Frequency of the noise.
-   GLfloat *texBuf = (GLfloat*) malloc( sizeof(GLfloat) * textureSize * textureSize * textureSize) ;
+   GLfloat *texBuf = (GLfloat*) malloc( sizeof(GLfloat) * textureSize * textureSize * textureSize);
+   GLubyte *texBufUbyte = (GLubyte*) malloc( sizeof(GLubyte) * textureSize * textureSize * textureSize);
    int x, y, z;
    int index = 0;
    float min = 1000;
@@ -246,7 +247,7 @@ void Create3DNoiseTexture( ESContext *esContext )
          {
             float noiseVal = texBuf[index];
             noiseVal = ( noiseVal - min ) / range;
-            texBuf[index++] = noiseVal;
+            texBufUbyte[index++] = (GLubyte)(noiseVal * 255.0f);
          }
       }
    }
@@ -254,7 +255,7 @@ void Create3DNoiseTexture( ESContext *esContext )
    glGenTextures( 1, &userData->textureId );
    glBindTexture( GL_TEXTURE_3D, userData->textureId );
    glTexImage3D( GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize, 0,
-      GL_RED, GL_FLOAT, texBuf );
+      GL_RED, GL_UNSIGNED_BYTE, texBufUbyte );
 
    glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
    glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
@@ -265,6 +266,7 @@ void Create3DNoiseTexture( ESContext *esContext )
    glBindTexture( GL_TEXTURE_3D, 0 );
 
    free( texBuf );
+   free( texBufUbyte );
 }
 
 ///
@@ -295,7 +297,7 @@ int Init ( ESContext *esContext )
    const char fShaderStr[] =  
       "#version 300 es                                   \n"
       "precision mediump float;                          \n"
-      "uniform sampler3D s_noiseTex;                     \n"
+      "uniform mediump sampler3D s_noiseTex;             \n"
       "uniform float u_fogMaxDist;                       \n"
       "uniform float u_fogMinDist;                       \n"
       "uniform vec4  u_fogColor;                         \n"

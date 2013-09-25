@@ -85,7 +85,7 @@ int Init ( ESContext *esContext )
    UserData *userData = esContext->userData;
    int i;
    
-   GLbyte vShaderStr[] =
+   char vShaderStr[] =
       "#version 300 es                                      \n"
       "uniform float u_time;                                \n"
       "uniform vec3 u_centerPosition;                       \n"
@@ -109,7 +109,7 @@ int Init ( ESContext *esContext )
       "  gl_PointSize = ( v_lifetime * v_lifetime ) * 40.0; \n"
       "}";
       
-   GLbyte fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                                      \n"
       "precision mediump float;                             \n"
       "uniform vec4 u_color;                                \n"

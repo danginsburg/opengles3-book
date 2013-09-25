@@ -1,0 +1,544 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7625BCC017F3ABB80019C421 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCBF17F3ABB80019C421 /* Foundation.framework */; };
+		7625BCC217F3ABB80019C421 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCC117F3ABB80019C421 /* CoreGraphics.framework */; };
+		7625BCC417F3ABB80019C421 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCC317F3ABB80019C421 /* UIKit.framework */; };
+		7625BCC617F3ABB80019C421 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCC517F3ABB80019C421 /* GLKit.framework */; };
+		7625BCC817F3ABB80019C421 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCC717F3ABB80019C421 /* OpenGLES.framework */; };
+		7625BCCE17F3ABB80019C421 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7625BCCC17F3ABB80019C421 /* InfoPlist.strings */; };
+		7625BCD717F3ABB80019C421 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7625BCD517F3ABB80019C421 /* Main_iPhone.storyboard */; };
+		7625BCDA17F3ABB80019C421 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7625BCD817F3ABB80019C421 /* Main_iPad.storyboard */; };
+		7625BCE317F3ABB80019C421 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7625BCE217F3ABB80019C421 /* Images.xcassets */; };
+		7625BCEA17F3ABB80019C421 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCE917F3ABB80019C421 /* XCTest.framework */; };
+		7625BCEB17F3ABB80019C421 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCBF17F3ABB80019C421 /* Foundation.framework */; };
+		7625BCEC17F3ABB80019C421 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7625BCC317F3ABB80019C421 /* UIKit.framework */; };
+		7625BCF417F3ABB80019C421 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7625BCF217F3ABB80019C421 /* InfoPlist.strings */; };
+		7625BCF617F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BCF517F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.m */; };
+		7625BD0B17F3ABE30019C421 /* esShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BCFF17F3ABE30019C421 /* esShader.c */; };
+		7625BD0C17F3ABE30019C421 /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0017F3ABE30019C421 /* esShapes.c */; };
+		7625BD0D17F3ABE30019C421 /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0117F3ABE30019C421 /* esTransform.c */; };
+		7625BD0E17F3ABE30019C421 /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0217F3ABE30019C421 /* esUtil.c */; };
+		7625BD0F17F3ABE30019C421 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0517F3ABE30019C421 /* AppDelegate.m */; };
+		7625BD1017F3ABE30019C421 /* FileWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0717F3ABE30019C421 /* FileWrapper.m */; };
+		7625BD1117F3ABE30019C421 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0817F3ABE30019C421 /* main.m */; };
+		7625BD1217F3ABE30019C421 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD0A17F3ABE30019C421 /* ViewController.m */; };
+		7625BD1717F3AC030019C421 /* Noise3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD1317F3AC030019C421 /* Noise3D.c */; };
+		7625BD1817F3AC030019C421 /* ParticleSystemTransformFeedback.c in Sources */ = {isa = PBXBuildFile; fileRef = 7625BD1517F3AC030019C421 /* ParticleSystemTransformFeedback.c */; };
+		7625BD1917F3AC030019C421 /* smoke.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7625BD1617F3AC030019C421 /* smoke.tga */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7625BCED17F3ABB80019C421 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7625BCB417F3ABB80019C421 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7625BCBB17F3ABB80019C421;
+			remoteInfo = ParticleSystemTransformFeedback;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7625BCBC17F3ABB80019C421 /* ParticleSystemTransformFeedback.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ParticleSystemTransformFeedback.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7625BCBF17F3ABB80019C421 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7625BCC117F3ABB80019C421 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7625BCC317F3ABB80019C421 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7625BCC517F3ABB80019C421 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		7625BCC717F3ABB80019C421 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7625BCCB17F3ABB80019C421 /* ParticleSystemTransformFeedback-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ParticleSystemTransformFeedback-Info.plist"; sourceTree = "<group>"; };
+		7625BCCD17F3ABB80019C421 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7625BCD117F3ABB80019C421 /* ParticleSystemTransformFeedback-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParticleSystemTransformFeedback-Prefix.pch"; sourceTree = "<group>"; };
+		7625BCD617F3ABB80019C421 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		7625BCD917F3ABB80019C421 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		7625BCE217F3ABB80019C421 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7625BCE817F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParticleSystemTransformFeedbackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7625BCE917F3ABB80019C421 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7625BCF117F3ABB80019C421 /* ParticleSystemTransformFeedbackTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ParticleSystemTransformFeedbackTests-Info.plist"; sourceTree = "<group>"; };
+		7625BCF317F3ABB80019C421 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7625BCF517F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParticleSystemTransformFeedbackTests.m; sourceTree = "<group>"; };
+		7625BCFF17F3ABE30019C421 /* esShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShader.c; path = ../../../../Common/Source/esShader.c; sourceTree = "<group>"; };
+		7625BD0017F3ABE30019C421 /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
+		7625BD0117F3ABE30019C421 /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
+		7625BD0217F3ABE30019C421 /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
+		7625BD0417F3ABE30019C421 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7625BD0517F3ABE30019C421 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7625BD0617F3ABE30019C421 /* FileWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWrapper.h; sourceTree = "<group>"; };
+		7625BD0717F3ABE30019C421 /* FileWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileWrapper.m; sourceTree = "<group>"; };
+		7625BD0817F3ABE30019C421 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7625BD0917F3ABE30019C421 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7625BD0A17F3ABE30019C421 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7625BD1317F3AC030019C421 /* Noise3D.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Noise3D.c; path = ../../Noise3D.c; sourceTree = "<group>"; };
+		7625BD1417F3AC030019C421 /* Noise3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Noise3D.h; path = ../../Noise3D.h; sourceTree = "<group>"; };
+		7625BD1517F3AC030019C421 /* ParticleSystemTransformFeedback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ParticleSystemTransformFeedback.c; path = ../../ParticleSystemTransformFeedback.c; sourceTree = "<group>"; };
+		7625BD1617F3AC030019C421 /* smoke.tga */ = {isa = PBXFileReference; lastKnownFileType = file; name = smoke.tga; path = ../../smoke.tga; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7625BCB917F3ABB80019C421 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BCC817F3ABB80019C421 /* OpenGLES.framework in Frameworks */,
+				7625BCC217F3ABB80019C421 /* CoreGraphics.framework in Frameworks */,
+				7625BCC417F3ABB80019C421 /* UIKit.framework in Frameworks */,
+				7625BCC617F3ABB80019C421 /* GLKit.framework in Frameworks */,
+				7625BCC017F3ABB80019C421 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7625BCE517F3ABB80019C421 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BCEA17F3ABB80019C421 /* XCTest.framework in Frameworks */,
+				7625BCEC17F3ABB80019C421 /* UIKit.framework in Frameworks */,
+				7625BCEB17F3ABB80019C421 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7625BCB317F3ABB80019C421 = {
+			isa = PBXGroup;
+			children = (
+				7625BD1517F3AC030019C421 /* ParticleSystemTransformFeedback.c */,
+				7625BD1317F3AC030019C421 /* Noise3D.c */,
+				7625BD1417F3AC030019C421 /* Noise3D.h */,
+				7625BD1617F3AC030019C421 /* smoke.tga */,
+				7625BCFF17F3ABE30019C421 /* esShader.c */,
+				7625BD0017F3ABE30019C421 /* esShapes.c */,
+				7625BD0117F3ABE30019C421 /* esTransform.c */,
+				7625BD0217F3ABE30019C421 /* esUtil.c */,
+				7625BD0317F3ABE30019C421 /* iOS */,
+				7625BCC917F3ABB80019C421 /* ParticleSystemTransformFeedback */,
+				7625BCEF17F3ABB80019C421 /* ParticleSystemTransformFeedbackTests */,
+				7625BCBE17F3ABB80019C421 /* Frameworks */,
+				7625BCBD17F3ABB80019C421 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7625BCBD17F3ABB80019C421 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCBC17F3ABB80019C421 /* ParticleSystemTransformFeedback.app */,
+				7625BCE817F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7625BCBE17F3ABB80019C421 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCBF17F3ABB80019C421 /* Foundation.framework */,
+				7625BCC117F3ABB80019C421 /* CoreGraphics.framework */,
+				7625BCC317F3ABB80019C421 /* UIKit.framework */,
+				7625BCC517F3ABB80019C421 /* GLKit.framework */,
+				7625BCC717F3ABB80019C421 /* OpenGLES.framework */,
+				7625BCE917F3ABB80019C421 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7625BCC917F3ABB80019C421 /* ParticleSystemTransformFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCD517F3ABB80019C421 /* Main_iPhone.storyboard */,
+				7625BCD817F3ABB80019C421 /* Main_iPad.storyboard */,
+				7625BCE217F3ABB80019C421 /* Images.xcassets */,
+				7625BCCA17F3ABB80019C421 /* Supporting Files */,
+			);
+			path = ParticleSystemTransformFeedback;
+			sourceTree = "<group>";
+		};
+		7625BCCA17F3ABB80019C421 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCCB17F3ABB80019C421 /* ParticleSystemTransformFeedback-Info.plist */,
+				7625BCCC17F3ABB80019C421 /* InfoPlist.strings */,
+				7625BCD117F3ABB80019C421 /* ParticleSystemTransformFeedback-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7625BCEF17F3ABB80019C421 /* ParticleSystemTransformFeedbackTests */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCF517F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.m */,
+				7625BCF017F3ABB80019C421 /* Supporting Files */,
+			);
+			path = ParticleSystemTransformFeedbackTests;
+			sourceTree = "<group>";
+		};
+		7625BCF017F3ABB80019C421 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7625BCF117F3ABB80019C421 /* ParticleSystemTransformFeedbackTests-Info.plist */,
+				7625BCF217F3ABB80019C421 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7625BD0317F3ABE30019C421 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7625BD0417F3ABE30019C421 /* AppDelegate.h */,
+				7625BD0517F3ABE30019C421 /* AppDelegate.m */,
+				7625BD0617F3ABE30019C421 /* FileWrapper.h */,
+				7625BD0717F3ABE30019C421 /* FileWrapper.m */,
+				7625BD0817F3ABE30019C421 /* main.m */,
+				7625BD0917F3ABE30019C421 /* ViewController.h */,
+				7625BD0A17F3ABE30019C421 /* ViewController.m */,
+			);
+			name = iOS;
+			path = ../../../../Common/Source/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7625BCBB17F3ABB80019C421 /* ParticleSystemTransformFeedback */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7625BCF917F3ABB80019C421 /* Build configuration list for PBXNativeTarget "ParticleSystemTransformFeedback" */;
+			buildPhases = (
+				7625BCB817F3ABB80019C421 /* Sources */,
+				7625BCB917F3ABB80019C421 /* Frameworks */,
+				7625BCBA17F3ABB80019C421 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ParticleSystemTransformFeedback;
+			productName = ParticleSystemTransformFeedback;
+			productReference = 7625BCBC17F3ABB80019C421 /* ParticleSystemTransformFeedback.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7625BCE717F3ABB80019C421 /* ParticleSystemTransformFeedbackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7625BCFC17F3ABB80019C421 /* Build configuration list for PBXNativeTarget "ParticleSystemTransformFeedbackTests" */;
+			buildPhases = (
+				7625BCE417F3ABB80019C421 /* Sources */,
+				7625BCE517F3ABB80019C421 /* Frameworks */,
+				7625BCE617F3ABB80019C421 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7625BCEE17F3ABB80019C421 /* PBXTargetDependency */,
+			);
+			name = ParticleSystemTransformFeedbackTests;
+			productName = ParticleSystemTransformFeedbackTests;
+			productReference = 7625BCE817F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7625BCB417F3ABB80019C421 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Daniel Ginsburg";
+				TargetAttributes = {
+					7625BCE717F3ABB80019C421 = {
+						TestTargetID = 7625BCBB17F3ABB80019C421;
+					};
+				};
+			};
+			buildConfigurationList = 7625BCB717F3ABB80019C421 /* Build configuration list for PBXProject "ParticleSystemTransformFeedback" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7625BCB317F3ABB80019C421;
+			productRefGroup = 7625BCBD17F3ABB80019C421 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7625BCBB17F3ABB80019C421 /* ParticleSystemTransformFeedback */,
+				7625BCE717F3ABB80019C421 /* ParticleSystemTransformFeedbackTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7625BCBA17F3ABB80019C421 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BD1917F3AC030019C421 /* smoke.tga in Resources */,
+				7625BCDA17F3ABB80019C421 /* Main_iPad.storyboard in Resources */,
+				7625BCD717F3ABB80019C421 /* Main_iPhone.storyboard in Resources */,
+				7625BCE317F3ABB80019C421 /* Images.xcassets in Resources */,
+				7625BCCE17F3ABB80019C421 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7625BCE617F3ABB80019C421 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BCF417F3ABB80019C421 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7625BCB817F3ABB80019C421 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BD0B17F3ABE30019C421 /* esShader.c in Sources */,
+				7625BD0C17F3ABE30019C421 /* esShapes.c in Sources */,
+				7625BD1217F3ABE30019C421 /* ViewController.m in Sources */,
+				7625BD0D17F3ABE30019C421 /* esTransform.c in Sources */,
+				7625BD1017F3ABE30019C421 /* FileWrapper.m in Sources */,
+				7625BD0E17F3ABE30019C421 /* esUtil.c in Sources */,
+				7625BD1817F3AC030019C421 /* ParticleSystemTransformFeedback.c in Sources */,
+				7625BD1117F3ABE30019C421 /* main.m in Sources */,
+				7625BD1717F3AC030019C421 /* Noise3D.c in Sources */,
+				7625BD0F17F3ABE30019C421 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7625BCE417F3ABB80019C421 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7625BCF617F3ABB80019C421 /* ParticleSystemTransformFeedbackTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7625BCEE17F3ABB80019C421 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7625BCBB17F3ABB80019C421 /* ParticleSystemTransformFeedback */;
+			targetProxy = 7625BCED17F3ABB80019C421 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7625BCCC17F3ABB80019C421 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7625BCCD17F3ABB80019C421 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7625BCD517F3ABB80019C421 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7625BCD617F3ABB80019C421 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		7625BCD817F3ABB80019C421 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7625BCD917F3ABB80019C421 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		7625BCF217F3ABB80019C421 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7625BCF317F3ABB80019C421 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7625BCF717F3ABB80019C421 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7625BCF817F3ABB80019C421 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7625BCFA17F3ABB80019C421 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Prefix.pch";
+				INFOPLIST_FILE = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7625BCFB17F3ABB80019C421 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Prefix.pch";
+				INFOPLIST_FILE = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7625BCFD17F3ABB80019C421 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ParticleSystemTransformFeedback.app/ParticleSystemTransformFeedback";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ParticleSystemTransformFeedbackTests/ParticleSystemTransformFeedbackTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7625BCFE17F3ABB80019C421 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ParticleSystemTransformFeedback.app/ParticleSystemTransformFeedback";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ParticleSystemTransformFeedback/ParticleSystemTransformFeedback-Prefix.pch";
+				INFOPLIST_FILE = "ParticleSystemTransformFeedbackTests/ParticleSystemTransformFeedbackTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7625BCB717F3ABB80019C421 /* Build configuration list for PBXProject "ParticleSystemTransformFeedback" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7625BCF717F3ABB80019C421 /* Debug */,
+				7625BCF817F3ABB80019C421 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7625BCF917F3ABB80019C421 /* Build configuration list for PBXNativeTarget "ParticleSystemTransformFeedback" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7625BCFA17F3ABB80019C421 /* Debug */,
+				7625BCFB17F3ABB80019C421 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7625BCFC17F3ABB80019C421 /* Build configuration list for PBXNativeTarget "ParticleSystemTransformFeedbackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7625BCFD17F3ABB80019C421 /* Debug */,
+				7625BCFE17F3ABB80019C421 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7625BCB417F3ABB80019C421 /* Project object */;
+}
