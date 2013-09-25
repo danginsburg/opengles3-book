@@ -13,6 +13,7 @@
 //    This example demonstrates mapping buffer objects
 //
 #include "esUtil.h"
+#include <string.h>
 
 typedef struct
 {

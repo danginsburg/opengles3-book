@@ -74,7 +74,7 @@ GLuint CreateSimpleTexture2D( )
 int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLbyte vShaderStr[] =  
+   char vShaderStr[] =
       "#version 300 es                            \n"
       "layout(location = 0) in vec4 a_position;   \n"
       "layout(location = 1) in vec2 a_texCoord;   \n"
@@ -85,7 +85,7 @@ int Init ( ESContext *esContext )
       "   v_texCoord = a_texCoord;                \n"
       "}                                          \n";
    
-   GLbyte fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
       "in vec2 v_texCoord;                                 \n"

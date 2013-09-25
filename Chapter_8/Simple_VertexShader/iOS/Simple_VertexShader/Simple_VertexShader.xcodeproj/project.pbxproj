@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7667DF1F17F260CC005D5823 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF1E17F260CC005D5823 /* Foundation.framework */; };
+		7667DF2117F260CC005D5823 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF2017F260CC005D5823 /* CoreGraphics.framework */; };
+		7667DF2317F260CC005D5823 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF2217F260CC005D5823 /* UIKit.framework */; };
+		7667DF2517F260CC005D5823 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF2417F260CC005D5823 /* GLKit.framework */; };
+		7667DF2717F260CC005D5823 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF2617F260CC005D5823 /* OpenGLES.framework */; };
+		7667DF2D17F260CC005D5823 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7667DF2B17F260CC005D5823 /* InfoPlist.strings */; };
+		7667DF3617F260CC005D5823 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7667DF3417F260CC005D5823 /* Main_iPhone.storyboard */; };
+		7667DF3917F260CC005D5823 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7667DF3717F260CC005D5823 /* Main_iPad.storyboard */; };
+		7667DF4217F260CC005D5823 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7667DF4117F260CC005D5823 /* Images.xcassets */; };
+		7667DF4917F260CC005D5823 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF4817F260CC005D5823 /* XCTest.framework */; };
+		7667DF4A17F260CC005D5823 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF1E17F260CC005D5823 /* Foundation.framework */; };
+		7667DF4B17F260CC005D5823 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7667DF2217F260CC005D5823 /* UIKit.framework */; };
+		7667DF5317F260CC005D5823 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7667DF5117F260CC005D5823 /* InfoPlist.strings */; };
+		7667DF5517F260CD005D5823 /* Simple_VertexShaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7667DF5417F260CC005D5823 /* Simple_VertexShaderTests.m */; };
+		7667E33517F2610D005D5823 /* esShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 7667E32B17F2610D005D5823 /* esShader.c */; };
+		7667E33617F2610D005D5823 /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 7667E32C17F2610D005D5823 /* esShapes.c */; };
+		7667E33717F2610D005D5823 /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 7667E32D17F2610D005D5823 /* esTransform.c */; };
+		7667E33817F2610D005D5823 /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 7667E32E17F2610D005D5823 /* esUtil.c */; };
+		7667E33917F2610D005D5823 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7667E33117F2610D005D5823 /* AppDelegate.m */; };
+		7667E33A17F2610D005D5823 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7667E33217F2610D005D5823 /* main.m */; };
+		7667E33B17F2610D005D5823 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7667E33417F2610D005D5823 /* ViewController.m */; };
+		7667E33D17F26116005D5823 /* Simple_VertexShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 7667E33C17F26116005D5823 /* Simple_VertexShader.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7667DF4C17F260CC005D5823 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7667DF1317F260CC005D5823 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7667DF1A17F260CC005D5823;
+			remoteInfo = Simple_VertexShader;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7667DF1B17F260CC005D5823 /* Simple_VertexShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simple_VertexShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7667DF1E17F260CC005D5823 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7667DF2017F260CC005D5823 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7667DF2217F260CC005D5823 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7667DF2417F260CC005D5823 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		7667DF2617F260CC005D5823 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7667DF2A17F260CC005D5823 /* Simple_VertexShader-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple_VertexShader-Info.plist"; sourceTree = "<group>"; };
+		7667DF2C17F260CC005D5823 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7667DF3017F260CC005D5823 /* Simple_VertexShader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simple_VertexShader-Prefix.pch"; sourceTree = "<group>"; };
+		7667DF3517F260CC005D5823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		7667DF3817F260CC005D5823 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		7667DF4117F260CC005D5823 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7667DF4717F260CC005D5823 /* Simple_VertexShaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Simple_VertexShaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7667DF4817F260CC005D5823 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7667DF5017F260CC005D5823 /* Simple_VertexShaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple_VertexShaderTests-Info.plist"; sourceTree = "<group>"; };
+		7667DF5217F260CC005D5823 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7667DF5417F260CC005D5823 /* Simple_VertexShaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Simple_VertexShaderTests.m; sourceTree = "<group>"; };
+		7667E32B17F2610D005D5823 /* esShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShader.c; path = ../../../../../Common/Source/esShader.c; sourceTree = "<group>"; };
+		7667E32C17F2610D005D5823 /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
+		7667E32D17F2610D005D5823 /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
+		7667E32E17F2610D005D5823 /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
+		7667E33017F2610D005D5823 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7667E33117F2610D005D5823 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7667E33217F2610D005D5823 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7667E33317F2610D005D5823 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7667E33417F2610D005D5823 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7667E33C17F26116005D5823 /* Simple_VertexShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Simple_VertexShader.c; path = ../../../Simple_VertexShader.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7667DF1817F260CC005D5823 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667DF2717F260CC005D5823 /* OpenGLES.framework in Frameworks */,
+				7667DF2117F260CC005D5823 /* CoreGraphics.framework in Frameworks */,
+				7667DF2317F260CC005D5823 /* UIKit.framework in Frameworks */,
+				7667DF2517F260CC005D5823 /* GLKit.framework in Frameworks */,
+				7667DF1F17F260CC005D5823 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7667DF4417F260CC005D5823 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667DF4917F260CC005D5823 /* XCTest.framework in Frameworks */,
+				7667DF4B17F260CC005D5823 /* UIKit.framework in Frameworks */,
+				7667DF4A17F260CC005D5823 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7667DF1217F260CC005D5823 = {
+			isa = PBXGroup;
+			children = (
+				7667DF2817F260CC005D5823 /* Simple_VertexShader */,
+				7667DF4E17F260CC005D5823 /* Simple_VertexShaderTests */,
+				7667DF1D17F260CC005D5823 /* Frameworks */,
+				7667DF1C17F260CC005D5823 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7667DF1C17F260CC005D5823 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7667DF1B17F260CC005D5823 /* Simple_VertexShader.app */,
+				7667DF4717F260CC005D5823 /* Simple_VertexShaderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7667DF1D17F260CC005D5823 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7667DF1E17F260CC005D5823 /* Foundation.framework */,
+				7667DF2017F260CC005D5823 /* CoreGraphics.framework */,
+				7667DF2217F260CC005D5823 /* UIKit.framework */,
+				7667DF2417F260CC005D5823 /* GLKit.framework */,
+				7667DF2617F260CC005D5823 /* OpenGLES.framework */,
+				7667DF4817F260CC005D5823 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7667DF2817F260CC005D5823 /* Simple_VertexShader */ = {
+			isa = PBXGroup;
+			children = (
+				7667E33C17F26116005D5823 /* Simple_VertexShader.c */,
+				7667E32B17F2610D005D5823 /* esShader.c */,
+				7667E32C17F2610D005D5823 /* esShapes.c */,
+				7667E32D17F2610D005D5823 /* esTransform.c */,
+				7667E32E17F2610D005D5823 /* esUtil.c */,
+				7667E32F17F2610D005D5823 /* iOS */,
+				7667DF3417F260CC005D5823 /* Main_iPhone.storyboard */,
+				7667DF3717F260CC005D5823 /* Main_iPad.storyboard */,
+				7667DF4117F260CC005D5823 /* Images.xcassets */,
+				7667DF2917F260CC005D5823 /* Supporting Files */,
+			);
+			path = Simple_VertexShader;
+			sourceTree = "<group>";
+		};
+		7667DF2917F260CC005D5823 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7667DF2A17F260CC005D5823 /* Simple_VertexShader-Info.plist */,
+				7667DF2B17F260CC005D5823 /* InfoPlist.strings */,
+				7667DF3017F260CC005D5823 /* Simple_VertexShader-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7667DF4E17F260CC005D5823 /* Simple_VertexShaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				7667DF5417F260CC005D5823 /* Simple_VertexShaderTests.m */,
+				7667DF4F17F260CC005D5823 /* Supporting Files */,
+			);
+			path = Simple_VertexShaderTests;
+			sourceTree = "<group>";
+		};
+		7667DF4F17F260CC005D5823 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7667DF5017F260CC005D5823 /* Simple_VertexShaderTests-Info.plist */,
+				7667DF5117F260CC005D5823 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7667E32F17F2610D005D5823 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7667E33017F2610D005D5823 /* AppDelegate.h */,
+				7667E33117F2610D005D5823 /* AppDelegate.m */,
+				7667E33217F2610D005D5823 /* main.m */,
+				7667E33317F2610D005D5823 /* ViewController.h */,
+				7667E33417F2610D005D5823 /* ViewController.m */,
+			);
+			name = iOS;
+			path = ../../../../../Common/Source/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7667DF1A17F260CC005D5823 /* Simple_VertexShader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7667DF5817F260CD005D5823 /* Build configuration list for PBXNativeTarget "Simple_VertexShader" */;
+			buildPhases = (
+				7667DF1717F260CC005D5823 /* Sources */,
+				7667DF1817F260CC005D5823 /* Frameworks */,
+				7667DF1917F260CC005D5823 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simple_VertexShader;
+			productName = Simple_VertexShader;
+			productReference = 7667DF1B17F260CC005D5823 /* Simple_VertexShader.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7667DF4617F260CC005D5823 /* Simple_VertexShaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7667DF5B17F260CD005D5823 /* Build configuration list for PBXNativeTarget "Simple_VertexShaderTests" */;
+			buildPhases = (
+				7667DF4317F260CC005D5823 /* Sources */,
+				7667DF4417F260CC005D5823 /* Frameworks */,
+				7667DF4517F260CC005D5823 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7667DF4D17F260CC005D5823 /* PBXTargetDependency */,
+			);
+			name = Simple_VertexShaderTests;
+			productName = Simple_VertexShaderTests;
+			productReference = 7667DF4717F260CC005D5823 /* Simple_VertexShaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7667DF1317F260CC005D5823 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Daniel Ginsburg";
+				TargetAttributes = {
+					7667DF4617F260CC005D5823 = {
+						TestTargetID = 7667DF1A17F260CC005D5823;
+					};
+				};
+			};
+			buildConfigurationList = 7667DF1617F260CC005D5823 /* Build configuration list for PBXProject "Simple_VertexShader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7667DF1217F260CC005D5823;
+			productRefGroup = 7667DF1C17F260CC005D5823 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7667DF1A17F260CC005D5823 /* Simple_VertexShader */,
+				7667DF4617F260CC005D5823 /* Simple_VertexShaderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7667DF1917F260CC005D5823 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667DF3917F260CC005D5823 /* Main_iPad.storyboard in Resources */,
+				7667DF3617F260CC005D5823 /* Main_iPhone.storyboard in Resources */,
+				7667DF4217F260CC005D5823 /* Images.xcassets in Resources */,
+				7667DF2D17F260CC005D5823 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7667DF4517F260CC005D5823 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667DF5317F260CC005D5823 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7667DF1717F260CC005D5823 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667E33B17F2610D005D5823 /* ViewController.m in Sources */,
+				7667E33517F2610D005D5823 /* esShader.c in Sources */,
+				7667E33617F2610D005D5823 /* esShapes.c in Sources */,
+				7667E33717F2610D005D5823 /* esTransform.c in Sources */,
+				7667E33D17F26116005D5823 /* Simple_VertexShader.c in Sources */,
+				7667E33817F2610D005D5823 /* esUtil.c in Sources */,
+				7667E33A17F2610D005D5823 /* main.m in Sources */,
+				7667E33917F2610D005D5823 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7667DF4317F260CC005D5823 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7667DF5517F260CD005D5823 /* Simple_VertexShaderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7667DF4D17F260CC005D5823 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7667DF1A17F260CC005D5823 /* Simple_VertexShader */;
+			targetProxy = 7667DF4C17F260CC005D5823 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7667DF2B17F260CC005D5823 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7667DF2C17F260CC005D5823 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7667DF3417F260CC005D5823 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7667DF3517F260CC005D5823 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		7667DF3717F260CC005D5823 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7667DF3817F260CC005D5823 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		7667DF5117F260CC005D5823 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7667DF5217F260CC005D5823 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7667DF5617F260CD005D5823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7667DF5717F260CD005D5823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7667DF5917F260CD005D5823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_VertexShader/Simple_VertexShader-Prefix.pch";
+				INFOPLIST_FILE = "Simple_VertexShader/Simple_VertexShader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7667DF5A17F260CD005D5823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_VertexShader/Simple_VertexShader-Prefix.pch";
+				INFOPLIST_FILE = "Simple_VertexShader/Simple_VertexShader-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7667DF5C17F260CD005D5823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple_VertexShader.app/Simple_VertexShader";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_VertexShader/Simple_VertexShader-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Simple_VertexShaderTests/Simple_VertexShaderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7667DF5D17F260CD005D5823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple_VertexShader.app/Simple_VertexShader";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_VertexShader/Simple_VertexShader-Prefix.pch";
+				INFOPLIST_FILE = "Simple_VertexShaderTests/Simple_VertexShaderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7667DF1617F260CC005D5823 /* Build configuration list for PBXProject "Simple_VertexShader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7667DF5617F260CD005D5823 /* Debug */,
+				7667DF5717F260CD005D5823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7667DF5817F260CD005D5823 /* Build configuration list for PBXNativeTarget "Simple_VertexShader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7667DF5917F260CD005D5823 /* Debug */,
+				7667DF5A17F260CD005D5823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7667DF5B17F260CD005D5823 /* Build configuration list for PBXNativeTarget "Simple_VertexShaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7667DF5C17F260CD005D5823 /* Debug */,
+				7667DF5D17F260CD005D5823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7667DF1317F260CC005D5823 /* Project object */;
+}

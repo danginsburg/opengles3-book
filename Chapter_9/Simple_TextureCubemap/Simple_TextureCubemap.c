@@ -102,7 +102,7 @@ GLuint CreateSimpleTextureCubemap( )
 int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLbyte vShaderStr[] =  
+   char vShaderStr[] =
       "#version 300 es                            \n"
       "layout(location = 0) in vec4 a_position;   \n"
       "layout(location = 1) in vec3 a_normal;     \n"
@@ -113,7 +113,7 @@ int Init ( ESContext *esContext )
       "   v_normal = a_normal;                    \n"
       "}                                          \n";
    
-   GLbyte fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
       "in vec3 v_normal;                                   \n"

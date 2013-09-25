@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A15AD74E-6F19-4ADA-93EB-B80B1D1C289F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Simple_Texture2D</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9EB368F2-0544-44D5-93FC-5D6BC106FE48</key>
+		<string>ssh://github.com/danginsburg/opengles-book.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ES30/Code/Chapter_9/Simple_Texture2D/iOS/Simple_Texture2D/Simple_Texture2D.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9EB368F2-0544-44D5-93FC-5D6BC106FE48</key>
+		<string>../../../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/danginsburg/opengles-book.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9EB368F2-0544-44D5-93FC-5D6BC106FE48</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9EB368F2-0544-44D5-93FC-5D6BC106FE48</string>
+			<key>IDESourceControlWCCName</key>
+			<string>opengles-book</string>
+		</dict>
+	</array>
+</dict>
+</plist>

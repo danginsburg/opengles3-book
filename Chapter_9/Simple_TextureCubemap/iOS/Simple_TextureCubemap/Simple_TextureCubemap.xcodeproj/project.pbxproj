@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		762F287C17F26276003C92E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F287B17F26276003C92E4 /* Foundation.framework */; };
+		762F287E17F26276003C92E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F287D17F26276003C92E4 /* CoreGraphics.framework */; };
+		762F288017F26276003C92E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F287F17F26276003C92E4 /* UIKit.framework */; };
+		762F288217F26276003C92E4 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F288117F26276003C92E4 /* GLKit.framework */; };
+		762F288417F26276003C92E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F288317F26276003C92E4 /* OpenGLES.framework */; };
+		762F288A17F26276003C92E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 762F288817F26276003C92E4 /* InfoPlist.strings */; };
+		762F289317F26276003C92E4 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762F289117F26276003C92E4 /* Main_iPhone.storyboard */; };
+		762F289617F26276003C92E4 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762F289417F26276003C92E4 /* Main_iPad.storyboard */; };
+		762F289F17F26276003C92E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 762F289E17F26276003C92E4 /* Images.xcassets */; };
+		762F28A617F26276003C92E4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F28A517F26276003C92E4 /* XCTest.framework */; };
+		762F28A717F26276003C92E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F287B17F26276003C92E4 /* Foundation.framework */; };
+		762F28A817F26276003C92E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F287F17F26276003C92E4 /* UIKit.framework */; };
+		762F28B017F26276003C92E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 762F28AE17F26276003C92E4 /* InfoPlist.strings */; };
+		762F28B217F26276003C92E4 /* Simple_TextureCubemapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F28B117F26276003C92E4 /* Simple_TextureCubemapTests.m */; };
+		762F28C517F26296003C92E4 /* esShader.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F28BB17F26296003C92E4 /* esShader.c */; };
+		762F28C617F26296003C92E4 /* esShapes.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F28BC17F26296003C92E4 /* esShapes.c */; };
+		762F28C717F26296003C92E4 /* esTransform.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F28BD17F26296003C92E4 /* esTransform.c */; };
+		762F28C817F26296003C92E4 /* esUtil.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F28BE17F26296003C92E4 /* esUtil.c */; };
+		762F28C917F26296003C92E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F28C117F26296003C92E4 /* AppDelegate.m */; };
+		762F28CA17F26296003C92E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F28C217F26296003C92E4 /* main.m */; };
+		762F28CB17F26296003C92E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F28C417F26296003C92E4 /* ViewController.m */; };
+		762F28CD17F262A1003C92E4 /* Simple_TextureCubemap.c in Sources */ = {isa = PBXBuildFile; fileRef = 762F28CC17F262A1003C92E4 /* Simple_TextureCubemap.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		762F28A917F26276003C92E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 762F287017F26276003C92E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 762F287717F26276003C92E4;
+			remoteInfo = Simple_TextureCubemap;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		762F287817F26276003C92E4 /* Simple_TextureCubemap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Simple_TextureCubemap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		762F287B17F26276003C92E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		762F287D17F26276003C92E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		762F287F17F26276003C92E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		762F288117F26276003C92E4 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		762F288317F26276003C92E4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		762F288717F26276003C92E4 /* Simple_TextureCubemap-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple_TextureCubemap-Info.plist"; sourceTree = "<group>"; };
+		762F288917F26276003C92E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		762F288D17F26276003C92E4 /* Simple_TextureCubemap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simple_TextureCubemap-Prefix.pch"; sourceTree = "<group>"; };
+		762F289217F26276003C92E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		762F289517F26276003C92E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		762F289E17F26276003C92E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		762F28A417F26276003C92E4 /* Simple_TextureCubemapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Simple_TextureCubemapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		762F28A517F26276003C92E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		762F28AD17F26276003C92E4 /* Simple_TextureCubemapTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Simple_TextureCubemapTests-Info.plist"; sourceTree = "<group>"; };
+		762F28AF17F26276003C92E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		762F28B117F26276003C92E4 /* Simple_TextureCubemapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Simple_TextureCubemapTests.m; sourceTree = "<group>"; };
+		762F28BB17F26296003C92E4 /* esShader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShader.c; path = ../../../../../Common/Source/esShader.c; sourceTree = "<group>"; };
+		762F28BC17F26296003C92E4 /* esShapes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esShapes.c; path = ../../../../../Common/Source/esShapes.c; sourceTree = "<group>"; };
+		762F28BD17F26296003C92E4 /* esTransform.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esTransform.c; path = ../../../../../Common/Source/esTransform.c; sourceTree = "<group>"; };
+		762F28BE17F26296003C92E4 /* esUtil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = esUtil.c; path = ../../../../../Common/Source/esUtil.c; sourceTree = "<group>"; };
+		762F28C017F26296003C92E4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		762F28C117F26296003C92E4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		762F28C217F26296003C92E4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		762F28C317F26296003C92E4 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		762F28C417F26296003C92E4 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		762F28CC17F262A1003C92E4 /* Simple_TextureCubemap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Simple_TextureCubemap.c; path = ../../../Simple_TextureCubemap.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		762F287517F26276003C92E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F288417F26276003C92E4 /* OpenGLES.framework in Frameworks */,
+				762F287E17F26276003C92E4 /* CoreGraphics.framework in Frameworks */,
+				762F288017F26276003C92E4 /* UIKit.framework in Frameworks */,
+				762F288217F26276003C92E4 /* GLKit.framework in Frameworks */,
+				762F287C17F26276003C92E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		762F28A117F26276003C92E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F28A617F26276003C92E4 /* XCTest.framework in Frameworks */,
+				762F28A817F26276003C92E4 /* UIKit.framework in Frameworks */,
+				762F28A717F26276003C92E4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		762F286F17F26276003C92E4 = {
+			isa = PBXGroup;
+			children = (
+				762F288517F26276003C92E4 /* Simple_TextureCubemap */,
+				762F28AB17F26276003C92E4 /* Simple_TextureCubemapTests */,
+				762F287A17F26276003C92E4 /* Frameworks */,
+				762F287917F26276003C92E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		762F287917F26276003C92E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				762F287817F26276003C92E4 /* Simple_TextureCubemap.app */,
+				762F28A417F26276003C92E4 /* Simple_TextureCubemapTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		762F287A17F26276003C92E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				762F287B17F26276003C92E4 /* Foundation.framework */,
+				762F287D17F26276003C92E4 /* CoreGraphics.framework */,
+				762F287F17F26276003C92E4 /* UIKit.framework */,
+				762F288117F26276003C92E4 /* GLKit.framework */,
+				762F288317F26276003C92E4 /* OpenGLES.framework */,
+				762F28A517F26276003C92E4 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		762F288517F26276003C92E4 /* Simple_TextureCubemap */ = {
+			isa = PBXGroup;
+			children = (
+				762F28CC17F262A1003C92E4 /* Simple_TextureCubemap.c */,
+				762F28BB17F26296003C92E4 /* esShader.c */,
+				762F28BC17F26296003C92E4 /* esShapes.c */,
+				762F28BD17F26296003C92E4 /* esTransform.c */,
+				762F28BE17F26296003C92E4 /* esUtil.c */,
+				762F28BF17F26296003C92E4 /* iOS */,
+				762F289117F26276003C92E4 /* Main_iPhone.storyboard */,
+				762F289417F26276003C92E4 /* Main_iPad.storyboard */,
+				762F289E17F26276003C92E4 /* Images.xcassets */,
+				762F288617F26276003C92E4 /* Supporting Files */,
+			);
+			path = Simple_TextureCubemap;
+			sourceTree = "<group>";
+		};
+		762F288617F26276003C92E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				762F288717F26276003C92E4 /* Simple_TextureCubemap-Info.plist */,
+				762F288817F26276003C92E4 /* InfoPlist.strings */,
+				762F288D17F26276003C92E4 /* Simple_TextureCubemap-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		762F28AB17F26276003C92E4 /* Simple_TextureCubemapTests */ = {
+			isa = PBXGroup;
+			children = (
+				762F28B117F26276003C92E4 /* Simple_TextureCubemapTests.m */,
+				762F28AC17F26276003C92E4 /* Supporting Files */,
+			);
+			path = Simple_TextureCubemapTests;
+			sourceTree = "<group>";
+		};
+		762F28AC17F26276003C92E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				762F28AD17F26276003C92E4 /* Simple_TextureCubemapTests-Info.plist */,
+				762F28AE17F26276003C92E4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		762F28BF17F26296003C92E4 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				762F28C017F26296003C92E4 /* AppDelegate.h */,
+				762F28C117F26296003C92E4 /* AppDelegate.m */,
+				762F28C217F26296003C92E4 /* main.m */,
+				762F28C317F26296003C92E4 /* ViewController.h */,
+				762F28C417F26296003C92E4 /* ViewController.m */,
+			);
+			name = iOS;
+			path = ../../../../../Common/Source/iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		762F287717F26276003C92E4 /* Simple_TextureCubemap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 762F28B517F26276003C92E4 /* Build configuration list for PBXNativeTarget "Simple_TextureCubemap" */;
+			buildPhases = (
+				762F287417F26276003C92E4 /* Sources */,
+				762F287517F26276003C92E4 /* Frameworks */,
+				762F287617F26276003C92E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Simple_TextureCubemap;
+			productName = Simple_TextureCubemap;
+			productReference = 762F287817F26276003C92E4 /* Simple_TextureCubemap.app */;
+			productType = "com.apple.product-type.application";
+		};
+		762F28A317F26276003C92E4 /* Simple_TextureCubemapTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 762F28B817F26276003C92E4 /* Build configuration list for PBXNativeTarget "Simple_TextureCubemapTests" */;
+			buildPhases = (
+				762F28A017F26276003C92E4 /* Sources */,
+				762F28A117F26276003C92E4 /* Frameworks */,
+				762F28A217F26276003C92E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				762F28AA17F26276003C92E4 /* PBXTargetDependency */,
+			);
+			name = Simple_TextureCubemapTests;
+			productName = Simple_TextureCubemapTests;
+			productReference = 762F28A417F26276003C92E4 /* Simple_TextureCubemapTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		762F287017F26276003C92E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Daniel Ginsburg";
+				TargetAttributes = {
+					762F28A317F26276003C92E4 = {
+						TestTargetID = 762F287717F26276003C92E4;
+					};
+				};
+			};
+			buildConfigurationList = 762F287317F26276003C92E4 /* Build configuration list for PBXProject "Simple_TextureCubemap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 762F286F17F26276003C92E4;
+			productRefGroup = 762F287917F26276003C92E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				762F287717F26276003C92E4 /* Simple_TextureCubemap */,
+				762F28A317F26276003C92E4 /* Simple_TextureCubemapTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		762F287617F26276003C92E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F289617F26276003C92E4 /* Main_iPad.storyboard in Resources */,
+				762F289317F26276003C92E4 /* Main_iPhone.storyboard in Resources */,
+				762F289F17F26276003C92E4 /* Images.xcassets in Resources */,
+				762F288A17F26276003C92E4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		762F28A217F26276003C92E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F28B017F26276003C92E4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		762F287417F26276003C92E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F28CB17F26296003C92E4 /* ViewController.m in Sources */,
+				762F28C517F26296003C92E4 /* esShader.c in Sources */,
+				762F28C617F26296003C92E4 /* esShapes.c in Sources */,
+				762F28C717F26296003C92E4 /* esTransform.c in Sources */,
+				762F28C817F26296003C92E4 /* esUtil.c in Sources */,
+				762F28CA17F26296003C92E4 /* main.m in Sources */,
+				762F28C917F26296003C92E4 /* AppDelegate.m in Sources */,
+				762F28CD17F262A1003C92E4 /* Simple_TextureCubemap.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		762F28A017F26276003C92E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				762F28B217F26276003C92E4 /* Simple_TextureCubemapTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		762F28AA17F26276003C92E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 762F287717F26276003C92E4 /* Simple_TextureCubemap */;
+			targetProxy = 762F28A917F26276003C92E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		762F288817F26276003C92E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				762F288917F26276003C92E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		762F289117F26276003C92E4 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				762F289217F26276003C92E4 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		762F289417F26276003C92E4 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				762F289517F26276003C92E4 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		762F28AE17F26276003C92E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				762F28AF17F26276003C92E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		762F28B317F26276003C92E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		762F28B417F26276003C92E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		762F28B617F26276003C92E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_TextureCubemap/Simple_TextureCubemap-Prefix.pch";
+				INFOPLIST_FILE = "Simple_TextureCubemap/Simple_TextureCubemap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		762F28B717F26276003C92E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_TextureCubemap/Simple_TextureCubemap-Prefix.pch";
+				INFOPLIST_FILE = "Simple_TextureCubemap/Simple_TextureCubemap-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = ../../../../Common/Include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		762F28B917F26276003C92E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple_TextureCubemap.app/Simple_TextureCubemap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_TextureCubemap/Simple_TextureCubemap-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Simple_TextureCubemapTests/Simple_TextureCubemapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		762F28BA17F26276003C92E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Simple_TextureCubemap.app/Simple_TextureCubemap";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Simple_TextureCubemap/Simple_TextureCubemap-Prefix.pch";
+				INFOPLIST_FILE = "Simple_TextureCubemapTests/Simple_TextureCubemapTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		762F287317F26276003C92E4 /* Build configuration list for PBXProject "Simple_TextureCubemap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				762F28B317F26276003C92E4 /* Debug */,
+				762F28B417F26276003C92E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		762F28B517F26276003C92E4 /* Build configuration list for PBXNativeTarget "Simple_TextureCubemap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				762F28B617F26276003C92E4 /* Debug */,
+				762F28B717F26276003C92E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		762F28B817F26276003C92E4 /* Build configuration list for PBXNativeTarget "Simple_TextureCubemapTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				762F28B917F26276003C92E4 /* Debug */,
+				762F28BA17F26276003C92E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 762F287017F26276003C92E4 /* Project object */;
+}
