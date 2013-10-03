@@ -140,7 +140,7 @@ void InitEmitParticles ( ESContext *esContext )
       "   return texture( s_noiseTex, texCoord ).r;                        \n"
       "}                                                                   \n"
       "void main()                                                         \n"
-      "{                                                                   \n"      
+      "{                                                                   \n"
       "  float seed = u_time;                                              \n"
       "  float lifetime = a_curtime - u_time;                              \n"
       "  if( lifetime <= 0.0 && randomValue(seed) < u_emissionRate )       \n"
@@ -160,6 +160,7 @@ void InitEmitParticles ( ESContext *esContext )
       "     v_curtime = a_curtime;                                         \n"
       "     v_lifetime = a_lifetime;                                       \n"
       "  }                                                                 \n"
+      "  gl_Position = vec4( v_position, 0.0, 1.0 );                       \n"
       "}                                                                   \n";
 
    char fShaderStr[] =  
@@ -172,7 +173,7 @@ void InitEmitParticles ( ESContext *esContext )
       "}                                                    \n";
 
    userData->emitProgramObject = esLoadProgram( vShaderStr, fShaderStr );
-   
+
    {
       const char* feedbackVaryings[5] =
       {
@@ -194,7 +195,6 @@ void InitEmitParticles ( ESContext *esContext )
       userData->emitTimeLoc = glGetUniformLocation ( userData->emitProgramObject, "u_time" );
       userData->emitEmissionRateLoc = glGetUniformLocation ( userData->emitProgramObject, "u_emissionRate" );
       userData->emitNoiseSamplerLoc = glGetUniformLocation ( userData->emitProgramObject, "s_noiseTex" );
-      
    }
 }
 
@@ -223,7 +223,7 @@ int Init ( ESContext *esContext )
       "                                                                    \n"
       "uniform float u_time;                                               \n"
       "uniform vec2 u_acceleration;                                        \n"
-      "                                                                    \n"      
+      "                                                                    \n"
       "void main()                                                         \n"
       "{                                                                   \n"
       "  float deltaTime = u_time - a_curtime;                             \n"
@@ -258,7 +258,7 @@ int Init ( ESContext *esContext )
 
    // Load the shaders and get a linked program object
    userData->drawProgramObject = esLoadProgram ( vShaderStr, fShaderStr );
-   
+
    // Get the uniform locations
    userData->drawTimeLoc = glGetUniformLocation ( userData->drawProgramObject, "u_time" );
    userData->drawColorLoc = glGetUniformLocation ( userData->drawProgramObject, "u_color" );
@@ -277,7 +277,7 @@ int Init ( ESContext *esContext )
    }
 
    // Create a 3D nosie texture for random values
-   userData->noiseTextureId = Create3DNoiseTexture( 256, 50.0 );
+   userData->noiseTextureId = Create3DNoiseTexture( 128, 50.0 );
 
    // Initialize particle data
    for ( i = 0; i < NUM_PARTICLES; i++ )
@@ -345,6 +345,7 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    SetupVertexAttributes( esContext, srcVBO );
 
    // Set transform feedback buffer
+   glBindBuffer( GL_TRANSFORM_FEEDBACK_BUFFER, dstVBO );
    glBindBufferBase( GL_TRANSFORM_FEEDBACK_BUFFER, 0, dstVBO );
 
    // Turn off rasterization - we are not drawing
@@ -363,11 +364,13 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    glBeginTransformFeedback( GL_POINTS );
       glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
    glEndTransformFeedback();
+   glFlush(); // Make sure transform feedback results are flushed before the draw that uses them.
 
    // Restore state
    glDisable( GL_RASTERIZER_DISCARD );
    glUseProgram ( 0 );
    glBindBufferBase ( GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0 );
+   glBindBuffer ( GL_ARRAY_BUFFER, 0 );
    glBindTexture( GL_TEXTURE_3D, 0 );
 
    // Ping pong the buffers
@@ -384,7 +387,7 @@ void Update ( ESContext *esContext, float deltaTime )
   
    userData->time += deltaTime;
 
-   EmitParticles ( esContext, deltaTime );   
+   EmitParticles ( esContext, deltaTime );
 }
 
 ///

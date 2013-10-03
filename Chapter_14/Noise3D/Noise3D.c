@@ -203,7 +203,7 @@ float noise3D(float *f)
 void Create3DNoiseTexture( ESContext *esContext )
 {
    UserData *userData = (UserData*) esContext->userData;
-   int textureSize = 256; // Size of the 3D nosie texture
+   int textureSize = 64; // Size of the 3D nosie texture
    float frequency = 5.0f; // Frequency of the noise.
    GLfloat *texBuf = (GLfloat*) malloc( sizeof(GLfloat) * textureSize * textureSize * textureSize);
    GLubyte *texBufUbyte = (GLubyte*) malloc( sizeof(GLubyte) * textureSize * textureSize * textureSize);
