@@ -15,7 +15,7 @@
 //    example is to demonstrate the basic concepts of 
 //    OpenGL ES 3.0 rendering.
 
-package com.opengles.hellotriangle;
+package com.openglesbook.hellotriangle;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

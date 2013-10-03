@@ -1,4 +1,4 @@
-package com.opengles.hellotriangle;
+package com.openglesbook.hellotriangle;
 
 import android.app.Activity;
 import android.app.ActivityManager;
