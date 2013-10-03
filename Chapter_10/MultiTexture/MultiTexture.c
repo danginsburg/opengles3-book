@@ -34,12 +34,12 @@ typedef struct
 ///
 // Load texture from disk
 //
-GLuint LoadTexture ( char *fileName )
+GLuint LoadTexture ( void* ioContext, char *fileName )
 {
    int width,
        height;
 
-   char *buffer = esLoadTGA ( fileName, &width, &height );
+   char *buffer = esLoadTGA (ioContext, fileName, &width, &height );
    GLuint texId;
    if ( buffer == NULL )
    {
@@ -105,8 +105,8 @@ int Init ( ESContext *esContext )
    userData->lightMapLoc = glGetUniformLocation ( userData->programObject, "s_lightMap" );
 
    // Load the textures
-   userData->baseMapTexId = LoadTexture ( "basemap.tga" );
-   userData->lightMapTexId = LoadTexture ( "lightmap.tga" );
+   userData->baseMapTexId = LoadTexture (esContext->platformData, "basemap.tga" );
+   userData->lightMapTexId = LoadTexture (esContext->platformData, "lightmap.tga" );
 
    if ( userData->baseMapTexId == 0 || userData->lightMapTexId == 0 )
       return FALSE;

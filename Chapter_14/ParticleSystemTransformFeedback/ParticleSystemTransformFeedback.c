@@ -77,11 +77,11 @@ typedef struct
 ///
 // Load texture from disk
 //
-GLuint LoadTexture ( char *fileName )
+GLuint LoadTexture ( void *ioContext, char *fileName )
 {
    int width,
        height;
-   char *buffer = esLoadTGA ( fileName, &width, &height );
+   char *buffer = esLoadTGA ( ioContext, fileName, &width, &height );
    GLuint texId;
 
    if ( buffer == NULL )
@@ -270,7 +270,7 @@ int Init ( ESContext *esContext )
 
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
-   userData->textureId = LoadTexture ( "smoke.tga" );
+   userData->textureId = LoadTexture ( esContext->platformData, "smoke.tga" );
    if ( userData->textureId <= 0 )
    {
       return FALSE;

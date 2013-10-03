@@ -28,6 +28,7 @@
 #ifdef ANDROID
 #include <android/log.h>
 #include <android_native_app_glue.h>
+#include <android/asset_manager.h>
 #endif // ANDROID
 
 #ifdef __APPLE__
@@ -291,42 +292,105 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
     va_end ( params );
 }
 
+#ifdef ANDROID
+typedef AAsset esFile;
+#else
+typedef FILE esFile;	
+#endif
+
+static esFile* esFileOpen(void* ioContext, char *fileName) 
+{
+	esFile *pFile = NULL;
+	
+#ifdef ANDROID	
+	if (ioContext != NULL) 
+	{
+		AAssetManager* assetManager = (AAssetManager *) ioContext;
+		pFile = AAssetManager_open(assetManager, fileName, AASSET_MODE_BUFFER);
+	}
+#else
+	pFile = fopen( fileName, "rb" );
+#endif
+	
+	return pFile;
+}
+
+static void esFileClose(esFile* pFile) 
+{	
+	if (pFile != NULL)
+	{
+#ifdef ANDROID
+		AAsset_close(pFile);
+#else
+		fclose(pFile);
+		pFile = NULL;
+#endif
+	}
+}
+
+static int esFileRead(esFile* pFile, int bytesToRead, void* buffer) 
+{
+	int bytesRead = 0;
+	
+	if (pFile == NULL)
+		return bytesRead;
+	
+#ifdef ANDROID
+	bytesRead = AAsset_read (pFile, buffer, bytesToRead);
+#else
+	bytesRead = fread (buffer, bytesToRead, 1, pFile);
+#endif
+	
+	return bytesRead;
+}
 
 ///
 // esLoadTGA()
 //
 //    Loads a 24-bit TGA image from a file
 //
-char* ESUTIL_API esLoadTGA ( const char *fileName, int *width, int *height )
+char* ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, int *height )
 {
    char        *buffer;
-   FILE        *fp;
+   esFile      *fp;
    TGA_HEADER   Header;
+<<<<<<< .mine
     
+=======
+   
+>>>>>>> .theirs
 #ifdef __APPLE__
     // iOS: Remap the filename to a path that can be opened from the bundle.
     fileName = GetBundleFileName( fileName );
 #endif
 
-   if ( ( fp = fopen ( fileName, "rb" ) ) == 0 )
+   // Open the file for reading
+   fp = esFileOpen(ioContext, fileName);
+   
+   if (fp == NULL)
    {
+	   // Log error as 'error in opening the input file from apk'
+	   esLogMessage("esLoadTGA FAILED to load : { %s }\n", fileName);
       return NULL;
    }
 
-   fread ( &Header, sizeof(TGA_HEADER), 1, fp );
+   int bytesRead = esFileRead(fp, sizeof(TGA_HEADER), &Header);
 
    *width = Header.Width;
    *height = Header.Height;
    
    if ( Header.ColorDepth == 24 )
    {
-      buffer = (char*)malloc(sizeof(char) * 3 * (*width) * (*height));
+	   int bytesToRead = sizeof(char) * 3 * (*width) * (*height);
+
+	   // Allocate the image data buffer
+	   buffer = (char *) malloc(bytesToRead);
 
       if (buffer)
       {
-         fread(buffer, sizeof(char) * 3, (*width) * (*height), fp);
+		   bytesRead = esFileRead(fp, bytesToRead, buffer);	
+		   esFileClose(fp);
 
-         fclose(fp);
          return(buffer);
       }		
    }

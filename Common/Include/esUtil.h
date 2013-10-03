@@ -77,6 +77,9 @@ typedef struct ESContext ESContext;
 
 struct ESContext
 {
+   /// Put platform specific data here
+   void*       platformData;
+   
    /// Put your user data here...
    void*       userData;
 
@@ -221,12 +224,13 @@ int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals,
 
 //
 /// \brief Loads a 24-bit TGA image from a file
+/// \param ioContext Context related to IO facility on the platform
 /// \param fileName Name of the file on disk
 /// \param width Width of loaded image in pixels
 /// \param height Height of loaded image in pixels
 ///  \return Pointer to loaded image.  NULL on failure. 
 //
-char* ESUTIL_API esLoadTGA ( const char *fileName, int *width, int *height );
+char* ESUTIL_API esLoadTGA ( void* ioContext, const char *fileName, int *width, int *height );
 
 
 //
