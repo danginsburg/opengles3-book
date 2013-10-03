@@ -29,7 +29,10 @@
 #include <android/log.h>
 #include <android_native_app_glue.h>
 #include <android/asset_manager.h>
-#endif // ANDROID
+typedef AAsset esFile;
+#else
+typedef FILE esFile;
+#endif
 
 #ifdef __APPLE__
 #include "FileWrapper.h"
@@ -292,56 +295,70 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
     va_end ( params );
 }
 
-#ifdef ANDROID
-typedef AAsset esFile;
-#else
-typedef FILE esFile;	
-#endif
-
-static esFile* esFileOpen(void* ioContext, char *fileName) 
+///
+// esFileRead()
+//
+//    Wrapper for platform specific File open
+//
+static esFile* esFileOpen(void* ioContext, const char *fileName) 
 {
-	esFile *pFile = NULL;
-	
-#ifdef ANDROID	
-	if (ioContext != NULL) 
-	{
-		AAssetManager* assetManager = (AAssetManager *) ioContext;
-		pFile = AAssetManager_open(assetManager, fileName, AASSET_MODE_BUFFER);
-	}
-#else
-	pFile = fopen( fileName, "rb" );
-#endif
-	
-	return pFile;
-}
-
-static void esFileClose(esFile* pFile) 
-{	
-	if (pFile != NULL)
-	{
+   esFile *pFile = NULL;
+   
 #ifdef ANDROID
-		AAsset_close(pFile);
+   if (ioContext != NULL) 
+   {
+      AAssetManager* assetManager = (AAssetManager *) ioContext;
+      pFile = AAssetManager_open(assetManager, fileName, AASSET_MODE_BUFFER);
+   }
 #else
-		fclose(pFile);
-		pFile = NULL;
+   #ifdef __APPLE__
+      // iOS: Remap the filename to a path that can be opened from the bundle.
+      fileName = GetBundleFileName( fileName );
+   #endif
+   
+   pFile = fopen( fileName, "rb" );
 #endif
-	}
+
+   return pFile;
 }
 
+///
+// esFileRead()
+//
+//    Wrapper for platform specific File close
+//
+static void esFileClose(esFile* pFile) 
+{
+   if (pFile != NULL)
+   {
+#ifdef ANDROID
+      AAsset_close(pFile);
+#else
+      fclose(pFile);
+      pFile = NULL;
+#endif
+   }
+}
+
+///
+// esFileRead()
+//
+//    Wrapper for platform specific File read
+//
 static int esFileRead(esFile* pFile, int bytesToRead, void* buffer) 
 {
-	int bytesRead = 0;
-	
-	if (pFile == NULL)
-		return bytesRead;
-	
+   int bytesRead = 0;
+
+   if (pFile == NULL)
+      return bytesRead;
+
 #ifdef ANDROID
-	bytesRead = AAsset_read (pFile, buffer, bytesToRead);
+   bytesRead = AAsset_read (pFile, buffer, bytesToRead);
 #else
-	bytesRead = fread (buffer, bytesToRead, 1, pFile);
+   bytesRead = fread (buffer, bytesToRead, 1, pFile);
 #endif
-	
-	return bytesRead;
+
+   return bytesRead;
 }
 
 ///
@@ -354,42 +371,34 @@ char* ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, 
    char        *buffer;
    esFile      *fp;
    TGA_HEADER   Header;
-<<<<<<< .mine
-    
-=======
-   
->>>>>>> .theirs
-#ifdef __APPLE__
-    // iOS: Remap the filename to a path that can be opened from the bundle.
-    fileName = GetBundleFileName( fileName );
-#endif
+   int          bytesRead;
 
    // Open the file for reading
-   fp = esFileOpen(ioContext, fileName);
+   fp = esFileOpen( ioContext, fileName );
    
    if (fp == NULL)
    {
-	   // Log error as 'error in opening the input file from apk'
-	   esLogMessage("esLoadTGA FAILED to load : { %s }\n", fileName);
+      // Log error as 'error in opening the input file from apk'
+      esLogMessage( "esLoadTGA FAILED to load : { %s }\n", fileName );
       return NULL;
    }
 
-   int bytesRead = esFileRead(fp, sizeof(TGA_HEADER), &Header);
+   bytesRead = esFileRead( fp, sizeof(TGA_HEADER), &Header );
 
    *width = Header.Width;
    *height = Header.Height;
    
    if ( Header.ColorDepth == 24 )
    {
-	   int bytesToRead = sizeof(char) * 3 * (*width) * (*height);
+      int bytesToRead = sizeof(char) * 3 * (*width) * (*height);
 
-	   // Allocate the image data buffer
-	   buffer = (char *) malloc(bytesToRead);
+      // Allocate the image data buffer
+      buffer = (char *) malloc(bytesToRead);
 
       if (buffer)
       {
-		   bytesRead = esFileRead(fp, bytesToRead, buffer);	
-		   esFileClose(fp);
+         bytesRead = esFileRead(fp, bytesToRead, buffer);	
+         esFileClose(fp);
 
          return(buffer);
       }		
