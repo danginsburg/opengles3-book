@@ -14,7 +14,7 @@
 //    using a vertex shader to transform the object
 //
 
-package com.opengles.simplevertexshader;
+package com.openglesbook.simplevertexshader;
 
 import com.openglesbook.common.ESShapes;
 import com.openglesbook.common.ESShader;

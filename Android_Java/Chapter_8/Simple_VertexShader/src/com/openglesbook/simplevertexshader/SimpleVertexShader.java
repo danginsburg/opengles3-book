@@ -1,4 +1,4 @@
-package com.opengles.simplevertexshader;
+package com.openglesbook.simplevertexshader;
 
 import android.app.Activity;
 import android.app.ActivityManager;
