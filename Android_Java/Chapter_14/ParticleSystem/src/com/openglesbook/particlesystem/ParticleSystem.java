@@ -55,7 +55,7 @@ public class ParticleSystem extends Activity {
         if (detectOpenGLES30()) 
         {
             // Tell the surface view we want to create an OpenGL ES 3.0-compatible
-            // context, and set an OpenGL ES 2.0-compatible renderer.
+            // context, and set an OpenGL ES 3.0-compatible renderer.
             mGLSurfaceView.setEGLContextClientVersion(CONTEXT_CLIENT_VERSION);
             mGLSurfaceView.setRenderer(new ParticleSystemRenderer(this));
         } 
