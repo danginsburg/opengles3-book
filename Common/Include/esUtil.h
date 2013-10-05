@@ -33,7 +33,7 @@
 /// \file ESUtil.h
 /// \brief A utility library for OpenGL ES.  This library provides a
 ///        basic common framework for the example applications in the
-///        OpenGL ES 2.0 Programming Guide.
+///        OpenGL ES 3.0 Programming Guide.
 //
 #ifndef ESUTIL_H
 #define ESUTIL_H

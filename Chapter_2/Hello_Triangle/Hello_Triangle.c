@@ -34,7 +34,7 @@
 //    This is a simple example that draws a single triangle with
 //    a minimal vertex/fragment shader.  The purpose of this 
 //    example is to demonstrate the basic concepts of 
-//    OpenGL ES 2.0 rendering.
+//    OpenGL ES 3.0 rendering.
 #include "esUtil.h"
 
 typedef struct
