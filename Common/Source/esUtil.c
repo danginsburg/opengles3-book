@@ -182,20 +182,6 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
 //
 
 ///
-//  esInitContext()
-//
-//      Initialize ES utility context.  This must be called before calling any other
-//      functions.
-//
-void ESUTIL_API esInitContext ( ESContext *esContext )
-{
-   if ( esContext != NULL )
-   {
-      memset( esContext, 0, sizeof( ESContext ) );
-   }
-}
-
-///
 //  esCreateWindow()
 //
 //      title - name for title bar of window

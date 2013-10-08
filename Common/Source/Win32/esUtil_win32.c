@@ -226,8 +226,8 @@ extern int esMain( ESContext *esContext );
 int main ( int argc, char *argv[] )
 {
    ESContext esContext;
-   
-   esInitContext ( &esContext );
+
+   memset( &esContext, 0, sizeof( ESContext ) );
 
    if ( esMain ( &esContext ) != GL_TRUE )
       return 1;   

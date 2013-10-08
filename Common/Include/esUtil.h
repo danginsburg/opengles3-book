@@ -140,13 +140,6 @@ struct ESContext
 //
 
 //
-///
-/// \brief Initialize ES framework context.  This must be called before calling any other functions.
-/// \param esContext Application context
-//
-void ESUTIL_API esInitContext ( ESContext *esContext );
-
-//
 /// \brief Create a window with the specified parameters
 /// \param esContext Application context
 /// \param title Name for title bar of window
@@ -171,7 +164,7 @@ void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *dra
 //
 /// \brief Register a callback function to be called on shutdown
 /// \param esContext Application context
-/// \param drawFunc Shutdown callback function
+/// \param shutdownFunc Shutdown callback function
 //
 void ESUTIL_API esRegisterShutdownFunc ( ESContext *esContext, void (ESCALLBACK *shutdownFunc) ( ESContext* ) );
 

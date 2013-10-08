@@ -131,7 +131,7 @@ void android_main ( struct android_app *pApp )
    app_dummy();
 
    // Initialize the context
-   esInitContext( &esContext );
+   memset( &esContext, 0, sizeof( ESContext ) );
 
    esContext.platformData = (void *) pApp->activity->assetManager;
    
