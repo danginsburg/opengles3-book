@@ -390,7 +390,7 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    glEndTransformFeedback();
 
    // Create a sync object to ensure transform feedback results are completed before the draw that uses them.
-   userData->emitSync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+   userData->emitSync = glFenceSync( GL_SYNC_GPU_COMMANDS_COMPLETE, 0 );
 
    // Restore state
    glDisable( GL_RASTERIZER_DISCARD );
