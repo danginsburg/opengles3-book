@@ -93,6 +93,9 @@ typedef struct
    // Current time
    float time;
 
+   // synch object to synchronize the transform feedback results and the draw
+   GLsync emitSync;
+
 } UserData;
 
 ///
@@ -297,7 +300,7 @@ int Init ( ESContext *esContext )
       return FALSE;
    }
 
-   // Create a 3D nosie texture for random values
+   // Create a 3D noise texture for random values
    userData->noiseTextureId = Create3DNoiseTexture( 128, 50.0 );
 
    // Initialize particle data
@@ -385,7 +388,9 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
    glBeginTransformFeedback( GL_POINTS );
       glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
    glEndTransformFeedback();
-   glFlush(); // Make sure transform feedback results are flushed before the draw that uses them.
+
+   // Create a sync object to ensure transform feedback results are completed before the draw that uses them.
+   userData->emitSync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 
    // Restore state
    glDisable( GL_RASTERIZER_DISCARD );
@@ -418,6 +423,10 @@ void Draw ( ESContext *esContext )
 {
    UserData *userData = (UserData*) esContext->userData;
       
+   // Block the GL server until transform feedback results are completed
+   glWaitSync( userData->emitSync, 0, GL_TIMEOUT_IGNORED );
+   glDeleteSync( userData->emitSync );
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
    
