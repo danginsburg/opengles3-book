@@ -299,3 +299,59 @@ int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals,
 
    return numIndices;
 }
+
+//
+/// \brief Generates a square grid consisting of triangles.  Allocates memory for the vertex data and stores 
+///        the results in the arrays.  Generate index list as TRIANGLES.
+/// \param size create a grid of size by size (number of triangles = (size-1)*(size-1)*2)
+/// \param vertices If not NULL, will contain array of float3 positions
+/// \param indices If not NULL, will contain the array of indices for the triangle strip
+/// \return The number of indices required for rendering the buffers (the number of indices stored in the indices array
+///         if it is not NULL ) as a GL_TRIANGLES
+//
+int ESUTIL_API esGenSquareGrid ( int size, GLfloat **vertices, GLuint **indices )
+{
+   int i, j;
+   int numIndices = (size-1) * (size-1) * 2 * 3;
+
+   // Allocate memory for buffers
+   if ( vertices != NULL )
+   {
+      int numVertices = size * size;
+      float stepSize = (float) size - 1;
+      *vertices = malloc ( sizeof(GLfloat) * 3 * numVertices );
+
+      for ( i = 0; i < size; ++i ) // row
+      {
+         for ( j = 0; j < size; ++j ) // column
+         {
+            (*vertices)[ 3 * ( j + i * size )     ] = i / stepSize; 
+            (*vertices)[ 3 * ( j + i * size ) + 1 ] = j / stepSize;
+            (*vertices)[ 3 * ( j + i * size ) + 2 ] = 0.0f;
+         }
+      }
+   }
+
+   // Generate the indices
+   if ( indices != NULL )
+   {
+      *indices = malloc ( sizeof(GLuint) * numIndices );
+
+      for ( i = 0; i < size - 1; ++i )
+      {
+         for ( j = 0; j < size - 1; ++j )
+         {
+             // two triangles per quad
+             (*indices)[ 6 * ( j + i * (size-1) )     ] = j + (i)   * (size)    ;
+             (*indices)[ 6 * ( j + i * (size-1) ) + 1 ] = j + (i)   * (size) + 1;
+             (*indices)[ 6 * ( j + i * (size-1) ) + 2 ] = j + (i+1) * (size) + 1;
+
+             (*indices)[ 6 * ( j + i * (size-1) ) + 3 ] = j + (i)   * (size)    ;
+             (*indices)[ 6 * ( j + i * (size-1) ) + 4 ] = j + (i+1) * (size) + 1;
+             (*indices)[ 6 * ( j + i * (size-1) ) + 5 ] = j + (i+1) * (size)    ;
+        }
+      }
+   }
+
+   return numIndices;
+}

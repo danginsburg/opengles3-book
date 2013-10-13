@@ -383,33 +383,34 @@ char* ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, 
    // Open the file for reading
    fp = esFileOpen( ioContext, fileName );
    
-   if (fp == NULL)
+   if ( fp == NULL )
    {
       // Log error as 'error in opening the input file from apk'
       esLogMessage( "esLoadTGA FAILED to load : { %s }\n", fileName );
       return NULL;
    }
 
-   bytesRead = esFileRead( fp, sizeof(TGA_HEADER), &Header );
+   bytesRead = esFileRead( fp, sizeof( TGA_HEADER ), &Header );
 
    *width = Header.Width;
    *height = Header.Height;
    
-   if ( Header.ColorDepth == 24 )
+   if ( Header.ColorDepth == 8 ||
+        Header.ColorDepth == 24 || Header.ColorDepth == 32 )
    {
-      int bytesToRead = sizeof(char) * 3 * (*width) * (*height);
-
+      int bytesToRead = sizeof( char ) * ( *width ) * ( *height ) * Header.ColorDepth/8;
+	  
       // Allocate the image data buffer
-      buffer = (char *) malloc(bytesToRead);
+      buffer = ( char* ) malloc( bytesToRead );
 
-      if (buffer)
+      if ( buffer )
       {
-         bytesRead = esFileRead(fp, bytesToRead, buffer);	
-         esFileClose(fp);
+         bytesRead = esFileRead( fp, bytesToRead, buffer );	
+         esFileClose( fp );
 
-         return(buffer);
+         return( buffer );
       }		
    }
 
-   return(NULL);
+   return ( NULL );
 }

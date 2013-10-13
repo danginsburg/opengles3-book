@@ -237,6 +237,17 @@ int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals,
                            GLfloat **texCoords, GLuint **indices );
 
 //
+/// \brief Generates a square grid consisting of triangles.  Allocates memory for the vertex data and stores 
+///        the results in the arrays.  Generate index list as TRIANGLES.
+/// \param size create a grid of size by size (number of triangles = (size-1)*(size-1)*2)
+/// \param vertices If not NULL, will contain array of float3 positions
+/// \param indices If not NULL, will contain the array of indices for the triangle strip
+/// \return The number of indices required for rendering the buffers (the number of indices stored in the indices array
+///         if it is not NULL ) as a GL_TRIANGLES
+//
+int ESUTIL_API esGenSquareGrid ( int size, GLfloat **vertices, GLuint **indices );
+
+//
 /// \brief Loads a 24-bit TGA image from a file
 /// \param ioContext Context related to IO facility on the platform
 /// \param fileName Name of the file on disk

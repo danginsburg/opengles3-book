@@ -27,4 +27,6 @@ SUBDIRS( Common
          Chapter_14/Instancing
          Chapter_14/Noise3D
          Chapter_14/ParticleSystem
-         Chapter_14/ParticleSystemTransformFeedback )	
+         Chapter_14/ParticleSystemTransformFeedback 
+         Chapter_14/TerrainRendering )	
+		
