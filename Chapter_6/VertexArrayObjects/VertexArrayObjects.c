@@ -29,7 +29,7 @@
 // URLs:      http://www.opengles-book.com
 //            http://my.safaribooksonline.com/book/animation-and-3d/9780133440133
 //
-// VertexArraybjects.c
+// VertexArrayObjects.c
 //
 //    This example demonstrates drawing a primitive with
 //    Vertex Array Objects (VAOs)

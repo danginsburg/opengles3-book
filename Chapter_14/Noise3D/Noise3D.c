@@ -29,7 +29,7 @@
 // URLs:      http://www.opengles-book.com
 //            http://my.safaribooksonline.com/book/animation-and-3d/9780133440133
 //
-// ParticleSystem.c
+// Noise3D.c
 //
 //    This is an example that demonstrates generating and using
 //    a 3D noise texture.

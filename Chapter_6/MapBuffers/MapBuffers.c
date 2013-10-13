@@ -29,7 +29,7 @@
 // URLs:      http://www.opengles-book.com
 //            http://my.safaribooksonline.com/book/animation-and-3d/9780133440133
 //
-// VertexBufferObjects.c
+// MapBuffers.c
 //
 //    This example demonstrates mapping buffer objects
 //
