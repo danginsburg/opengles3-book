@@ -422,7 +422,11 @@ void Update ( ESContext *esContext, float deltaTime )
 void Draw ( ESContext *esContext )
 {
    UserData *userData = (UserData*) esContext->userData;
-   
+
+   // Block the GL server until transform feedback results are completed
+   glWaitSync( userData->emitSync, 0, GL_TIMEOUT_IGNORED );
+   glDeleteSync( userData->emitSync );
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
    
@@ -450,10 +454,6 @@ void Draw ( ESContext *esContext )
 
    // Set the sampler texture unit to 0
    glUniform1i ( userData->samplerLoc, 0 );
-
-   // Block the GL server until transform feedback results are completed
-   glWaitSync( userData->emitSync, 0, GL_TIMEOUT_IGNORED );
-   glDeleteSync( userData->emitSync );
 
    glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
 }
