@@ -194,18 +194,21 @@ int InitShadowMap ( ESContext *esContext )
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE );
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL );
         
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16,
                   userData->shadowMapTextureWidth, userData->shadowMapTextureHeight, 
                   0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL );
 
    glBindTexture ( GL_TEXTURE_2D, 0 );
+
+   GLint defaultFramebuffer = 0;
+   glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
    // setup fbo
    glGenFramebuffers ( 1, &userData->shadowMapBufferId );
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
 
    glDrawBuffers ( 1, &none );
-
+   
    glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, userData->shadowMapTextureId, 0 );
 
    glActiveTexture ( GL_TEXTURE0 );
@@ -216,7 +219,7 @@ int InitShadowMap ( ESContext *esContext )
       return FALSE;
    }
 
-   glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+   glBindFramebuffer( GL_FRAMEBUFFER, defaultFramebuffer );
 
    return TRUE;
 }
@@ -268,7 +271,7 @@ int Init ( ESContext *esContext )
    const char fSceneShaderStr[] =  
       "#version 300 es                                                \n"
       "precision lowp float;                                          \n"
-      "uniform sampler2DShadow s_shadowMap;                           \n"
+      "uniform lowp sampler2DShadow s_shadowMap;                      \n"
       "in vec4 v_color;                                               \n"
       "in vec4 v_shadowCoord;                                         \n"
       "layout(location = 0) out vec4 outColor;                        \n"
@@ -352,8 +355,7 @@ int Init ( ESContext *esContext )
    userData->lightPosition[0] = 10.0f;
    userData->lightPosition[1] = 5.0f;
    userData->lightPosition[2] = 2.0f;
-   InitMVP ( esContext );
-
+   
    // create depth texture
    if ( !InitShadowMap( esContext ) )
    {
@@ -379,6 +381,9 @@ void DrawScene ( ESContext *esContext,
                  GLint mvpLightLoc )
 {
    UserData *userData = (UserData*) esContext->userData;
+ 
+   // Initialize matrices
+   InitMVP ( esContext );
    
    // Draw the ground
    // Load the vertex position
@@ -422,12 +427,11 @@ void DrawScene ( ESContext *esContext,
 void Draw ( ESContext *esContext )
 {
    UserData *userData = (UserData*)esContext->userData;
+   GLint defaultFramebuffer = 0;
+   glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
    // FIRST PASS: Render the scene from light position to generate the shadow map texture
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
-
-   glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, 
-                            userData->shadowMapTextureId, 0 );
 
    // Set the viewport
    glViewport ( 0, 0, userData->shadowMapTextureWidth, userData->shadowMapTextureHeight );
@@ -448,7 +452,7 @@ void Draw ( ESContext *esContext )
    glDisable( GL_POLYGON_OFFSET_FILL );
 
    // SECOND PASS: Render the scene from eye location using the shadow map texture created in the first pass
-   glBindFramebuffer ( GL_FRAMEBUFFER, 0 );
+   glBindFramebuffer ( GL_FRAMEBUFFER, defaultFramebuffer );
    glColorMask ( GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE );
 
    // Set the viewport
