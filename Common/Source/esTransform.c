@@ -232,3 +232,74 @@ esMatrixLoadIdentity(ESMatrix *result)
     result->m[3][3] = 1.0f;
 }
 
+void ESUTIL_API
+esMatrixLookAt(ESMatrix *result, 
+               float posX,    float posY,    float posZ, 
+               float lookAtX, float lookAtY, float lookAtZ, 
+               float upX,     float upY,     float upZ)
+{
+   float axisX[3], axisY[3], axisZ[3];
+   float length;
+
+   // axisZ = lookAt - pos
+   axisZ[0] = lookAtX - posX;
+   axisZ[1] = lookAtY - posY;
+   axisZ[2] = lookAtZ - posZ;
+
+   // normalize axisZ
+   length = sqrtf ( axisZ[0]*axisZ[0] + axisZ[1]*axisZ[1] + axisZ[2]*axisZ[2] );
+   if ( length != 0.0f )
+   {
+      axisZ[0] /= length;
+      axisZ[1] /= length;
+      axisZ[2] /= length;
+   }
+
+   // axisX = up X axisZ
+    axisX[0] = upY * axisZ[2] - upZ * axisZ[1];
+    axisX[1] = upZ * axisZ[0] - upX * axisZ[2];
+    axisX[2] = upX * axisZ[1] - upY * axisZ[0];
+
+   // normalize axisX
+   length = sqrtf ( axisX[0]*axisX[0] + axisX[1]*axisX[1] + axisX[2]*axisX[2] ); 
+   if ( length != 0.0f )
+   {
+      axisX[0] /= length;
+      axisX[1] /= length;
+      axisX[2] /= length;
+   }
+
+   // axisY = axisZ x axisX
+   axisY[0] = axisZ[1] * axisX[2] - axisZ[2] * axisX[1];
+   axisY[1] = axisZ[2] * axisX[0] - axisZ[0] * axisX[2];
+   axisY[2] = axisZ[0] * axisX[1] - axisZ[1] * axisX[0];
+
+   // normalize axisY
+   length = sqrtf ( axisY[0]*axisY[0] + axisY[1]*axisY[1] + axisY[2]*axisY[2] );
+   if ( length != 0.0f )
+   {
+      axisY[0] /= length;
+      axisY[1] /= length;
+      axisY[2] /= length;
+   }
+
+   memset (result, 0x0, sizeof(ESMatrix) );
+
+   result->m[0][0] = -axisX[0];
+   result->m[0][1] =  axisY[0];
+   result->m[0][2] = -axisZ[0];
+
+   result->m[1][0] = -axisX[1];
+   result->m[1][1] =  axisY[1];
+   result->m[1][2] = -axisZ[1];
+
+   result->m[2][0] = -axisX[2];
+   result->m[2][1] =  axisY[2];
+   result->m[2][2] = -axisZ[2];
+
+   // translate (-posX, -posY, -posZ)
+   result->m[3][0] =  axisX[0] * posX + axisX[1] * posY + axisX[2] * posZ;
+   result->m[3][1] = -axisY[0] * posX - axisY[1] * posY - axisY[2] * posZ;
+   result->m[3][2] =  axisZ[0] * posX + axisZ[1] * posY + axisZ[2] * posZ;
+   result->m[3][3] = 1.0f;
+}

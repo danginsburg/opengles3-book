@@ -321,6 +321,19 @@ void ESUTIL_API esMatrixMultiply(ESMatrix *result, ESMatrix *srcA, ESMatrix *src
 //
 void ESUTIL_API esMatrixLoadIdentity(ESMatrix *result);
 
+//
+/// \brief Generate a transformation matrix from eye position, look at and up vectors
+/// \param result Returns transformation matrix
+/// \param posX, posY, posZ           eye position
+/// \param lookAtX, lookAtY, lookAtZ  look at vector
+/// \param upX, upY, upZ              up vector
+//
+void ESUTIL_API
+esMatrixLookAt(ESMatrix *result, 
+               float posX,    float posY,    float posZ, 
+               float lookAtX, float lookAtY, float lookAtZ, 
+               float upX,     float upY,     float upZ);
+
 #ifdef __cplusplus
 }
 #endif
