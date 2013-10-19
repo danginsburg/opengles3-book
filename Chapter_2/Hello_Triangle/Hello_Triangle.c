@@ -99,12 +99,12 @@ int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
    char vShaderStr[] =
-      "#version 300 es              \n"
-      "in vec4 vPosition;           \n"
-      "void main()                  \n"
-      "{                            \n"
-      "   gl_Position = vPosition;  \n"
-      "}                            \n";
+      "#version 300 es                          \n"
+      "layout(location = 0) in vec4 vPosition;  \n"
+      "void main()                              \n"
+      "{                                        \n"
+      "   gl_Position = vPosition;              \n"
+      "}                                        \n";
    
    char fShaderStr[] =
       "#version 300 es                              \n"
@@ -132,9 +132,6 @@ int Init ( ESContext *esContext )
 
    glAttachShader ( programObject, vertexShader );
    glAttachShader ( programObject, fragmentShader );
-
-   // Bind vPosition to attribute 0   
-   glBindAttribLocation ( programObject, 0, "vPosition" );
 
    // Link the program
    glLinkProgram ( programObject );
