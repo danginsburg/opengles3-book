@@ -151,9 +151,9 @@ public class MipMap2DRenderer implements GLSurfaceView.Renderer
                     rColor = (byte)(127 * ( 1 - ( ( y / checkSize ) % 2 ) ));
                 }
 
-                pixels[(y * height + x) * 3] = rColor;
-                pixels[(y * height + x) * 3 + 1] = 0;
-                pixels[(y * height + x) * 3 + 2] = bColor; 
+                pixels[(y * width + x) * 3] = rColor;
+                pixels[(y * width + x) * 3 + 1] = 0;
+                pixels[(y * width + x) * 3 + 2] = bColor; 
             } 
 
         return pixels;
