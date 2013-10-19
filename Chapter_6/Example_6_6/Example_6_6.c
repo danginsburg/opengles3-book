@@ -106,7 +106,7 @@ void DrawPrimitiveWithVBOs(ESContext *esContext,
    UserData *userData = (UserData*) esContext->userData;
 
    // vboIds[0] - used to store vertex position
-   // vboIds[1] - used to store vertex normal
+   // vboIds[1] - used to store vertex color
    // vboIds[2] - used to store element indices 
    if ( userData->vboIds[0] == 0 && userData->vboIds[1] == 0 &&
         userData->vboIds[2] == 0)
