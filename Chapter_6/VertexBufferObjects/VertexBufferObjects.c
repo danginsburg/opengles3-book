@@ -44,6 +44,9 @@ typedef struct
    // VertexBufferObject Ids
    GLuint vboIds[2];
 
+   // x-offset uniform location
+   GLuint offsetLoc;
+
 } UserData;
 
 
@@ -61,11 +64,13 @@ int Init ( ESContext *esContext )
       "#version 300 es                            \n"
       "layout(location = 0) in vec4 a_position;   \n"
       "layout(location = 1) in vec4 a_color;      \n"
+      "uniform float u_offset;                    \n"
       "out vec4 v_color;                          \n"
       "void main()                                \n"
       "{                                          \n"
       "    v_color = a_color;                     \n"
       "    gl_Position = a_position;              \n"
+      "    gl_Position.x += u_offset;             \n"
       "}";
 
    
@@ -83,6 +88,8 @@ int Init ( ESContext *esContext )
 
    // Create the program object
    programObject = esLoadProgram ( vShaderStr, fShaderStr );
+
+   userData->offsetLoc = glGetUniformLocation( programObject, "u_offset" );
    
    if ( programObject == 0 )
       return GL_FALSE;
@@ -200,22 +207,19 @@ void Draw ( ESContext *esContext )
    };
    // Index buffer data
    GLushort indices[3] = { 0, 1, 2 };
-   int i;
       
    glViewport ( 0, 0, esContext->width, esContext->height );   
    glClear ( GL_COLOR_BUFFER_BIT );
    glUseProgram ( userData->programObject );
+   glUniform1f ( userData->offsetLoc, 0.0f );
 
    DrawPrimitiveWithoutVBOs ( vertices, 
       sizeof(GLfloat) * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE),
       3, indices );
    
    // Offset the vertex positions so both can be seen
-   for ( i = 0; i < 3; i++ )
-   {
-      vertices[ i * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE) + 0] += 1.0f;
-   }
-
+   glUniform1f ( userData->offsetLoc, 1.0f );
+   
    DrawPrimitiveWithVBOs ( esContext, 3, vertices, 
       sizeof(GLfloat) * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE),
       3, indices );
