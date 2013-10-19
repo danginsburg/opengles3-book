@@ -221,8 +221,6 @@ int Init ( ESContext *esContext )
                  positions, GL_STATIC_DRAW );
    free( positions );
 
-   InitMVP ( esContext );
-
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
    return TRUE;
@@ -235,6 +233,8 @@ void Draw ( ESContext *esContext )
 {
    UserData *userData = (UserData*)esContext->userData;
    
+   InitMVP ( esContext );
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
    
