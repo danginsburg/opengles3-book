@@ -132,7 +132,7 @@ void DrawPrimitiveWithVBOsMapBuffers(ESContext *esContext,
       // Copy the data into the mapped buffer
       memcpy ( vtxMappedBuf, vtxBuf, vtxStride * numVertices );
 
-      // Unamp the buffer
+      // Unmap the buffer
       if ( glUnmapBuffer( GL_ARRAY_BUFFER ) == GL_FALSE )
       {
          esLogMessage( "Error unmapping array buffer object." );
@@ -156,7 +156,7 @@ void DrawPrimitiveWithVBOsMapBuffers(ESContext *esContext,
       // Copy the data into the mapped buffer
       memcpy ( idxMappedBuf, indices, sizeof(GLushort) * numIndices );
 
-      // Unamp the buffer
+      // Unmap the buffer
       if ( glUnmapBuffer( GL_ELEMENT_ARRAY_BUFFER ) == GL_FALSE )
       {
          esLogMessage( "Error unmapping element array buffer object." );
