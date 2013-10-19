@@ -31,7 +31,7 @@
 //
 // Shadows.c
 //
-//    Demonstrates shadow rendering with depth texture and 3x3 PCF
+//    Demonstrates shadow rendering with depth texture and 6x6 PCF
 //
 #include <stdlib.h>
 #include <math.h>
@@ -194,18 +194,21 @@ int InitShadowMap ( ESContext *esContext )
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE );
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL );
         
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16,
                   userData->shadowMapTextureWidth, userData->shadowMapTextureHeight, 
                   0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL );
 
    glBindTexture ( GL_TEXTURE_2D, 0 );
+
+   GLint defaultFramebuffer = 0;
+   glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
    // setup fbo
    glGenFramebuffers ( 1, &userData->shadowMapBufferId );
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
 
    glDrawBuffers ( 1, &none );
-
+   
    glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, userData->shadowMapTextureId, 0 );
 
    glActiveTexture ( GL_TEXTURE0 );
@@ -216,7 +219,7 @@ int InitShadowMap ( ESContext *esContext )
       return FALSE;
    }
 
-   glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+   glBindFramebuffer ( GL_FRAMEBUFFER, defaultFramebuffer );
 
    return TRUE;
 }
@@ -268,7 +271,7 @@ int Init ( ESContext *esContext )
    const char fSceneShaderStr[] =  
       "#version 300 es                                                \n"
       "precision lowp float;                                          \n"
-      "uniform sampler2DShadow s_shadowMap;                           \n"
+      "uniform lowp sampler2DShadow s_shadowMap;                      \n"
       "in vec4 v_color;                                               \n"
       "in vec4 v_shadowCoord;                                         \n"
       "layout(location = 0) out vec4 outColor;                        \n"
@@ -284,16 +287,15 @@ int Init ( ESContext *esContext )
       "                                                               \n"
       "void main()                                                    \n"
       "{                                                              \n"
-      "   // 3x3 PCF                                                  \n"
+      "   // 3x3 kernel with 4 taps per sample, effectively 6x6 PCF   \n"
       "   float sum = 0.0;                                            \n"
       "   float x, y;                                                 \n"
-      "   for ( x = -1.0; x <= 1.0; x += 1.0 )                        \n"
-      "      for ( y = -1.0; y <= 1.0; y += 1.0 )                     \n"
+      "   for ( x = -2.0; x <= 2.0; x += 2.0 )                        \n"
+      "      for ( y = -2.0; y <= 2.0; y += 2.0 )                     \n"
       "         sum += lookup ( x, y );                               \n"
       "                                                               \n"
       "   // divide sum by 9.0                                        \n"
-      "   // also add by 0.25 so that shadow is not too dark          \n"
-      "   sum = sum * 0.11 + 0.25;                                    \n"
+      "   sum = sum * 0.11;                                           \n"
       "   outColor = v_color * sum;                                   \n"
       "}                                                              \n";
 
@@ -352,8 +354,7 @@ int Init ( ESContext *esContext )
    userData->lightPosition[0] = 10.0f;
    userData->lightPosition[1] = 5.0f;
    userData->lightPosition[2] = 2.0f;
-   InitMVP ( esContext );
-
+   
    // create depth texture
    if ( !InitShadowMap( esContext ) )
    {
@@ -379,7 +380,7 @@ void DrawScene ( ESContext *esContext,
                  GLint mvpLightLoc )
 {
    UserData *userData = (UserData*) esContext->userData;
-   
+ 
    // Draw the ground
    // Load the vertex position
    glBindBuffer ( GL_ARRAY_BUFFER, userData->groundPositionVBO );
@@ -395,7 +396,7 @@ void DrawScene ( ESContext *esContext,
    glUniformMatrix4fv ( mvpLightLoc, 1, GL_FALSE, (GLfloat*) &userData->groundMvpLightMatrix.m[0][0] );
 
    // Set the ground color to light gray
-   glVertexAttrib4f ( COLOR_LOC, 0.7f, 0.7f, 0.7f, 1.0f );
+   glVertexAttrib4f ( COLOR_LOC, 0.9f, 0.9f, 0.9f, 1.0f );
 
    glDrawElements ( GL_TRIANGLES, userData->groundNumIndices, GL_UNSIGNED_INT, (const void*)NULL );
 
@@ -421,13 +422,16 @@ void DrawScene ( ESContext *esContext,
 
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*)esContext->userData;
+   UserData *userData = (UserData*) esContext->userData;
+   GLint defaultFramebuffer = 0;
+
+   // Initialize matrices
+   InitMVP ( esContext );
+
+   glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
    // FIRST PASS: Render the scene from light position to generate the shadow map texture
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
-
-   glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, 
-                            userData->shadowMapTextureId, 0 );
 
    // Set the viewport
    glViewport ( 0, 0, userData->shadowMapTextureWidth, userData->shadowMapTextureHeight );
@@ -448,13 +452,13 @@ void Draw ( ESContext *esContext )
    glDisable( GL_POLYGON_OFFSET_FILL );
 
    // SECOND PASS: Render the scene from eye location using the shadow map texture created in the first pass
-   glBindFramebuffer ( GL_FRAMEBUFFER, 0 );
+   glBindFramebuffer ( GL_FRAMEBUFFER, defaultFramebuffer );
    glColorMask ( GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE );
 
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
    
-   // Clear the color buffer
+   // Clear the color and depth buffers
    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
