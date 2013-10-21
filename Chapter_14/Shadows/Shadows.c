@@ -179,6 +179,7 @@ int InitShadowMap ( ESContext *esContext )
 {
    UserData *userData = (UserData*) esContext->userData;
    GLenum none = GL_NONE;
+   GLint defaultFramebuffer = 0;
 
    // use 1K by 1K texture for shadow map
    userData->shadowMapTextureWidth = userData->shadowMapTextureHeight = 1024;
@@ -200,7 +201,6 @@ int InitShadowMap ( ESContext *esContext )
 
    glBindTexture ( GL_TEXTURE_2D, 0 );
 
-   GLint defaultFramebuffer = 0;
    glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
    // setup fbo
