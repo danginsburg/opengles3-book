@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -52,7 +52,7 @@ typedef struct
    GLint  fogColorLoc;
    GLint  noiseTexLoc;
    GLint  timeLoc;
-   
+
    // Vertex daata
    GLfloat  *vertices;
    GLfloat  *texCoords;
@@ -90,10 +90,10 @@ typedef struct
 #endif
 
 // lattice gradients 3D noise
-static float	gradientTable[256*3];
+static float   gradientTable[256 * 3];
 
 // permTable describes a random permutatin of 8-bit values from 0 to 255.
-static unsigned char permTable[256] = 
+static unsigned char permTable[256] =
 {
    0xE1, 0x9B, 0xD2, 0x6C, 0xAF, 0xC7, 0xDD, 0x90, 0xCB, 0x74, 0x46, 0xD5, 0x45, 0x9E, 0x21, 0xFC,
    0x05, 0x52, 0xAD, 0x85, 0xDE, 0x8B, 0xAE, 0x1B, 0x09, 0x47, 0x5A, 0xF6, 0x4B, 0x82, 0x5B, 0xBF,
@@ -118,42 +118,43 @@ void initNoiseTable()
    int            i;
    float          a;
    float          x, y, z, r, theta;
-   float          gradients[256*3];
+   float          gradients[256 * 3];
    unsigned int   *p, *psrc;
 
-   srandom(0);
+   srandom ( 0 );
 
    // build gradient table for 3D noise
-   for (i=0; i<256; i++)
+   for ( i = 0; i < 256; i++ )
    {
       /*
       * calculate 1 - 2 * random number
       */
-      a = (random() % 32768) / 32768.0f;
-      z = (1.0f - 2.0f * a);
+      a = ( random() % 32768 ) / 32768.0f;
+      z = ( 1.0f - 2.0f * a );
 
-      r = sqrtf(1.0f - z * z);   // r is radius of circle
+      r = sqrtf ( 1.0f - z * z ); // r is radius of circle
 
-      a = (random() % 32768) / 32768.0f;
-      theta = (2.0f * (float)M_PI * a);
-      x = (r * cosf(a));
-      y = (r * sinf(a));
+      a = ( random() % 32768 ) / 32768.0f;
+      theta = ( 2.0f * ( float ) M_PI * a );
+      x = ( r * cosf ( a ) );
+      y = ( r * sinf ( a ) );
 
-      gradients[i*3] = x;
-      gradients[i*3+1] = y;
-      gradients[i*3+2] = z;
+      gradients[i * 3] = x;
+      gradients[i * 3 + 1] = y;
+      gradients[i * 3 + 2] = z;
    }
 
    // use the index in the permutation table to load the
    // gradient values from gradients to gradientTable
-   p = (unsigned int *)gradientTable;
-   psrc = (unsigned int *)gradients;
-   for (i=0; i<256; i++)
+   p = ( unsigned int * ) gradientTable;
+   psrc = ( unsigned int * ) gradients;
+
+   for ( i = 0; i < 256; i++ )
    {
       int indx = permTable[i];
-      p[i*3] = psrc[indx*3];
-      p[i*3+1] = psrc[indx*3+1];
-      p[i*3+2] = psrc[indx*3+2];
+      p[i * 3] = psrc[indx * 3];
+      p[i * 3 + 1] = psrc[indx * 3 + 1];
+      p[i * 3 + 2] = psrc[indx * 3 + 2];
    }
 }
 //
@@ -162,17 +163,17 @@ void initNoiseTable()
 // (ix, iy, iz) specifies the 3D lattice position
 // (fx, fy, fz) specifies the fractional part
 //
-static float glattice3D(int ix, int iy, int iz, float fx, float fy, float fz)
+static float glattice3D ( int ix, int iy, int iz, float fx, float fy, float fz )
 {
    float *g;
    int   indx, y, z;
 
    z = permTable[iz & NOISE_TABLE_MASK];
-   y = permTable[(iy + z) & NOISE_TABLE_MASK];
-   indx = (ix + y) & NOISE_TABLE_MASK;
-   g = &gradientTable[indx*3];
+   y = permTable[ ( iy + z ) & NOISE_TABLE_MASK];
+   indx = ( ix + y ) & NOISE_TABLE_MASK;
+   g = &gradientTable[indx * 3];
 
-   return (g[0]*fx + g[1]*fy + g[2]*fz);
+   return ( g[0] * fx + g[1] * fy + g[2] * fz );
 }
 
 //
@@ -180,78 +181,85 @@ static float glattice3D(int ix, int iy, int iz, float fx, float fy, float fz)
 // f describes the input (x, y, z) position for which the noise value needs to be computed
 // noise3D returns the scalar noise value
 //
-float noise3D(float *f)
+float noise3D ( float *f )
 {
    int   ix, iy, iz;
    float fx0, fx1, fy0, fy1, fz0, fz1;
    float wx, wy, wz;
    float vx0, vx1, vy0, vy1, vz0, vz1;
 
-   ix = FLOOR(f[0]);
+   ix = FLOOR ( f[0] );
    fx0 = f[0] - ix;
    fx1 = fx0 - 1;
-   wx = smoothstep(fx0);
+   wx = smoothstep ( fx0 );
 
-   iy = FLOOR(f[1]);
+   iy = FLOOR ( f[1] );
    fy0 = f[1] - iy;
    fy1 = fy0 - 1;
-   wy = smoothstep(fy0);
+   wy = smoothstep ( fy0 );
 
-   iz = FLOOR(f[2]);
+   iz = FLOOR ( f[2] );
    fz0 = f[2] - iz;
    fz1 = fz0 - 1;
-   wz = smoothstep(fz0);
+   wz = smoothstep ( fz0 );
 
-   vx0 = glattice3D(ix, iy, iz, fx0, fy0, fz0);
-   vx1 = glattice3D(ix+1, iy, iz, fx1, fy0, fz0);
-   vy0 = lerp(wx, vx0, vx1);
-   vx0 = glattice3D(ix, iy+1, iz, fx0, fy1, fz0);
-   vx1 = glattice3D(ix+1, iy+1, iz, fx1, fy1, fz0);
-   vy1 = lerp(wx, vx0, vx1);
-   vz0 = lerp(wy, vy0, vy1);
+   vx0 = glattice3D ( ix, iy, iz, fx0, fy0, fz0 );
+   vx1 = glattice3D ( ix + 1, iy, iz, fx1, fy0, fz0 );
+   vy0 = lerp ( wx, vx0, vx1 );
+   vx0 = glattice3D ( ix, iy + 1, iz, fx0, fy1, fz0 );
+   vx1 = glattice3D ( ix + 1, iy + 1, iz, fx1, fy1, fz0 );
+   vy1 = lerp ( wx, vx0, vx1 );
+   vz0 = lerp ( wy, vy0, vy1 );
 
-   vx0 = glattice3D(ix, iy, iz+1, fx0, fy0, fz1);
-   vx1 = glattice3D(ix+1, iy, iz+1, fx1, fy0, fz1);
-   vy0 = lerp(wx, vx0, vx1);
-   vx0 = glattice3D(ix, iy+1, iz+1, fx0, fy1, fz1);
-   vx1 = glattice3D(ix+1, iy+1, iz+1, fx1, fy1, fz1);
-   vy1 = lerp(wx, vx0, vx1);
-   vz1 = lerp(wy, vy0, vy1);
+   vx0 = glattice3D ( ix, iy, iz + 1, fx0, fy0, fz1 );
+   vx1 = glattice3D ( ix + 1, iy, iz + 1, fx1, fy0, fz1 );
+   vy0 = lerp ( wx, vx0, vx1 );
+   vx0 = glattice3D ( ix, iy + 1, iz + 1, fx0, fy1, fz1 );
+   vx1 = glattice3D ( ix + 1, iy + 1, iz + 1, fx1, fy1, fz1 );
+   vy1 = lerp ( wx, vx0, vx1 );
+   vz1 = lerp ( wy, vy0, vy1 );
 
-   return lerp(wz, vz0, vz1);;
+   return lerp ( wz, vz0, vz1 );;
 }
 
-void Create3DNoiseTexture( ESContext *esContext )
+void Create3DNoiseTexture ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = ( UserData * ) esContext->userData;
    int textureSize = 64; // Size of the 3D nosie texture
    float frequency = 5.0f; // Frequency of the noise.
-   GLfloat *texBuf = (GLfloat*) malloc( sizeof(GLfloat) * textureSize * textureSize * textureSize);
-   GLubyte *texBufUbyte = (GLubyte*) malloc( sizeof(GLubyte) * textureSize * textureSize * textureSize);
+   GLfloat *texBuf = ( GLfloat * ) malloc ( sizeof ( GLfloat ) * textureSize * textureSize * textureSize );
+   GLubyte *texBufUbyte = ( GLubyte * ) malloc ( sizeof ( GLubyte ) * textureSize * textureSize * textureSize );
    int x, y, z;
    int index = 0;
    float min = 1000;
    float max = -1000;
    float range;
-   
+
    initNoiseTable();
-   for( z = 0; z < textureSize; z++ )
+
+   for ( z = 0; z < textureSize; z++ )
    {
-      for( y = 0; y < textureSize; y++ )
+      for ( y = 0; y < textureSize; y++ )
       {
-         for( x = 0; x < textureSize; x++ )
+         for ( x = 0; x < textureSize; x++ )
          {
             float noiseVal;
-            float pos[3] = { (float)x / (float)textureSize, (float)y / (float)textureSize, (float)z  / (float)textureSize };
+            float pos[3] = { ( float ) x / ( float ) textureSize, ( float ) y / ( float ) textureSize, ( float ) z  / ( float ) textureSize };
             pos[0] *= frequency;
             pos[1] *= frequency;
             pos[2] *= frequency;
-            noiseVal = noise3D( pos );
-            
+            noiseVal = noise3D ( pos );
+
             if ( noiseVal < min )
+            {
                min = noiseVal;
+            }
+
             if ( noiseVal > max )
+            {
                max = noiseVal;
+            }
+
             texBuf[ index++ ] = noiseVal;
          }
       }
@@ -260,34 +268,35 @@ void Create3DNoiseTexture( ESContext *esContext )
    // Normalize to the [0, 1] range
    range = ( max - min );
    index = 0;
-   for( z = 0; z < textureSize; z++ )
+
+   for ( z = 0; z < textureSize; z++ )
    {
-      for( y = 0; y < textureSize; y++ )
+      for ( y = 0; y < textureSize; y++ )
       {
-         for( x = 0; x < textureSize; x++ )
+         for ( x = 0; x < textureSize; x++ )
          {
             float noiseVal = texBuf[index];
             noiseVal = ( noiseVal - min ) / range;
-            texBufUbyte[index++] = (GLubyte)(noiseVal * 255.0f);
+            texBufUbyte[index++] = ( GLubyte ) ( noiseVal * 255.0f );
          }
       }
    }
 
-   glGenTextures( 1, &userData->textureId );
-   glBindTexture( GL_TEXTURE_3D, userData->textureId );
-   glTexImage3D( GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize, 0,
-      GL_RED, GL_UNSIGNED_BYTE, texBufUbyte );
+   glGenTextures ( 1, &userData->textureId );
+   glBindTexture ( GL_TEXTURE_3D, userData->textureId );
+   glTexImage3D ( GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize, 0,
+                  GL_RED, GL_UNSIGNED_BYTE, texBufUbyte );
 
-   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
-   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
-   glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_MIRRORED_REPEAT );
+   glTexParameteri ( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+   glTexParameteri ( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+   glTexParameteri ( GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT );
+   glTexParameteri ( GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT );
+   glTexParameteri ( GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_MIRRORED_REPEAT );
 
-   glBindTexture( GL_TEXTURE_3D, 0 );
+   glBindTexture ( GL_TEXTURE_3D, 0 );
 
-   free( texBuf );
-   free( texBufUbyte );
+   free ( texBuf );
+   free ( texBufUbyte );
 }
 
 ///
@@ -295,8 +304,8 @@ void Create3DNoiseTexture( ESContext *esContext )
 //
 int Init ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
-   const char vShaderStr[] =  
+   UserData *userData = ( UserData * ) esContext->userData;
+   const char vShaderStr[] =
       "#version 300 es                             \n"
       "uniform mat4 u_mvpMatrix;                   \n"
       "uniform mat4 u_mvMatrix;                    \n"
@@ -314,8 +323,8 @@ int Init ( ESContext *esContext )
       "   v_texCoord = a_texCoord;                 \n"
       "   gl_Position = u_mvpMatrix * a_position;  \n"
       "}                                           \n";
-   
-   const char fShaderStr[] =  
+
+   const char fShaderStr[] =
       "#version 300 es                                   \n"
       "precision mediump float;                          \n"
       "uniform mediump sampler3D s_noiseTex;             \n"
@@ -355,29 +364,29 @@ int Init ( ESContext *esContext )
       "}                                                 \n";
 
    // Create the 3D texture
-   Create3DNoiseTexture( esContext );
+   Create3DNoiseTexture ( esContext );
 
    // Load the shaders and get a linked program object
    userData->programObject = esLoadProgram ( vShaderStr, fShaderStr );
 
    // Get the uniform locations
-   userData->mvpLoc = glGetUniformLocation( userData->programObject, "u_mvpMatrix" );
-   userData->mvLoc = glGetUniformLocation( userData->programObject, "u_mvMatrix" );
-   userData->noiseTexLoc = glGetUniformLocation( userData->programObject, "s_noiseTex" );
-   userData->fogMinDistLoc = glGetUniformLocation( userData->programObject, "u_fogMinDist" );
-   userData->fogMaxDistLoc = glGetUniformLocation( userData->programObject, "u_fogMaxDist" );
-   userData->fogColorLoc = glGetUniformLocation( userData->programObject, "u_fogColor" );
-   userData->timeLoc = glGetUniformLocation( userData->programObject, "u_time" );
+   userData->mvpLoc = glGetUniformLocation ( userData->programObject, "u_mvpMatrix" );
+   userData->mvLoc = glGetUniformLocation ( userData->programObject, "u_mvMatrix" );
+   userData->noiseTexLoc = glGetUniformLocation ( userData->programObject, "s_noiseTex" );
+   userData->fogMinDistLoc = glGetUniformLocation ( userData->programObject, "u_fogMinDist" );
+   userData->fogMaxDistLoc = glGetUniformLocation ( userData->programObject, "u_fogMaxDist" );
+   userData->fogColorLoc = glGetUniformLocation ( userData->programObject, "u_fogColor" );
+   userData->timeLoc = glGetUniformLocation ( userData->programObject, "u_time" );
 
    // Generate the vertex data
-   userData->numIndices = esGenCube( 3.0, &userData->vertices,
-                                     NULL, &userData->texCoords, &userData->indices );
-   
+   userData->numIndices = esGenCube ( 3.0, &userData->vertices,
+                                      NULL, &userData->texCoords, &userData->indices );
+
    // Starting rotation angle for the cube
    userData->angle = 0.0f;
    userData->curTime = 0.0f;
 
-   glEnable( GL_DEPTH_TEST );
+   glEnable ( GL_DEPTH_TEST );
    glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
 
    return TRUE;
@@ -388,31 +397,31 @@ int Init ( ESContext *esContext )
 //
 void Update ( ESContext *esContext, float deltaTime )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = ( UserData * ) esContext->userData;
    ESMatrix perspective;
    float    aspect;
-   
+
    userData->curTime += deltaTime;
 
    // Compute the window aspect ratio
-   aspect = (GLfloat) esContext->width / (GLfloat) esContext->height;
-   
+   aspect = ( GLfloat ) esContext->width / ( GLfloat ) esContext->height;
+
    // Generate a perspective matrix with a 60 degree FOV
-   esMatrixLoadIdentity( &perspective );
-   esPerspective( &perspective, 60.0f, aspect, 1.0f, 20.0f );
+   esMatrixLoadIdentity ( &perspective );
+   esPerspective ( &perspective, 60.0f, aspect, 1.0f, 20.0f );
 
    // Generate a model view matrix to rotate/translate the cube
-   esMatrixLoadIdentity( &userData->mvMatrix );
+   esMatrixLoadIdentity ( &userData->mvMatrix );
 
    // Translate away from the viewer
-   esTranslate( &userData->mvMatrix, 0.0, -2.5, -2.5 );
+   esTranslate ( &userData->mvMatrix, 0.0, -2.5, -2.5 );
 
    // Rotate the cube
-   esRotate( &userData->mvMatrix, userData->angle, 1.0, 0.0, 1.0 );
-   
-   // Compute the final MVP by multiplying the 
+   esRotate ( &userData->mvMatrix, userData->angle, 1.0, 0.0, 1.0 );
+
+   // Compute the final MVP by multiplying the
    // modevleiw and perspective matrices together
-   esMatrixMultiply( &userData->mvpMatrix, &userData->mvMatrix, &perspective );
+   esMatrixMultiply ( &userData->mvpMatrix, &userData->mvMatrix, &perspective );
 }
 
 ///
@@ -420,11 +429,11 @@ void Update ( ESContext *esContext, float deltaTime )
 //
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*)esContext->userData;
-   
+   UserData *userData = esContext->userData;
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -432,40 +441,40 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glVertexAttribPointer ( ATTRIB_LOCATION_POS, 3, GL_FLOAT, 
-                           GL_FALSE, 3 * sizeof(GLfloat), userData->vertices );
+   glVertexAttribPointer ( ATTRIB_LOCATION_POS, 3, GL_FLOAT,
+                           GL_FALSE, 3 * sizeof ( GLfloat ), userData->vertices );
 
    glEnableVertexAttribArray ( ATTRIB_LOCATION_POS );
 
    // Set the vertex color to red
-   glVertexAttrib4f( ATTRIB_LOCATION_COLOR, 1.0f, 0.0f, 0.0f, 1.0f );
+   glVertexAttrib4f ( ATTRIB_LOCATION_COLOR, 1.0f, 0.0f, 0.0f, 1.0f );
 
    // Bind the texture coordinates
-   glVertexAttribPointer ( ATTRIB_LOCATION_TEXCOORD, 2, GL_FLOAT, 
-                           GL_FALSE, 2 * sizeof(GLfloat), userData->texCoords );
+   glVertexAttribPointer ( ATTRIB_LOCATION_TEXCOORD, 2, GL_FLOAT,
+                           GL_FALSE, 2 * sizeof ( GLfloat ), userData->texCoords );
 
    glEnableVertexAttribArray ( ATTRIB_LOCATION_TEXCOORD );
-   
+
    // Load the matrices
-   glUniformMatrix4fv( userData->mvpLoc, 1, GL_FALSE, (GLfloat*) &userData->mvpMatrix.m[0][0] );
-   glUniformMatrix4fv( userData->mvLoc, 1, GL_FALSE, (GLfloat*) &userData->mvMatrix.m[0][0] );
+   glUniformMatrix4fv ( userData->mvpLoc, 1, GL_FALSE, ( GLfloat * ) &userData->mvpMatrix.m[0][0] );
+   glUniformMatrix4fv ( userData->mvLoc, 1, GL_FALSE, ( GLfloat * ) &userData->mvMatrix.m[0][0] );
 
    // Load other uniforms
    {
       float fogColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
       float fogMinDist = 2.75f;
       float fogMaxDist = 4.0f;
-      glUniform1f( userData->fogMinDistLoc, fogMinDist );
-      glUniform1f( userData->fogMaxDistLoc, fogMaxDist );
-   
-      glUniform4fv( userData->fogColorLoc, 1, fogColor );
-      glUniform1f( userData->timeLoc, userData->curTime * 0.1f );
+      glUniform1f ( userData->fogMinDistLoc, fogMinDist );
+      glUniform1f ( userData->fogMaxDistLoc, fogMaxDist );
+
+      glUniform4fv ( userData->fogColorLoc, 1, fogColor );
+      glUniform1f ( userData->timeLoc, userData->curTime * 0.1f );
    }
 
    // Bind the 3D texture
-   glUniform1i( userData->noiseTexLoc, 0 );
-   glBindTexture( GL_TEXTURE_3D, userData->textureId );
-   
+   glUniform1i ( userData->noiseTexLoc, 0 );
+   glBindTexture ( GL_TEXTURE_3D, userData->textureId );
+
    // Draw the cube
    glDrawElements ( GL_TRIANGLES, userData->numIndices, GL_UNSIGNED_INT, userData->indices );
 }
@@ -488,6 +497,7 @@ void Shutdown ( ESContext *esContext )
    }
 
    if ( userData->texCoords != NULL );
+
    {
       free ( userData->texCoords );
    }
@@ -502,16 +512,18 @@ void Shutdown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "Noise3D", 800, 600, ES_WINDOW_RGB | ES_WINDOW_DEPTH );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterUpdateFunc ( esContext, Update );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }

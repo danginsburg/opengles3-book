@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -41,8 +41,8 @@
 #include "Noise3D.h"
 
 #define NUM_PARTICLES   200
-#define EMISSION_RATE   0.3f 
-#define ACCELERATION   -1.0f 
+#define EMISSION_RATE   0.3f
+#define ACCELERATION   -1.0f
 
 #define ATTRIBUTE_POSITION      0
 #define ATTRIBUTE_VELOCITY      1
@@ -69,7 +69,7 @@ typedef struct
    GLint emitTimeLoc;
    GLint emitEmissionRateLoc;
    GLint emitNoiseSamplerLoc;
-   
+
    // Draw shader uniform location
    GLint drawTimeLoc;
    GLint drawColorLoc;
@@ -130,8 +130,8 @@ GLuint LoadTexture ( void *ioContext, char *fileName )
 
 void InitEmitParticles ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
- 
+   UserData *userData = esContext->userData;
+
    char vShaderStr[] =
       "#version 300 es                                                     \n"
       "#define NUM_PARTICLES           200                                 \n"
@@ -187,7 +187,7 @@ void InitEmitParticles ( ESContext *esContext )
       "  gl_Position = vec4( v_position, 0.0, 1.0 );                       \n"
       "}                                                                   \n";
 
-   char fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                                      \n"
       "precision mediump float;                             \n"
       "layout(location = 0) out vec4 fragColor;             \n"
@@ -196,10 +196,10 @@ void InitEmitParticles ( ESContext *esContext )
       "  fragColor = vec4(1.0);                             \n"
       "}                                                    \n";
 
-   userData->emitProgramObject = esLoadProgram( vShaderStr, fShaderStr );
+   userData->emitProgramObject = esLoadProgram ( vShaderStr, fShaderStr );
 
    {
-      const char* feedbackVaryings[5] =
+      const char *feedbackVaryings[5] =
       {
          "v_position",
          "v_velocity",
@@ -212,7 +212,7 @@ void InitEmitParticles ( ESContext *esContext )
       glTransformFeedbackVaryings ( userData->emitProgramObject, 5, feedbackVaryings, GL_INTERLEAVED_ATTRIBS );
 
       // Link program must occur after calling glTransformFeedbackVaryings
-      glLinkProgram( userData->emitProgramObject );
+      glLinkProgram ( userData->emitProgramObject );
 
       // Get the uniform locations - this also needs to happen after glLinkProgram is called again so
       // that the uniforms that output to varyings are active
@@ -228,9 +228,9 @@ void InitEmitParticles ( ESContext *esContext )
 int Init ( ESContext *esContext )
 {
    Particle particleData[ NUM_PARTICLES ];
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = ( UserData * ) esContext->userData;
    int i;
-   
+
    char vShaderStr[] =
       "#version 300 es                                                     \n"
       "#define ATTRIBUTE_POSITION      0                                   \n"
@@ -265,7 +265,7 @@ int Init ( ESContext *esContext )
       "  }                                                                 \n"
       "}";
 
-   char fShaderStr[] =  
+   char fShaderStr[] =
       "#version 300 es                                      \n"
       "precision mediump float;                             \n"
       "layout(location = 0) out vec4 fragColor;             \n"
@@ -278,7 +278,7 @@ int Init ( ESContext *esContext )
       "  fragColor = texColor * u_color;                    \n"
       "}                                                    \n";
 
-   InitEmitParticles( esContext );
+   InitEmitParticles ( esContext );
 
    // Load the shaders and get a linked program object
    userData->drawProgramObject = esLoadProgram ( vShaderStr, fShaderStr );
@@ -295,13 +295,14 @@ int Init ( ESContext *esContext )
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
    userData->textureId = LoadTexture ( esContext->platformData, "smoke.tga" );
+
    if ( userData->textureId <= 0 )
    {
       return FALSE;
    }
 
    // Create a 3D noise texture for random values
-   userData->noiseTextureId = Create3DNoiseTexture( 128, 50.0 );
+   userData->noiseTextureId = Create3DNoiseTexture ( 128, 50.0 );
 
    // Initialize particle data
    for ( i = 0; i < NUM_PARTICLES; i++ )
@@ -319,37 +320,38 @@ int Init ( ESContext *esContext )
 
    // Create the particle VBOs
    glGenBuffers ( 2, &userData->particleVBOs[0] );
+
    for ( i = 0; i < 2; i++ )
    {
       glBindBuffer ( GL_ARRAY_BUFFER, userData->particleVBOs[i] );
-      glBufferData ( GL_ARRAY_BUFFER, sizeof(Particle) * NUM_PARTICLES, particleData, GL_DYNAMIC_COPY );
+      glBufferData ( GL_ARRAY_BUFFER, sizeof ( Particle ) * NUM_PARTICLES, particleData, GL_DYNAMIC_COPY );
    }
-   
+
    return TRUE;
 }
 
-void SetupVertexAttributes( ESContext *esContext, GLuint vboID )
+void SetupVertexAttributes ( ESContext *esContext, GLuint vboID )
 {
-   glBindBuffer( GL_ARRAY_BUFFER, vboID );
-   glVertexAttribPointer ( ATTRIBUTE_POSITION, 2, GL_FLOAT, 
-                           GL_FALSE, sizeof(Particle), 
-                           (const void *) NULL );
+   glBindBuffer ( GL_ARRAY_BUFFER, vboID );
+   glVertexAttribPointer ( ATTRIBUTE_POSITION, 2, GL_FLOAT,
+                           GL_FALSE, sizeof ( Particle ),
+                           ( const void * ) NULL );
 
-   glVertexAttribPointer ( ATTRIBUTE_VELOCITY, 2, GL_FLOAT, 
-                           GL_FALSE, sizeof(Particle), 
-                           (const void *) offsetof(Particle,velocity[0]) );
+   glVertexAttribPointer ( ATTRIBUTE_VELOCITY, 2, GL_FLOAT,
+                           GL_FALSE, sizeof ( Particle ),
+                           ( const void * ) offsetof ( Particle, velocity[0] ) );
 
-   glVertexAttribPointer ( ATTRIBUTE_SIZE, 1, GL_FLOAT, 
-                           GL_FALSE, sizeof(Particle), 
-                           (const void *) offsetof(Particle,size) );
-   
-   glVertexAttribPointer ( ATTRIBUTE_CURTIME, 1, GL_FLOAT, 
-                           GL_FALSE, sizeof(Particle), 
-                           (const void *) offsetof(Particle,curtime) );
+   glVertexAttribPointer ( ATTRIBUTE_SIZE, 1, GL_FLOAT,
+                           GL_FALSE, sizeof ( Particle ),
+                           ( const void * ) offsetof ( Particle, size ) );
 
-   glVertexAttribPointer ( ATTRIBUTE_LIFETIME, 1, GL_FLOAT, 
-                           GL_FALSE, sizeof(Particle), 
-                           (const void *) offsetof(Particle,lifetime) );
+   glVertexAttribPointer ( ATTRIBUTE_CURTIME, 1, GL_FLOAT,
+                           GL_FALSE, sizeof ( Particle ),
+                           ( const void * ) offsetof ( Particle, curtime ) );
+
+   glVertexAttribPointer ( ATTRIBUTE_LIFETIME, 1, GL_FLOAT,
+                           GL_FALSE, sizeof ( Particle ),
+                           ( const void * ) offsetof ( Particle, lifetime ) );
 
    glEnableVertexAttribArray ( ATTRIBUTE_POSITION );
    glEnableVertexAttribArray ( ATTRIBUTE_VELOCITY );
@@ -360,44 +362,44 @@ void SetupVertexAttributes( ESContext *esContext, GLuint vboID )
 
 void EmitParticles ( ESContext *esContext, float deltaTime )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLuint srcVBO = userData->particleVBOs[ userData->curSrcIndex ];
    GLuint dstVBO = userData->particleVBOs[ ( userData->curSrcIndex + 1 ) % 2 ];
-   
-   glUseProgram( userData->emitProgramObject );
 
-   SetupVertexAttributes( esContext, srcVBO );
+   glUseProgram ( userData->emitProgramObject );
+
+   SetupVertexAttributes ( esContext, srcVBO );
 
    // Set transform feedback buffer
-   glBindBuffer( GL_TRANSFORM_FEEDBACK_BUFFER, dstVBO );
-   glBindBufferBase( GL_TRANSFORM_FEEDBACK_BUFFER, 0, dstVBO );
+   glBindBuffer ( GL_TRANSFORM_FEEDBACK_BUFFER, dstVBO );
+   glBindBufferBase ( GL_TRANSFORM_FEEDBACK_BUFFER, 0, dstVBO );
 
    // Turn off rasterization - we are not drawing
-   glEnable( GL_RASTERIZER_DISCARD );
+   glEnable ( GL_RASTERIZER_DISCARD );
 
    // Set uniforms
-   glUniform1f( userData->emitTimeLoc, userData->time );
-   glUniform1f( userData->emitEmissionRateLoc, EMISSION_RATE );
+   glUniform1f ( userData->emitTimeLoc, userData->time );
+   glUniform1f ( userData->emitEmissionRateLoc, EMISSION_RATE );
 
    // Bind the 3D noise texture
-   glActiveTexture( GL_TEXTURE0 );
-   glBindTexture( GL_TEXTURE_3D, userData->noiseTextureId );
-   glUniform1i( userData->emitNoiseSamplerLoc, 0 );
+   glActiveTexture ( GL_TEXTURE0 );
+   glBindTexture ( GL_TEXTURE_3D, userData->noiseTextureId );
+   glUniform1i ( userData->emitNoiseSamplerLoc, 0 );
 
    // Emit particles using transform feedback
-   glBeginTransformFeedback( GL_POINTS );
-      glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
+   glBeginTransformFeedback ( GL_POINTS );
+   glDrawArrays ( GL_POINTS, 0, NUM_PARTICLES );
    glEndTransformFeedback();
 
    // Create a sync object to ensure transform feedback results are completed before the draw that uses them.
-   userData->emitSync = glFenceSync( GL_SYNC_GPU_COMMANDS_COMPLETE, 0 );
+   userData->emitSync = glFenceSync ( GL_SYNC_GPU_COMMANDS_COMPLETE, 0 );
 
    // Restore state
-   glDisable( GL_RASTERIZER_DISCARD );
+   glDisable ( GL_RASTERIZER_DISCARD );
    glUseProgram ( 0 );
    glBindBufferBase ( GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0 );
    glBindBuffer ( GL_ARRAY_BUFFER, 0 );
-   glBindTexture( GL_TEXTURE_3D, 0 );
+   glBindTexture ( GL_TEXTURE_3D, 0 );
 
    // Ping pong the buffers
    userData->curSrcIndex = ( userData->curSrcIndex + 1 ) % 2;
@@ -409,8 +411,8 @@ void EmitParticles ( ESContext *esContext, float deltaTime )
 //
 void Update ( ESContext *esContext, float deltaTime )
 {
-   UserData *userData = (UserData*) esContext->userData;
-  
+   UserData *userData = ( UserData * ) esContext->userData;
+
    userData->time += deltaTime;
 
    EmitParticles ( esContext, deltaTime );
@@ -421,15 +423,15 @@ void Update ( ESContext *esContext, float deltaTime )
 //
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
 
    // Block the GL server until transform feedback results are completed
-   glWaitSync( userData->emitSync, 0, GL_TIMEOUT_IGNORED );
-   glDeleteSync( userData->emitSync );
+   glWaitSync ( userData->emitSync, 0, GL_TIMEOUT_IGNORED );
+   glDeleteSync ( userData->emitSync );
 
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -437,12 +439,12 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->drawProgramObject );
 
    // Load the VBO and vertex attributes
-   SetupVertexAttributes( esContext, userData->particleVBOs[ userData->curSrcIndex ] );
-   
+   SetupVertexAttributes ( esContext, userData->particleVBOs[ userData->curSrcIndex ] );
+
    // Set uniforms
-   glUniform1f( userData->drawTimeLoc, userData->time );
-   glUniform4f( userData->drawColorLoc, 1.0f, 1.0f, 1.0f, 1.0f );
-   glUniform2f( userData->drawAccelerationLoc, 0.0f, ACCELERATION );
+   glUniform1f ( userData->drawTimeLoc, userData->time );
+   glUniform4f ( userData->drawColorLoc, 1.0f, 1.0f, 1.0f, 1.0f );
+   glUniform2f ( userData->drawAccelerationLoc, 0.0f, ACCELERATION );
 
    // Blend particles
    glEnable ( GL_BLEND );
@@ -455,7 +457,7 @@ void Draw ( ESContext *esContext )
    // Set the sampler texture unit to 0
    glUniform1i ( userData->samplerLoc, 0 );
 
-   glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
+   glDrawArrays ( GL_POINTS, 0, NUM_PARTICLES );
 }
 
 ///
@@ -472,23 +474,25 @@ void ShutDown ( ESContext *esContext )
    glDeleteProgram ( userData->drawProgramObject );
    glDeleteProgram ( userData->emitProgramObject );
 
-   glDeleteBuffers( 2, &userData->particleVBOs[0] );
+   glDeleteBuffers ( 2, &userData->particleVBOs[0] );
 }
 
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "ParticleSystemTransformFeedback", 640, 480, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterUpdateFunc ( esContext, Update );
    esRegisterShutdownFunc ( esContext, ShutDown );
-   
+
    return GL_TRUE;
 }
 

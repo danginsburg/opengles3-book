@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -57,7 +57,7 @@ typedef struct
    // VBOs
    GLuint positionVBO;
    GLuint indicesIBO;
-   
+
    // Number of indices
    int    numIndices;
 
@@ -71,13 +71,14 @@ typedef struct
 ///
 // Load texture from disk
 //
-GLuint LoadTexture (  void* ioContext, char *fileName )
+GLuint LoadTexture (  void *ioContext, char *fileName )
 {
    int width,
        height;
 
    char *buffer = esLoadTGA ( ioContext, fileName, &width, &height );
    GLuint texId;
+
    if ( buffer == NULL )
    {
       esLogMessage ( "Error loading (%s) image.\n", fileName );
@@ -106,27 +107,27 @@ int InitMVP ( ESContext *esContext )
    ESMatrix perspective;
    ESMatrix modelview;
    float    aspect;
-   UserData *userData = (UserData*) esContext->userData;
-   
+   UserData *userData = esContext->userData;
+
    // Compute the window aspect ratio
-   aspect = (GLfloat) esContext->width / (GLfloat) esContext->height;
-   
+   aspect = ( GLfloat ) esContext->width / ( GLfloat ) esContext->height;
+
    // Generate a perspective matrix with a 60 degree FOV
-   esMatrixLoadIdentity( &perspective );
-   esPerspective( &perspective, 60.0f, aspect, 0.1f, 20.0f );
+   esMatrixLoadIdentity ( &perspective );
+   esPerspective ( &perspective, 60.0f, aspect, 0.1f, 20.0f );
 
    // Generate a model view matrix to rotate/translate the terrain
-   esMatrixLoadIdentity( &modelview );
+   esMatrixLoadIdentity ( &modelview );
 
    // Center the terrain
-   esTranslate( &modelview, -0.5f, -0.5f, -0.7f );
+   esTranslate ( &modelview, -0.5f, -0.5f, -0.7f );
 
-   // Rotate 
-   esRotate( &modelview, 45.0f, 1.0, 0.0, 0.0 );
-   
-   // Compute the final MVP by multiplying the 
+   // Rotate
+   esRotate ( &modelview, 45.0f, 1.0, 0.0, 0.0 );
+
+   // Compute the final MVP by multiplying the
    // modelview and perspective matrices together
-   esMatrixMultiply( &userData->mvpMatrix, &modelview, &perspective );
+   esMatrixMultiply ( &userData->mvpMatrix, &modelview, &perspective );
 
    return TRUE;
 }
@@ -139,8 +140,8 @@ int Init ( ESContext *esContext )
    GLfloat *positions;
    GLuint *indices;
 
-   UserData *userData = (UserData*) esContext->userData;
-   const char vShaderStr[] =  
+   UserData *userData = esContext->userData;
+   const char vShaderStr[] =
       "#version 300 es                                      \n"
       "uniform mat4 u_mvpMatrix;                            \n"
       "uniform vec3 u_lightDirection;                       \n"
@@ -173,8 +174,8 @@ int Init ( ESContext *esContext )
       "                            a_position.w );          \n"
       "   gl_Position = u_mvpMatrix * v_position;           \n"
       "}                                                    \n";
-   
-   const char fShaderStr[] =  
+
+   const char fShaderStr[] =
       "#version 300 es                                      \n"
       "precision mediump float;                             \n"
       "in vec4 v_color;                                     \n"
@@ -188,38 +189,40 @@ int Init ( ESContext *esContext )
    userData->programObject = esLoadProgram ( vShaderStr, fShaderStr );
 
    // Get the uniform locations
-   userData->mvpLoc = glGetUniformLocation( userData->programObject, "u_mvpMatrix" );
-   userData->lightDirectionLoc = glGetUniformLocation( userData->programObject, 
-                                                       "u_lightDirection" );
+   userData->mvpLoc = glGetUniformLocation ( userData->programObject, "u_mvpMatrix" );
+   userData->lightDirectionLoc = glGetUniformLocation ( userData->programObject,
+                                                        "u_lightDirection" );
 
    // Get the sampler location
    userData->samplerLoc = glGetUniformLocation ( userData->programObject, "s_texture" );
 
-   // Load the heightmap 
+   // Load the heightmap
    userData->textureId = LoadTexture ( esContext->platformData, "heightmap.tga" );
 
    if ( userData->textureId == 0 )
+   {
       return FALSE;
+   }
 
    // Generate the position and indices of a square grid for the base terrain
    userData->gridSize = 200;
-   userData->numIndices = esGenSquareGrid( userData->gridSize, &positions, &indices );
+   userData->numIndices = esGenSquareGrid ( userData->gridSize, &positions, &indices );
 
    // Index buffer for base terrain
-   glGenBuffers( 1, &userData->indicesIBO );
-   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, userData->indicesIBO );
-   glBufferData( GL_ELEMENT_ARRAY_BUFFER, userData->numIndices * sizeof( GLuint ), 
-                 indices, GL_STATIC_DRAW );
-   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
-   free( indices );
+   glGenBuffers ( 1, &userData->indicesIBO );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->indicesIBO );
+   glBufferData ( GL_ELEMENT_ARRAY_BUFFER, userData->numIndices * sizeof ( GLuint ),
+                  indices, GL_STATIC_DRAW );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, 0 );
+   free ( indices );
 
    // Position VBO for base terrain
-   glGenBuffers( 1, &userData->positionVBO );
-   glBindBuffer( GL_ARRAY_BUFFER, userData->positionVBO );
-   glBufferData( GL_ARRAY_BUFFER, 
-                 userData->gridSize * userData->gridSize * sizeof( GLfloat ) * 3, 
-                 positions, GL_STATIC_DRAW );
-   free( positions );
+   glGenBuffers ( 1, &userData->positionVBO );
+   glBindBuffer ( GL_ARRAY_BUFFER, userData->positionVBO );
+   glBufferData ( GL_ARRAY_BUFFER,
+                  userData->gridSize * userData->gridSize * sizeof ( GLfloat ) * 3,
+                  positions, GL_STATIC_DRAW );
+   free ( positions );
 
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
@@ -227,17 +230,17 @@ int Init ( ESContext *esContext )
 }
 
 ///
-// Draw a flat grid 
+// Draw a flat grid
 //
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*)esContext->userData;
-   
+   UserData *userData = esContext->userData;
+
    InitMVP ( esContext );
 
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -245,29 +248,29 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glBindBuffer( GL_ARRAY_BUFFER, userData->positionVBO );
-   glVertexAttribPointer( POSITION_LOC, 3, GL_FLOAT, 
-                          GL_FALSE, 3 * sizeof(GLfloat), (const void*)NULL );
-   glEnableVertexAttribArray( POSITION_LOC );   
+   glBindBuffer ( GL_ARRAY_BUFFER, userData->positionVBO );
+   glVertexAttribPointer ( POSITION_LOC, 3, GL_FLOAT,
+                           GL_FALSE, 3 * sizeof ( GLfloat ), ( const void * ) NULL );
+   glEnableVertexAttribArray ( POSITION_LOC );
 
    // Bind the index buffer
-   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, userData->indicesIBO );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->indicesIBO );
 
    // Bind the height map
    glActiveTexture ( GL_TEXTURE0 );
    glBindTexture ( GL_TEXTURE_2D, userData->textureId );
 
    // Load the MVP matrix
-   glUniformMatrix4fv( userData->mvpLoc, 1, GL_FALSE, (GLfloat*) &userData->mvpMatrix.m[0][0] );
+   glUniformMatrix4fv ( userData->mvpLoc, 1, GL_FALSE, ( GLfloat * ) &userData->mvpMatrix.m[0][0] );
 
    // Load the light direction
-   glUniform3f( userData->lightDirectionLoc, 0.86f, 0.14f, 0.49f );
+   glUniform3f ( userData->lightDirectionLoc, 0.86f, 0.14f, 0.49f );
 
    // Set the height map sampler to texture unit to 0
    glUniform1i ( userData->samplerLoc, 0 );
 
    // Draw the grid
-   glDrawElements ( GL_TRIANGLES, userData->numIndices, GL_UNSIGNED_INT, (const void*)NULL );
+   glDrawElements ( GL_TRIANGLES, userData->numIndices, GL_UNSIGNED_INT, ( const void * ) NULL );
 }
 
 ///
@@ -275,11 +278,11 @@ void Draw ( ESContext *esContext )
 //
 void Shutdown ( ESContext *esContext )
 {
-   UserData *userData = (UserData *) esContext->userData;
+   UserData *userData = esContext->userData;
 
-   glDeleteBuffers( 1, &userData->positionVBO );
-   glDeleteBuffers( 1, &userData->indicesIBO );
-   
+   glDeleteBuffers ( 1, &userData->positionVBO );
+   glDeleteBuffers ( 1, &userData->indicesIBO );
+
    // Delete program object
    glDeleteProgram ( userData->programObject );
 }
@@ -287,16 +290,18 @@ void Shutdown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "TerrainRendering", 640, 480, ES_WINDOW_RGB | ES_WINDOW_DEPTH );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }
 

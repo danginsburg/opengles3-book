@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -66,7 +66,7 @@ typedef struct
    GLuint groundIndicesIBO;
    GLuint cubePositionVBO;
    GLuint cubeIndicesIBO;
-   
+
    // Number of indices
    int    groundNumIndices;
    int    cubeNumIndices;
@@ -95,11 +95,11 @@ int InitMVP ( ESContext *esContext )
    ESMatrix model;
    ESMatrix view;
    float    aspect;
-   UserData *userData = (UserData*) esContext->userData;
-   
+   UserData *userData = esContext->userData;
+
    // Compute the window aspect ratio
-   aspect = (GLfloat) esContext->width / (GLfloat) esContext->height;
-   
+   aspect = ( GLfloat ) esContext->width / ( GLfloat ) esContext->height;
+
    // Generate a perspective matrix with a 45 degree FOV for the scene rendering
    esMatrixLoadIdentity ( &perspective );
    esPerspective ( &perspective, 45.0f, aspect, 0.1f, 100.0f );
@@ -118,26 +118,26 @@ int InitMVP ( ESContext *esContext )
    esRotate ( &model, 90.0f, 1.0f, 0.0f, 0.0f );
 
    // create view matrix transformation from the eye position
-   esMatrixLookAt ( &view, 
+   esMatrixLookAt ( &view,
                     userData->eyePosition[0], userData->eyePosition[1], userData->eyePosition[2],
                     0.0f, 0.0f, 0.0f,
                     0.0f, 1.0f, 0.0f );
 
    esMatrixMultiply ( &modelview, &model, &view );
 
-   // Compute the final ground MVP for the scene rendering by multiplying the 
+   // Compute the final ground MVP for the scene rendering by multiplying the
    // modelview and perspective matrices together
    esMatrixMultiply ( &userData->groundMvpMatrix, &modelview, &perspective );
 
    // create view matrix transformation from the light position
-   esMatrixLookAt ( &view, 
+   esMatrixLookAt ( &view,
                     userData->lightPosition[0], userData->lightPosition[1], userData->lightPosition[2],
                     0.0f, 0.0f, 0.0f,
                     0.0f, 1.0f, 0.0f );
 
    esMatrixMultiply ( &modelview, &model, &view );
 
-   // Compute the final ground MVP for the shadow map rendering by multiplying the 
+   // Compute the final ground MVP for the shadow map rendering by multiplying the
    // modelview and ortho matrices together
    esMatrixMultiply ( &userData->groundMvpLightMatrix, &modelview, &ortho );
 
@@ -149,26 +149,26 @@ int InitMVP ( ESContext *esContext )
    esRotate ( &model, -15.0f, 0.0f, 1.0f, 0.0f );
 
    // create view matrix transformation from the eye position
-   esMatrixLookAt ( &view, 
+   esMatrixLookAt ( &view,
                     userData->eyePosition[0], userData->eyePosition[1], userData->eyePosition[2],
                     0.0f, 0.0f, 0.0f,
                     0.0f, 1.0f, 0.0f );
 
    esMatrixMultiply ( &modelview, &model, &view );
-   
-   // Compute the final cube MVP for scene rendering by multiplying the 
+
+   // Compute the final cube MVP for scene rendering by multiplying the
    // modelview and perspective matrices together
    esMatrixMultiply ( &userData->cubeMvpMatrix, &modelview, &perspective );
 
    // create view matrix transformation from the light position
-   esMatrixLookAt ( &view, 
+   esMatrixLookAt ( &view,
                     userData->lightPosition[0], userData->lightPosition[1], userData->lightPosition[2],
                     0.0f, 0.0f, 0.0f,
                     0.0f, 1.0f, 0.0f );
 
    esMatrixMultiply ( &modelview, &model, &view );
-   
-   // Compute the final cube MVP for shadow map rendering by multiplying the 
+
+   // Compute the final cube MVP for shadow map rendering by multiplying the
    // modelview and ortho matrices together
    esMatrixMultiply ( &userData->cubeMvpLightMatrix, &modelview, &ortho );
 
@@ -177,7 +177,7 @@ int InitMVP ( ESContext *esContext )
 
 int InitShadowMap ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLenum none = GL_NONE;
    GLint defaultFramebuffer = 0;
 
@@ -190,13 +190,13 @@ int InitShadowMap ( ESContext *esContext )
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     GL_CLAMP_TO_EDGE );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_CLAMP_TO_EDGE );
-        
+
    // Setup hardware comparison
-   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE );
-   glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL );
-        
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL );
+
    glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16,
-                  userData->shadowMapTextureWidth, userData->shadowMapTextureHeight, 
+                  userData->shadowMapTextureWidth, userData->shadowMapTextureHeight,
                   0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL );
 
    glBindTexture ( GL_TEXTURE_2D, 0 );
@@ -208,12 +208,12 @@ int InitShadowMap ( ESContext *esContext )
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
 
    glDrawBuffers ( 1, &none );
-   
+
    glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, userData->shadowMapTextureId, 0 );
 
    glActiveTexture ( GL_TEXTURE0 );
    glBindTexture ( GL_TEXTURE_2D, userData->shadowMapTextureId );
- 
+
    if ( GL_FRAMEBUFFER_COMPLETE != glCheckFramebufferStatus ( GL_FRAMEBUFFER ) )
    {
       return FALSE;
@@ -232,8 +232,8 @@ int Init ( ESContext *esContext )
    GLfloat *positions;
    GLuint *indices;
 
-   UserData *userData = (UserData*) esContext->userData;
-   const char vShadowMapShaderStr[] =  
+   UserData *userData = esContext->userData;
+   const char vShadowMapShaderStr[] =
       "#version 300 es                                  \n"
       "uniform mat4 u_mvpLightMatrix;                   \n"
       "layout(location = 0) in vec4 a_position;         \n"
@@ -242,15 +242,15 @@ int Init ( ESContext *esContext )
       "{                                                \n"
       "   gl_Position = u_mvpLightMatrix * a_position;  \n"
       "}                                                \n";
-   
-   const char fShadowMapShaderStr[] =  
+
+   const char fShadowMapShaderStr[] =
       "#version 300 es                                  \n"
       "precision lowp float;                            \n"
       "void main()                                      \n"
       "{                                                \n"
       "}                                                \n";
 
-    const char vSceneShaderStr[] =  
+   const char vSceneShaderStr[] =
       "#version 300 es                                   \n"
       "uniform mat4 u_mvpMatrix;                         \n"
       "uniform mat4 u_mvpLightMatrix;                    \n"
@@ -267,8 +267,8 @@ int Init ( ESContext *esContext )
       "   // transform from [-1,1] to [0,1];             \n"
       "   v_shadowCoord = v_shadowCoord * 0.5 + 0.5;     \n"
       "}                                                 \n";
-   
-   const char fSceneShaderStr[] =  
+
+   const char fSceneShaderStr[] =
       "#version 300 es                                                \n"
       "precision lowp float;                                          \n"
       "uniform lowp sampler2DShadow s_shadowMap;                      \n"
@@ -314,21 +314,21 @@ int Init ( ESContext *esContext )
 
    // Generate the vertex and index data for the ground
    userData->groundGridSize = 3;
-   userData->groundNumIndices = esGenSquareGrid( userData->groundGridSize, &positions, &indices );
+   userData->groundNumIndices = esGenSquareGrid ( userData->groundGridSize, &positions, &indices );
 
    // Index buffer object for the ground model
    glGenBuffers ( 1, &userData->groundIndicesIBO );
    glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->groundIndicesIBO );
-   glBufferData ( GL_ELEMENT_ARRAY_BUFFER, userData->groundNumIndices * sizeof( GLuint ), indices, GL_STATIC_DRAW );
+   glBufferData ( GL_ELEMENT_ARRAY_BUFFER, userData->groundNumIndices * sizeof ( GLuint ), indices, GL_STATIC_DRAW );
    glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, 0 );
-   free( indices );
+   free ( indices );
 
    // Position VBO for ground model
    glGenBuffers ( 1, &userData->groundPositionVBO );
    glBindBuffer ( GL_ARRAY_BUFFER, userData->groundPositionVBO );
-   glBufferData ( GL_ARRAY_BUFFER, userData->groundGridSize * userData->groundGridSize * sizeof( GLfloat ) * 3, 
+   glBufferData ( GL_ARRAY_BUFFER, userData->groundGridSize * userData->groundGridSize * sizeof ( GLfloat ) * 3,
                   positions, GL_STATIC_DRAW );
-   free( positions );
+   free ( positions );
 
    // Generate the vertex and index date for the cube model
    userData->cubeNumIndices = esGenCube ( 1.0f, &positions,
@@ -337,15 +337,15 @@ int Init ( ESContext *esContext )
    // Index buffer object for cube model
    glGenBuffers ( 1, &userData->cubeIndicesIBO );
    glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->cubeIndicesIBO );
-   glBufferData ( GL_ELEMENT_ARRAY_BUFFER, sizeof( GLuint ) * userData->cubeNumIndices, indices, GL_STATIC_DRAW );
+   glBufferData ( GL_ELEMENT_ARRAY_BUFFER, sizeof ( GLuint ) * userData->cubeNumIndices, indices, GL_STATIC_DRAW );
    glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, 0 );
-   free( indices );
+   free ( indices );
 
    // Position VBO for cube model
    glGenBuffers ( 1, &userData->cubePositionVBO );
    glBindBuffer ( GL_ARRAY_BUFFER, userData->cubePositionVBO );
-   glBufferData ( GL_ARRAY_BUFFER, 24 * sizeof( GLfloat ) * 3, positions, GL_STATIC_DRAW );
-   free( positions );
+   glBufferData ( GL_ARRAY_BUFFER, 24 * sizeof ( GLfloat ) * 3, positions, GL_STATIC_DRAW );
+   free ( positions );
 
    // setup transformation matrices
    userData->eyePosition[0] = -5.0f;
@@ -354,9 +354,9 @@ int Init ( ESContext *esContext )
    userData->lightPosition[0] = 10.0f;
    userData->lightPosition[1] = 5.0f;
    userData->lightPosition[2] = 2.0f;
-   
+
    // create depth texture
-   if ( !InitShadowMap( esContext ) )
+   if ( !InitShadowMap ( esContext ) )
    {
       return FALSE;
    }
@@ -375,54 +375,54 @@ int Init ( ESContext *esContext )
 ///
 // Draw the model
 //
-void DrawScene ( ESContext *esContext, 
-                 GLint mvpLoc, 
+void DrawScene ( ESContext *esContext,
+                 GLint mvpLoc,
                  GLint mvpLightLoc )
 {
-   UserData *userData = (UserData*) esContext->userData;
- 
+   UserData *userData = esContext->userData;
+
    // Draw the ground
    // Load the vertex position
    glBindBuffer ( GL_ARRAY_BUFFER, userData->groundPositionVBO );
-   glVertexAttribPointer ( POSITION_LOC, 3, GL_FLOAT, 
-                           GL_FALSE, 3 * sizeof(GLfloat), (const void*)NULL );
-   glEnableVertexAttribArray ( POSITION_LOC );   
+   glVertexAttribPointer ( POSITION_LOC, 3, GL_FLOAT,
+                           GL_FALSE, 3 * sizeof ( GLfloat ), ( const void * ) NULL );
+   glEnableVertexAttribArray ( POSITION_LOC );
 
    // Bind the index buffer
-   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, userData->groundIndicesIBO );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->groundIndicesIBO );
 
    // Load the MVP matrix for the ground model
-   glUniformMatrix4fv ( mvpLoc, 1, GL_FALSE, (GLfloat*) &userData->groundMvpMatrix.m[0][0] );
-   glUniformMatrix4fv ( mvpLightLoc, 1, GL_FALSE, (GLfloat*) &userData->groundMvpLightMatrix.m[0][0] );
+   glUniformMatrix4fv ( mvpLoc, 1, GL_FALSE, ( GLfloat * ) &userData->groundMvpMatrix.m[0][0] );
+   glUniformMatrix4fv ( mvpLightLoc, 1, GL_FALSE, ( GLfloat * ) &userData->groundMvpLightMatrix.m[0][0] );
 
    // Set the ground color to light gray
    glVertexAttrib4f ( COLOR_LOC, 0.9f, 0.9f, 0.9f, 1.0f );
 
-   glDrawElements ( GL_TRIANGLES, userData->groundNumIndices, GL_UNSIGNED_INT, (const void*)NULL );
+   glDrawElements ( GL_TRIANGLES, userData->groundNumIndices, GL_UNSIGNED_INT, ( const void * ) NULL );
 
    // Draw the cube
    // Load the vertex position
-   glBindBuffer( GL_ARRAY_BUFFER, userData->cubePositionVBO );
-   glVertexAttribPointer ( POSITION_LOC, 3, GL_FLOAT, 
-                           GL_FALSE, 3 * sizeof(GLfloat), (const void*)NULL );
-   glEnableVertexAttribArray ( POSITION_LOC );   
+   glBindBuffer ( GL_ARRAY_BUFFER, userData->cubePositionVBO );
+   glVertexAttribPointer ( POSITION_LOC, 3, GL_FLOAT,
+                           GL_FALSE, 3 * sizeof ( GLfloat ), ( const void * ) NULL );
+   glEnableVertexAttribArray ( POSITION_LOC );
 
    // Bind the index buffer
-   glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, userData->cubeIndicesIBO );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->cubeIndicesIBO );
 
    // Load the MVP matrix for the cube model
-   glUniformMatrix4fv ( mvpLoc, 1, GL_FALSE, (GLfloat*) &userData->cubeMvpMatrix.m[0][0] );
-   glUniformMatrix4fv ( mvpLightLoc, 1, GL_FALSE, (GLfloat*) &userData->cubeMvpLightMatrix.m[0][0] );
+   glUniformMatrix4fv ( mvpLoc, 1, GL_FALSE, ( GLfloat * ) &userData->cubeMvpMatrix.m[0][0] );
+   glUniformMatrix4fv ( mvpLightLoc, 1, GL_FALSE, ( GLfloat * ) &userData->cubeMvpLightMatrix.m[0][0] );
 
    // Set the cube color to red
    glVertexAttrib4f ( COLOR_LOC, 1.0f, 0.0f, 0.0f, 1.0f );
 
-   glDrawElements ( GL_TRIANGLES, userData->cubeNumIndices, GL_UNSIGNED_INT, (const void*)NULL );
+   glDrawElements ( GL_TRIANGLES, userData->cubeNumIndices, GL_UNSIGNED_INT, ( const void * ) NULL );
 }
 
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLint defaultFramebuffer = 0;
 
    // Initialize matrices
@@ -437,19 +437,19 @@ void Draw ( ESContext *esContext )
    glViewport ( 0, 0, userData->shadowMapTextureWidth, userData->shadowMapTextureHeight );
 
    // clear depth buffer
-   glClear( GL_DEPTH_BUFFER_BIT );
+   glClear ( GL_DEPTH_BUFFER_BIT );
 
    // disable color rendering, only write to depth buffer
    glColorMask ( GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE );
 
    // reduce shadow rendering artifact
    glEnable ( GL_POLYGON_OFFSET_FILL );
-   glPolygonOffset( 4.0f, 100.0f );
+   glPolygonOffset ( 4.0f, 100.0f );
 
    glUseProgram ( userData->shadowMapProgramObject );
    DrawScene ( esContext, userData->shadowMapMvpLoc, userData->shadowMapMvpLightLoc );
 
-   glDisable( GL_POLYGON_OFFSET_FILL );
+   glDisable ( GL_POLYGON_OFFSET_FILL );
 
    // SECOND PASS: Render the scene from eye location using the shadow map texture created in the first pass
    glBindFramebuffer ( GL_FRAMEBUFFER, defaultFramebuffer );
@@ -457,7 +457,7 @@ void Draw ( ESContext *esContext )
 
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color and depth buffers
    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
@@ -480,14 +480,14 @@ void Draw ( ESContext *esContext )
 //
 void Shutdown ( ESContext *esContext )
 {
-   UserData *userData = (UserData *) esContext->userData;
+   UserData *userData = esContext->userData;
 
-   glDeleteBuffers( 1, &userData->groundPositionVBO );
-   glDeleteBuffers( 1, &userData->groundIndicesIBO );
+   glDeleteBuffers ( 1, &userData->groundPositionVBO );
+   glDeleteBuffers ( 1, &userData->groundIndicesIBO );
 
-   glDeleteBuffers( 1, &userData->cubePositionVBO );
-   glDeleteBuffers( 1, &userData->cubeIndicesIBO );
-   
+   glDeleteBuffers ( 1, &userData->cubePositionVBO );
+   glDeleteBuffers ( 1, &userData->cubeIndicesIBO );
+
    // Delete shadow map
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->shadowMapBufferId );
    glFramebufferTexture2D ( GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, 0, 0 );
@@ -502,16 +502,18 @@ void Shutdown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "Shadow Rendering", 500, 500, ES_WINDOW_RGB | ES_WINDOW_DEPTH );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }
 

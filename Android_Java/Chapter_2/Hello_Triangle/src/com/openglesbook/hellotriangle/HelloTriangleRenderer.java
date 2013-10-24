@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -33,8 +33,8 @@
 // Hello_Triangle
 //
 //    This is a simple example that draws a single triangle with
-//    a minimal vertex/fragment shader.  The purpose of this 
-//    example is to demonstrate the basic concepts of 
+//    a minimal vertex/fragment shader.  The purpose of this
+//    example is to demonstrate the basic concepts of
 //    OpenGL ES 3.0 rendering.
 
 package com.openglesbook.hellotriangle;
@@ -54,150 +54,155 @@ import android.util.Log;
 public class HelloTriangleRenderer implements GLSurfaceView.Renderer
 {
 
-    ///
-    // Constructor
-    //
-    public HelloTriangleRenderer(Context context)
-    {
-        mVertices = ByteBuffer.allocateDirect(mVerticesData.length * 4)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
-        mVertices.put(mVerticesData).position(0);
-    }
+   ///
+   // Constructor
+   //
+   public HelloTriangleRenderer ( Context context )
+   {
+      mVertices = ByteBuffer.allocateDirect ( mVerticesData.length * 4 )
+                  .order ( ByteOrder.nativeOrder() ).asFloatBuffer();
+      mVertices.put ( mVerticesData ).position ( 0 );
+   }
 
-    ///
-    // Create a shader object, load the shader source, and
-    // compile the shader.
-    //
-    private int LoadShader(int type, String shaderSrc)
-    {
-        int shader;
-        int[] compiled = new int[1];
+   ///
+   // Create a shader object, load the shader source, and
+   // compile the shader.
+   //
+   private int LoadShader ( int type, String shaderSrc )
+   {
+      int shader;
+      int[] compiled = new int[1];
 
-        // Create the shader object
-        shader = GLES30.glCreateShader(type);
+      // Create the shader object
+      shader = GLES30.glCreateShader ( type );
 
-        if (shader == 0)
-            return 0;
+      if ( shader == 0 )
+      {
+         return 0;
+      }
 
-        // Load the shader source
-        GLES30.glShaderSource(shader, shaderSrc);
+      // Load the shader source
+      GLES30.glShaderSource ( shader, shaderSrc );
 
-        // Compile the shader
-        GLES30.glCompileShader(shader);
+      // Compile the shader
+      GLES30.glCompileShader ( shader );
 
-        // Check the compile status
-        GLES30.glGetShaderiv(shader, GLES30.GL_COMPILE_STATUS, compiled, 0);
+      // Check the compile status
+      GLES30.glGetShaderiv ( shader, GLES30.GL_COMPILE_STATUS, compiled, 0 );
 
-        if (compiled[0] == 0)
-        {
-            Log.e(TAG, GLES30.glGetShaderInfoLog(shader));
-            GLES30.glDeleteShader(shader);
-            return 0;
-        }
-        return shader;
-    }
+      if ( compiled[0] == 0 )
+      {
+         Log.e ( TAG, GLES30.glGetShaderInfoLog ( shader ) );
+         GLES30.glDeleteShader ( shader );
+         return 0;
+      }
 
-    ///
-    // Initialize the shader and program object
-    //
-    public void onSurfaceCreated(GL10 glUnused, EGLConfig config)
-    {    	
-        String vShaderStr = 
-                "#version 300 es 			  \n"
-        	  +	"in vec4 vPosition;           \n"
-              + "void main()                  \n"
-              + "{                            \n"
-              + "   gl_Position = vPosition;  \n"
-              + "}                            \n";
+      return shader;
+   }
 
-        String fShaderStr = 
-        		"#version 300 es		 			          	\n"
-                + "precision mediump float;					  	\n"
-                + "out vec4 fragColor;	 			 		  	\n"
-                + "void main()                                  \n"
-                + "{                                            \n"
-                + "  fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );	\n"
-                + "}                                            \n";
+   ///
+   // Initialize the shader and program object
+   //
+   public void onSurfaceCreated ( GL10 glUnused, EGLConfig config )
+   {
+      String vShaderStr =
+         "#version 300 es 			  \n"
+         +   "in vec4 vPosition;           \n"
+         + "void main()                  \n"
+         + "{                            \n"
+         + "   gl_Position = vPosition;  \n"
+         + "}                            \n";
 
-        int vertexShader;
-        int fragmentShader;
-        int programObject;
-        int[] linked = new int[1];
+      String fShaderStr =
+         "#version 300 es		 			          	\n"
+         + "precision mediump float;					  	\n"
+         + "out vec4 fragColor;	 			 		  	\n"
+         + "void main()                                  \n"
+         + "{                                            \n"
+         + "  fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );	\n"
+         + "}                                            \n";
 
-        // Load the vertex/fragment shaders
-        vertexShader = LoadShader(GLES30.GL_VERTEX_SHADER, vShaderStr);
-        fragmentShader = LoadShader(GLES30.GL_FRAGMENT_SHADER, fShaderStr);
+      int vertexShader;
+      int fragmentShader;
+      int programObject;
+      int[] linked = new int[1];
 
-        // Create the program object
-        programObject = GLES30.glCreateProgram();
+      // Load the vertex/fragment shaders
+      vertexShader = LoadShader ( GLES30.GL_VERTEX_SHADER, vShaderStr );
+      fragmentShader = LoadShader ( GLES30.GL_FRAGMENT_SHADER, fShaderStr );
 
-        if (programObject == 0)
-            return;
+      // Create the program object
+      programObject = GLES30.glCreateProgram();
 
-        GLES30.glAttachShader(programObject, vertexShader);
-        GLES30.glAttachShader(programObject, fragmentShader);
+      if ( programObject == 0 )
+      {
+         return;
+      }
 
-        // Bind vPosition to attribute 0
-        GLES30.glBindAttribLocation(programObject, 0, "vPosition");
+      GLES30.glAttachShader ( programObject, vertexShader );
+      GLES30.glAttachShader ( programObject, fragmentShader );
 
-        // Link the program
-        GLES30.glLinkProgram(programObject);
+      // Bind vPosition to attribute 0
+      GLES30.glBindAttribLocation ( programObject, 0, "vPosition" );
 
-        // Check the link status
-        GLES30.glGetProgramiv(programObject, GLES30.GL_LINK_STATUS, linked, 0);
+      // Link the program
+      GLES30.glLinkProgram ( programObject );
 
-        if (linked[0] == 0)
-        {
-            Log.e(TAG, "Error linking program:");
-            Log.e(TAG, GLES30.glGetProgramInfoLog(programObject));
-            GLES30.glDeleteProgram(programObject);
-            return;
-        }
+      // Check the link status
+      GLES30.glGetProgramiv ( programObject, GLES30.GL_LINK_STATUS, linked, 0 );
 
-        // Store the program object
-        mProgramObject = programObject;
+      if ( linked[0] == 0 )
+      {
+         Log.e ( TAG, "Error linking program:" );
+         Log.e ( TAG, GLES30.glGetProgramInfoLog ( programObject ) );
+         GLES30.glDeleteProgram ( programObject );
+         return;
+      }
 
-        GLES30.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    }
+      // Store the program object
+      mProgramObject = programObject;
 
-    // /
-    // Draw a triangle using the shader pair created in onSurfaceCreated()
-    //
-    public void onDrawFrame(GL10 glUnused)
-    {
-        // Set the viewport
-        GLES30.glViewport(0, 0, mWidth, mHeight);
+      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   }
 
-        // Clear the color buffer
-        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
+   // /
+   // Draw a triangle using the shader pair created in onSurfaceCreated()
+   //
+   public void onDrawFrame ( GL10 glUnused )
+   {
+      // Set the viewport
+      GLES30.glViewport ( 0, 0, mWidth, mHeight );
 
-        // Use the program object
-        GLES30.glUseProgram(mProgramObject);
+      // Clear the color buffer
+      GLES30.glClear ( GLES30.GL_COLOR_BUFFER_BIT );
 
-        // Load the vertex data
-        GLES30.glVertexAttribPointer(0, 3, GLES30.GL_FLOAT, false, 0, mVertices);
-        GLES30.glEnableVertexAttribArray(0);
+      // Use the program object
+      GLES30.glUseProgram ( mProgramObject );
 
-        GLES30.glDrawArrays(GLES30.GL_TRIANGLES, 0, 3);
-    }
+      // Load the vertex data
+      GLES30.glVertexAttribPointer ( 0, 3, GLES30.GL_FLOAT, false, 0, mVertices );
+      GLES30.glEnableVertexAttribArray ( 0 );
 
-    // /
-    // Handle surface changes
-    //
-    public void onSurfaceChanged(GL10 glUnused, int width, int height)
-    {
-        mWidth = width;
-        mHeight = height;
-    }
+      GLES30.glDrawArrays ( GLES30.GL_TRIANGLES, 0, 3 );
+   }
 
-    // Member variables
-    private int mProgramObject;
-    private int mWidth;
-    private int mHeight;
-    private FloatBuffer mVertices;
-    private static String TAG = "HelloTriangleRenderer";
+   // /
+   // Handle surface changes
+   //
+   public void onSurfaceChanged ( GL10 glUnused, int width, int height )
+   {
+      mWidth = width;
+      mHeight = height;
+   }
 
-    private final float[] mVerticesData =
-    { 0.0f, 0.5f, 0.0f, -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f };
+   // Member variables
+   private int mProgramObject;
+   private int mWidth;
+   private int mHeight;
+   private FloatBuffer mVertices;
+   private static String TAG = "HelloTriangleRenderer";
+
+   private final float[] mVerticesData =
+   { 0.0f, 0.5f, 0.0f, -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f };
 
 }

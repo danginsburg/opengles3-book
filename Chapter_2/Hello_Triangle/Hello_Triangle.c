@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -32,8 +32,8 @@
 // Hello_Triangle.c
 //
 //    This is a simple example that draws a single triangle with
-//    a minimal vertex/fragment shader.  The purpose of this 
-//    example is to demonstrate the basic concepts of 
+//    a minimal vertex/fragment shader.  The purpose of this
+//    example is to demonstrate the basic concepts of
 //    OpenGL ES 3.0 rendering.
 #include "esUtil.h"
 
@@ -52,35 +52,37 @@ GLuint LoadShader ( GLenum type, const char *shaderSrc )
 {
    GLuint shader;
    GLint compiled;
-   
+
    // Create the shader object
    shader = glCreateShader ( type );
 
    if ( shader == 0 )
-    return 0;
+   {
+      return 0;
+   }
 
    // Load the shader source
    glShaderSource ( shader, 1, &shaderSrc, NULL );
-   
+
    // Compile the shader
    glCompileShader ( shader );
 
    // Check the compile status
    glGetShaderiv ( shader, GL_COMPILE_STATUS, &compiled );
 
-   if ( !compiled ) 
+   if ( !compiled )
    {
       GLint infoLen = 0;
 
       glGetShaderiv ( shader, GL_INFO_LOG_LENGTH, &infoLen );
-      
+
       if ( infoLen > 1 )
       {
-         char* infoLog = malloc (sizeof(char) * infoLen );
+         char *infoLog = malloc ( sizeof ( char ) * infoLen );
 
          glGetShaderInfoLog ( shader, infoLen, NULL, infoLog );
-         esLogMessage ( "Error compiling shader:\n%s\n", infoLog );            
-         
+         esLogMessage ( "Error compiling shader:\n%s\n", infoLog );
+
          free ( infoLog );
       }
 
@@ -105,7 +107,7 @@ int Init ( ESContext *esContext )
       "{                                        \n"
       "   gl_Position = vPosition;              \n"
       "}                                        \n";
-   
+
    char fShaderStr[] =
       "#version 300 es                              \n"
       "precision mediump float;                     \n"
@@ -126,9 +128,11 @@ int Init ( ESContext *esContext )
 
    // Create the program object
    programObject = glCreateProgram ( );
-   
+
    if ( programObject == 0 )
+   {
       return 0;
+   }
 
    glAttachShader ( programObject, vertexShader );
    glAttachShader ( programObject, fragmentShader );
@@ -139,19 +143,19 @@ int Init ( ESContext *esContext )
    // Check the link status
    glGetProgramiv ( programObject, GL_LINK_STATUS, &linked );
 
-   if ( !linked ) 
+   if ( !linked )
    {
       GLint infoLen = 0;
 
       glGetProgramiv ( programObject, GL_INFO_LOG_LENGTH, &infoLen );
-      
+
       if ( infoLen > 1 )
       {
-         char* infoLog = malloc (sizeof(char) * infoLen );
+         char *infoLog = malloc ( sizeof ( char ) * infoLen );
 
          glGetProgramInfoLog ( programObject, infoLen, NULL, infoLog );
-         esLogMessage ( "Error linking program:\n%s\n", infoLog );            
-         
+         esLogMessage ( "Error linking program:\n%s\n", infoLog );
+
          free ( infoLog );
       }
 
@@ -172,13 +176,14 @@ int Init ( ESContext *esContext )
 void Draw ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f, 
-                           -0.5f, -0.5f, 0.0f,
-                            0.5f, -0.5f, 0.0f };
-      
+   GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f,
+                            -0.5f, -0.5f, 0.0f,
+                            0.5f, -0.5f, 0.0f
+                         };
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -196,20 +201,22 @@ void Shutdown ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
 
-   glDeleteProgram( userData->programObject );
+   glDeleteProgram ( userData->programObject );
 }
 
-int esMain( ESContext *esContext )
+int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "Hello Triangle", 320, 240, ES_WINDOW_RGB );
-   
-   if ( !Init ( esContext ) )
-      return GL_FALSE;
 
-   esRegisterShutdownFunc( esContext, Shutdown );
+   if ( !Init ( esContext ) )
+   {
+      return GL_FALSE;
+   }
+
+   esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }

@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -31,7 +31,7 @@
 //
 // esUtil_win32.c
 //
-//    This file contains the Win32 implementation of the windowing functions. 
+//    This file contains the Win32 implementation of the windowing functions.
 
 
 ///
@@ -57,53 +57,53 @@
 //
 //      Main window procedure
 //
-LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam ) 
+LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-   LRESULT  lRet = 1; 
+   LRESULT  lRet = 1;
 
-   switch (uMsg) 
-   { 
+   switch ( uMsg )
+   {
       case WM_CREATE:
          break;
 
       case WM_PAINT:
-         {
-            ESContext *esContext = (ESContext*)(LONG_PTR) GetWindowLongPtr ( hWnd, GWL_USERDATA );
-            
-            if ( esContext && esContext->drawFunc )
-            {
-               esContext->drawFunc ( esContext );
-               eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);        
-            }
+      {
+         ESContext *esContext = ( ESContext * ) ( LONG_PTR ) GetWindowLongPtr ( hWnd, GWL_USERDATA );
 
-            
-            ValidateRect( esContext->eglNativeWindow, NULL );
+         if ( esContext && esContext->drawFunc )
+         {
+            esContext->drawFunc ( esContext );
+            eglSwapBuffers ( esContext->eglDisplay, esContext->eglSurface );
          }
-         break;
+
+
+         ValidateRect ( esContext->eglNativeWindow, NULL );
+      }
+      break;
 
       case WM_DESTROY:
-         PostQuitMessage(0);             
-         break; 
-      
-      case WM_CHAR:
-         {
-            POINT      point;
-            ESContext *esContext = (ESContext*)(LONG_PTR) GetWindowLongPtr ( hWnd, GWL_USERDATA );
-            
-            GetCursorPos( &point );
-
-            if ( esContext && esContext->keyFunc )
-               esContext->keyFunc ( esContext, (unsigned char) wParam, 
-                                    (int) point.x, (int) point.y );
-}
+         PostQuitMessage ( 0 );
          break;
-         
-      default: 
-         lRet = DefWindowProc (hWnd, uMsg, wParam, lParam); 
-         break; 
-   } 
 
-   return lRet; 
+      case WM_CHAR:
+      {
+         POINT      point;
+         ESContext *esContext = ( ESContext * ) ( LONG_PTR ) GetWindowLongPtr ( hWnd, GWL_USERDATA );
+
+         GetCursorPos ( &point );
+
+         if ( esContext && esContext->keyFunc )
+            esContext->keyFunc ( esContext, ( unsigned char ) wParam,
+                                 ( int ) point.x, ( int ) point.y );
+      }
+      break;
+
+      default:
+         lRet = DefWindowProc ( hWnd, uMsg, wParam, lParam );
+         break;
+   }
+
+   return lRet;
 }
 
 //////////////////////////////////////////////////////////////////
@@ -119,23 +119,25 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 //
 GLboolean WinCreate ( ESContext *esContext, const char *title )
 {
-   WNDCLASS wndclass = {0}; 
+   WNDCLASS wndclass = {0};
    DWORD    wStyle   = 0;
    RECT     windowRect;
-   HINSTANCE hInstance = GetModuleHandle(NULL);
+   HINSTANCE hInstance = GetModuleHandle ( NULL );
 
 
    wndclass.style         = CS_OWNDC;
-   wndclass.lpfnWndProc   = (WNDPROC)ESWindowProc; 
-   wndclass.hInstance     = hInstance; 
-   wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH); 
-   wndclass.lpszClassName = "opengles3.0"; 
+   wndclass.lpfnWndProc   = ( WNDPROC ) ESWindowProc;
+   wndclass.hInstance     = hInstance;
+   wndclass.hbrBackground = ( HBRUSH ) GetStockObject ( BLACK_BRUSH );
+   wndclass.lpszClassName = "opengles3.0";
 
-   if (!RegisterClass (&wndclass) ) 
-      return FALSE; 
+   if ( !RegisterClass ( &wndclass ) )
+   {
+      return FALSE;
+   }
 
    wStyle = WS_VISIBLE | WS_POPUP | WS_BORDER | WS_SYSMENU | WS_CAPTION;
-   
+
    // Adjust the window rectangle so that the client area has
    // the correct number of pixels
    windowRect.left = 0;
@@ -147,26 +149,28 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
 
 
 
-   esContext->eglNativeWindow = CreateWindow(
-                         "opengles3.0",
-                         title,
-                         wStyle,
-                         0,
-                         0,
-                         windowRect.right - windowRect.left,
-                         windowRect.bottom - windowRect.top,
-                         NULL,
-                         NULL,
-                         hInstance,
-                         NULL);
+   esContext->eglNativeWindow = CreateWindow (
+                                   "opengles3.0",
+                                   title,
+                                   wStyle,
+                                   0,
+                                   0,
+                                   windowRect.right - windowRect.left,
+                                   windowRect.bottom - windowRect.top,
+                                   NULL,
+                                   NULL,
+                                   hInstance,
+                                   NULL );
 
-   // Set the ESContext* to the GWL_USERDATA so that it is available to the 
+   // Set the ESContext* to the GWL_USERDATA so that it is available to the
    // ESWindowProc
-   SetWindowLongPtr (  esContext->eglNativeWindow, GWL_USERDATA, (LONG) (LONG_PTR) esContext );
+   SetWindowLongPtr (  esContext->eglNativeWindow, GWL_USERDATA, ( LONG ) ( LONG_PTR ) esContext );
 
 
    if ( esContext->eglNativeWindow == NULL )
+   {
       return GL_FALSE;
+   }
 
    ShowWindow ( esContext->eglNativeWindow, TRUE );
 
@@ -183,32 +187,36 @@ void WinLoop ( ESContext *esContext )
    MSG msg = { 0 };
    int done = 0;
    DWORD lastTime = GetTickCount();
-   
-   while (!done)
+
+   while ( !done )
    {
-      int gotMsg = (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) != 0);
+      int gotMsg = ( PeekMessage ( &msg, NULL, 0, 0, PM_REMOVE ) != 0 );
       DWORD curTime = GetTickCount();
-      float deltaTime = (float)( curTime - lastTime ) / 1000.0f;
+      float deltaTime = ( float ) ( curTime - lastTime ) / 1000.0f;
       lastTime = curTime;
 
       if ( gotMsg )
       {
-         if (msg.message==WM_QUIT)
+         if ( msg.message == WM_QUIT )
          {
-             done=1; 
+            done = 1;
          }
          else
          {
-             TranslateMessage(&msg); 
-             DispatchMessage(&msg); 
+            TranslateMessage ( &msg );
+            DispatchMessage ( &msg );
          }
       }
       else
-         SendMessage( esContext->eglNativeWindow, WM_PAINT, 0, 0 );
+      {
+         SendMessage ( esContext->eglNativeWindow, WM_PAINT, 0, 0 );
+      }
 
       // Call update function if registered
       if ( esContext->updateFunc != NULL )
+      {
          esContext->updateFunc ( esContext, deltaTime );
+      }
    }
 }
 
@@ -216,7 +224,7 @@ void WinLoop ( ESContext *esContext )
 //  Global extern.  The application must declsare this function
 //  that runs the application.
 //
-extern int esMain( ESContext *esContext );
+extern int esMain ( ESContext *esContext );
 
 ///
 //  main()
@@ -227,18 +235,24 @@ int main ( int argc, char *argv[] )
 {
    ESContext esContext;
 
-   memset( &esContext, 0, sizeof( ESContext ) );
+   memset ( &esContext, 0, sizeof ( ESContext ) );
 
    if ( esMain ( &esContext ) != GL_TRUE )
-      return 1;   
-   
+   {
+      return 1;
+   }
+
    WinLoop ( &esContext );
 
    if ( esContext.shutdownFunc != NULL )
-      esContext.shutdownFunc( &esContext );
+   {
+      esContext.shutdownFunc ( &esContext );
+   }
 
    if ( esContext.userData != NULL )
-	   free ( esContext.userData );
+   {
+      free ( esContext.userData );
+   }
 
    return 0;
 }
