@@ -126,7 +126,7 @@ int Init ( ESContext *esContext )
    // Load the texture
    userData->textureId = CreateSimpleTexture2D ();
 
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    return TRUE;
 }
 

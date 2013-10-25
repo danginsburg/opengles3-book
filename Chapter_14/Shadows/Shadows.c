@@ -361,7 +361,7 @@ int Init ( ESContext *esContext )
       return FALSE;
    }
 
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
 
    // disable culling
    glDisable ( GL_CULL_FACE );
@@ -460,7 +460,7 @@ void Draw ( ESContext *esContext )
    
    // Clear the color and depth buffers
    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
 
    // Use the scene program object
    glUseProgram ( userData->sceneProgramObject );

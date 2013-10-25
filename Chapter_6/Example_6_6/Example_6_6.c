@@ -96,7 +96,7 @@ int Init ( ESContext *esContext )
    userData->vboIds[2] = 0;
 
 
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    return GL_TRUE;
 }
 
