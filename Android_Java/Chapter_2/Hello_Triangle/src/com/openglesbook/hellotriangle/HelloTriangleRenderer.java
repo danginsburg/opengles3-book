@@ -162,7 +162,7 @@ public class HelloTriangleRenderer implements GLSurfaceView.Renderer
       // Store the program object
       mProgramObject = programObject;
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    // /

@@ -138,7 +138,7 @@ public class VAORenderer implements GLSurfaceView.Renderer
       // Reset to the default VAO
       GLES30.glBindVertexArray ( 0 );
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    // /

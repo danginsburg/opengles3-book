@@ -155,7 +155,7 @@ int Init ( ESContext *esContext )
    }
    glBindBuffer ( GL_ARRAY_BUFFER, 0 );
 
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    return GL_TRUE;
 }
 

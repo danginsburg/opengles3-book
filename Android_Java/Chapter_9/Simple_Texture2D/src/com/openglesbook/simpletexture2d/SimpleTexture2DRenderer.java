@@ -144,7 +144,7 @@ public class SimpleTexture2DRenderer implements GLSurfaceView.Renderer
       // Load the texture
       mTextureId = createSimpleTexture2D ();
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    // /

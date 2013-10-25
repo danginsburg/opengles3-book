@@ -159,7 +159,7 @@ int Init ( ESContext *esContext )
                                         NULL, &userData->indices );
 
 
-   glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    return TRUE;
 }
 
