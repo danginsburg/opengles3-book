@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -31,7 +31,7 @@
 //
 // esUtil_Android.c
 //
-//    This file contains the Android implementation of the windowing functions. 
+//    This file contains the Android implementation of the windowing functions.
 
 
 ///
@@ -58,7 +58,7 @@ static float GetCurrentTime()
 {
    struct timespec clockRealTime;
    clock_gettime ( CLOCK_MONOTONIC, &clockRealTime );
-   double curTimeInSeconds = clockRealTime.tv_sec + (double) clockRealTime.tv_nsec / 1e9;
+   double curTimeInSeconds = clockRealTime.tv_sec + ( double ) clockRealTime.tv_nsec / 1e9;
    return ( float ) curTimeInSeconds;
 }
 
@@ -67,14 +67,16 @@ static float GetCurrentTime()
 //
 //    Android callback for onAppCmd
 //
-static void HandleCommand( struct android_app *pApp, int32_t cmd )
+static void HandleCommand ( struct android_app *pApp, int32_t cmd )
 {
    ESContext *esContext = ( ESContext * ) pApp->userData;
-   switch( cmd )
+
+   switch ( cmd )
    {
       case APP_CMD_SAVE_STATE:
          // the OS asked us to save the state of the app
          break;
+
       case APP_CMD_INIT_WINDOW:
 
          esContext->eglNativeDisplay = EGL_DEFAULT_DISPLAY;
@@ -83,22 +85,31 @@ static void HandleCommand( struct android_app *pApp, int32_t cmd )
          // Call the main entrypoint for the app
          if ( esMain ( esContext ) != GL_TRUE )
          {
-            exit( 0 ); //@TEMP better way to exit?
+            exit ( 0 ); //@TEMP better way to exit?
          }
+
          break;
+
       case APP_CMD_TERM_WINDOW:
+
          // Cleanup on shutdown
          if ( esContext->shutdownFunc != NULL )
-            esContext->shutdownFunc( esContext );
-         
-         if ( esContext->userData != NULL )
-            free ( esContext->userData );
+         {
+            esContext->shutdownFunc ( esContext );
+         }
 
-         memset ( esContext, 0, sizeof( ESContext ) );
+         if ( esContext->userData != NULL )
+         {
+            free ( esContext->userData );
+         }
+
+         memset ( esContext, 0, sizeof ( ESContext ) );
          break;
+
       case APP_CMD_LOST_FOCUS:
          // if the app lost focus, avoid unnecessary processing (like monitoring the accelerometer)
          break;
+
       case APP_CMD_GAINED_FOCUS:
          // bring back a certain functionality, like monitoring the accelerometer
          break;
@@ -109,7 +120,7 @@ static void HandleCommand( struct android_app *pApp, int32_t cmd )
 //  Global extern.  The application must declare this function
 //  that runs the application.
 //
-extern int esMain( ESContext *esContext );
+extern int esMain ( ESContext *esContext );
 
 //////////////////////////////////////////////////////////////////
 //
@@ -131,26 +142,27 @@ void android_main ( struct android_app *pApp )
    app_dummy();
 
    // Initialize the context
-   memset( &esContext, 0, sizeof( ESContext ) );
+   memset ( &esContext, 0, sizeof ( ESContext ) );
 
-   esContext.platformData = (void *) pApp->activity->assetManager;
-   
+   esContext.platformData = ( void * ) pApp->activity->assetManager;
+
    pApp->onAppCmd = HandleCommand;
    pApp->userData = &esContext;
 
    lastTime = GetCurrentTime();
-   while (1)
+
+   while ( 1 )
    {
       int ident;
       int events;
       struct android_poll_source *pSource;
 
-      while ( ( ident = ALooper_pollAll(0, NULL, &events, (void**)&pSource) ) >= 0 )
+      while ( ( ident = ALooper_pollAll ( 0, NULL, &events, ( void ** ) &pSource ) ) >= 0 )
       {
-         
-         if (pSource != NULL)
+
+         if ( pSource != NULL )
          {
-            pSource->process( pApp, pSource );
+            pSource->process ( pApp, pSource );
          }
 
          if ( pApp->destroyRequested != 0 )
@@ -161,7 +173,9 @@ void android_main ( struct android_app *pApp )
       }
 
       if ( esContext.eglNativeWindow == NULL )
+      {
          continue;
+      }
 
       // Call app update function
       if ( esContext.updateFunc != NULL )
@@ -174,8 +188,8 @@ void android_main ( struct android_app *pApp )
 
       if ( esContext.drawFunc != NULL )
       {
-         esContext.drawFunc( &esContext );
-         eglSwapBuffers( esContext.eglDisplay, esContext.eglSurface );
+         esContext.drawFunc ( &esContext );
+         eglSwapBuffers ( esContext.eglDisplay, esContext.eglSurface );
       }
    }
 }

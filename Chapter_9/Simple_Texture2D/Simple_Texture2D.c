@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -32,7 +32,7 @@
 // Simple_Texture2D.c
 //
 //    This is a simple example that draws a quad with a 2D
-//    texture image. The purpose of this example is to demonstrate 
+//    texture image. The purpose of this example is to demonstrate
 //    the basics of 2D texturing
 //
 #include <stdlib.h>
@@ -58,10 +58,10 @@ GLuint CreateSimpleTexture2D( )
 {
    // Texture object handle
    GLuint textureId;
-   
+
    // 2x2 Image, 3 bytes per pixel (R, G, B)
    GLubyte pixels[4 * 3] =
-   {  
+   {
       255,   0,   0, // Red
         0, 255,   0, // Green
         0,   0, 255, // Blue
@@ -105,7 +105,7 @@ int Init ( ESContext *esContext )
       "   gl_Position = a_position;               \n"
       "   v_texCoord = a_texCoord;                \n"
       "}                                          \n";
-   
+
    char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
@@ -146,10 +146,10 @@ void Draw ( ESContext *esContext )
                             1.0f,  0.0f         // TexCoord 3
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
-      
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -157,11 +157,11 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glVertexAttribPointer ( 0, 3, GL_FLOAT, 
-                           GL_FALSE, 5 * sizeof(GLfloat), vVertices );
+   glVertexAttribPointer ( 0, 3, GL_FLOAT,
+                           GL_FALSE, 5 * sizeof ( GLfloat ), vVertices );
    // Load the texture coordinate
    glVertexAttribPointer ( 1, 2, GL_FLOAT,
-                           GL_FALSE, 5 * sizeof(GLfloat), &vVertices[3] );
+                           GL_FALSE, 5 * sizeof ( GLfloat ), &vVertices[3] );
 
    glEnableVertexAttribArray ( 0 );
    glEnableVertexAttribArray ( 1 );
@@ -193,12 +193,14 @@ void ShutDown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "Simple Texture 2D", 320, 240, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterShutdownFunc ( esContext, ShutDown );

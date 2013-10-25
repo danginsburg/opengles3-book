@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -56,8 +56,8 @@ typedef struct
 
 int Init ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
-   const char vShaderStr[] =  
+   UserData *userData = esContext->userData;
+   const char vShaderStr[] =
       "#version 300 es                            \n"
       "layout(location = 0) in vec4 a_position;   \n"
       "layout(location = 1) in vec4 a_color;      \n"
@@ -68,7 +68,7 @@ int Init ( ESContext *esContext )
       "    gl_Position = a_position;              \n"
       "}";
 
-   
+
    const char fShaderStr[] =
       "#version 300 es            \n"
       "precision mediump float;   \n"
@@ -83,9 +83,11 @@ int Init ( ESContext *esContext )
 
    // Create the program object
    programObject = esLoadProgram ( vShaderStr, fShaderStr );
-   
+
    if ( programObject == 0 )
+   {
       return GL_FALSE;
+   }
 
    // Store the program object
    userData->programObject = programObject;
@@ -98,16 +100,16 @@ int Init ( ESContext *esContext )
 
 
 
-void DrawPrimitiveWithVBOsMapBuffers(ESContext *esContext, 
-                           GLint numVertices, GLfloat *vtxBuf,
-                           GLint vtxStride, GLint numIndices, 
-                           GLushort *indices)
+void DrawPrimitiveWithVBOsMapBuffers ( ESContext *esContext,
+                                       GLint numVertices, GLfloat *vtxBuf,
+                                       GLint vtxStride, GLint numIndices,
+                                       GLushort *indices )
 {
-   UserData *userData = (UserData*) esContext->userData;
-   GLuint   offset = 0; 
+   UserData *userData = esContext->userData;
+   GLuint   offset = 0;
 
-   // vboIds[0] - used to store vertex attribute data 
-   // vboIds[l] - used to store element indices 
+   // vboIds[0] - used to store vertex attribute data
+   // vboIds[l] - used to store element indices
    if ( userData->vboIds[0] == 0 && userData->vboIds[1] == 0 )
    {
       GLfloat *vtxMappedBuf;
@@ -115,17 +117,18 @@ void DrawPrimitiveWithVBOsMapBuffers(ESContext *esContext,
 
       // Only allocate on the first draw
       glGenBuffers ( 2, userData->vboIds );
-    
+
       glBindBuffer ( GL_ARRAY_BUFFER, userData->vboIds[0] );
       glBufferData ( GL_ARRAY_BUFFER, vtxStride * numVertices,
                      NULL, GL_STATIC_DRAW );
 
-      vtxMappedBuf = (GLfloat*) 
-         glMapBufferRange ( GL_ARRAY_BUFFER, 0, vtxStride * numVertices, 
-                            GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT );
+      vtxMappedBuf = ( GLfloat * )
+                     glMapBufferRange ( GL_ARRAY_BUFFER, 0, vtxStride * numVertices,
+                                        GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT );
+
       if ( vtxMappedBuf == NULL )
       {
-         esLogMessage( "Error mapping vertex buffer object." );
+         esLogMessage ( "Error mapping vertex buffer object." );
          return;
       }
 
@@ -133,108 +136,111 @@ void DrawPrimitiveWithVBOsMapBuffers(ESContext *esContext,
       memcpy ( vtxMappedBuf, vtxBuf, vtxStride * numVertices );
 
       // Unmap the buffer
-      if ( glUnmapBuffer( GL_ARRAY_BUFFER ) == GL_FALSE )
+      if ( glUnmapBuffer ( GL_ARRAY_BUFFER ) == GL_FALSE )
       {
-         esLogMessage( "Error unmapping array buffer object." );
+         esLogMessage ( "Error unmapping array buffer object." );
          return;
       }
 
       // Map the index buffer
       glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->vboIds[1] );
       glBufferData ( GL_ELEMENT_ARRAY_BUFFER,
-                     sizeof(GLushort) * numIndices,
+                     sizeof ( GLushort ) * numIndices,
                      NULL, GL_STATIC_DRAW );
-      idxMappedBuf = (GLushort*) 
-         glMapBufferRange ( GL_ELEMENT_ARRAY_BUFFER, 0, sizeof(GLushort) * numIndices, 
-                            GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT );
+      idxMappedBuf = ( GLushort * )
+                     glMapBufferRange ( GL_ELEMENT_ARRAY_BUFFER, 0, sizeof ( GLushort ) * numIndices,
+                                        GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT );
+
       if ( idxMappedBuf == NULL )
       {
-         esLogMessage( "Error mapping element array buffer object." );
+         esLogMessage ( "Error mapping element array buffer object." );
          return;
       }
 
       // Copy the data into the mapped buffer
-      memcpy ( idxMappedBuf, indices, sizeof(GLushort) * numIndices );
+      memcpy ( idxMappedBuf, indices, sizeof ( GLushort ) * numIndices );
 
       // Unmap the buffer
-      if ( glUnmapBuffer( GL_ELEMENT_ARRAY_BUFFER ) == GL_FALSE )
+      if ( glUnmapBuffer ( GL_ELEMENT_ARRAY_BUFFER ) == GL_FALSE )
       {
-         esLogMessage( "Error unmapping element array buffer object." );
+         esLogMessage ( "Error unmapping element array buffer object." );
          return;
       }
    }
 
-   glBindBuffer(GL_ARRAY_BUFFER, userData->vboIds[0]);
-   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, userData->vboIds[1]); 
+   glBindBuffer ( GL_ARRAY_BUFFER, userData->vboIds[0] );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, userData->vboIds[1] );
 
-   glEnableVertexAttribArray(VERTEX_POS_INDX); 
-   glEnableVertexAttribArray(VERTEX_COLOR_INDX); 
+   glEnableVertexAttribArray ( VERTEX_POS_INDX );
+   glEnableVertexAttribArray ( VERTEX_COLOR_INDX );
 
-   glVertexAttribPointer(VERTEX_POS_INDX, VERTEX_POS_SIZE,
-                        GL_FLOAT, GL_FALSE, vtxStride, 
-                        (const void*)offset);
+   glVertexAttribPointer ( VERTEX_POS_INDX, VERTEX_POS_SIZE,
+                           GL_FLOAT, GL_FALSE, vtxStride,
+                           ( const void * ) offset );
 
-   offset += VERTEX_POS_SIZE * sizeof(GLfloat); 
-   glVertexAttribPointer(VERTEX_COLOR_INDX, 
-                        VERTEX_COLOR_SIZE,
-                        GL_FLOAT, GL_FALSE, vtxStride,
-                        (const void*)offset);
+   offset += VERTEX_POS_SIZE * sizeof ( GLfloat );
+   glVertexAttribPointer ( VERTEX_COLOR_INDX,
+                           VERTEX_COLOR_SIZE,
+                           GL_FLOAT, GL_FALSE, vtxStride,
+                           ( const void * ) offset );
 
-   glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT,
-                  0);
+   glDrawElements ( GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT,
+                    0 );
 
-   glDisableVertexAttribArray(VERTEX_POS_INDX); 
-   glDisableVertexAttribArray(VERTEX_COLOR_INDX); 
+   glDisableVertexAttribArray ( VERTEX_POS_INDX );
+   glDisableVertexAttribArray ( VERTEX_COLOR_INDX );
 
-   glBindBuffer(GL_ARRAY_BUFFER, 0);
-   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+   glBindBuffer ( GL_ARRAY_BUFFER, 0 );
+   glBindBuffer ( GL_ELEMENT_ARRAY_BUFFER, 0 );
 }
 
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
-   
+   UserData *userData = esContext->userData;
+
    // 3 vertices, with (x,y,z) ,(r, g, b, a) per-vertex
-   GLfloat vertices[3 * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE)] = 
-   {  
-       0.0f,  0.5f, 0.0f,        // v0
-       1.0f,  0.0f, 0.0f, 1.0f,  // c0
+   GLfloat vertices[3 * ( VERTEX_POS_SIZE + VERTEX_COLOR_SIZE )] =
+   {
+      0.0f,  0.5f, 0.0f,        // v0
+      1.0f,  0.0f, 0.0f, 1.0f,  // c0
       -0.5f, -0.5f, 0.0f,        // v1
-       0.0f,  1.0f, 0.0f, 1.0f,  // c1
-       0.5f, -0.5f, 0.0f,        // v2
-       0.0f,  0.0f, 1.0f, 1.0f,  // c2
+      0.0f,  1.0f, 0.0f, 1.0f,  // c1
+      0.5f, -0.5f, 0.0f,        // v2
+      0.0f,  0.0f, 1.0f, 1.0f,  // c2
    };
    // Index buffer data
    GLushort indices[3] = { 0, 1, 2 };
-      
-   glViewport ( 0, 0, esContext->width, esContext->height );   
+
+   glViewport ( 0, 0, esContext->width, esContext->height );
    glClear ( GL_COLOR_BUFFER_BIT );
    glUseProgram ( userData->programObject );
 
-   DrawPrimitiveWithVBOsMapBuffers ( esContext, 3, vertices, 
-      sizeof(GLfloat) * (VERTEX_POS_SIZE + VERTEX_COLOR_SIZE),
-      3, indices );
+   DrawPrimitiveWithVBOsMapBuffers ( esContext, 3, vertices,
+                                     sizeof ( GLfloat ) * ( VERTEX_POS_SIZE + VERTEX_COLOR_SIZE ),
+                                     3, indices );
 }
 
 void Shutdown ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
 
    glDeleteProgram ( userData->programObject );
    glDeleteBuffers ( 2, userData->vboIds );
 }
 
-int esMain( ESContext *esContext )
+int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "VertexBufferObjects", 320, 240, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }

@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -53,154 +53,160 @@ import android.os.SystemClock;
 public class SimpleVertexShaderRenderer implements GLSurfaceView.Renderer
 {
 
-    ///
-    // Constructor
-    //
-    public SimpleVertexShaderRenderer(Context context)
-    {
+   ///
+   // Constructor
+   //
+   public SimpleVertexShaderRenderer ( Context context )
+   {
 
-    }
+   }
 
-    ///
-    // Initialize the shader and program object
-    //
-    public void onSurfaceCreated(GL10 glUnused, EGLConfig config)
-    {
-    	String vShaderStr = 
-    			"#version 300 es 							 \n" +
-    			"uniform mat4 u_mvpMatrix;                   \n" +
-                "layout(location = 0) in vec4 a_position;    \n" +
-                "layout(location = 1) in vec4 a_color;       \n" +
-                "out vec4 v_color;                           \n" +
-                "void main()                                 \n" +
-                "{                                           \n" +
-                "   v_color = a_color;                       \n" +
-                "   gl_Position = u_mvpMatrix * a_position;  \n" +
-                "}                                           \n";
-        
-        String fShaderStr = 
-        		"#version 300 es 							 \n" +
-        		"precision mediump float;                    \n" +
-        		"in vec4 v_color;                            \n" +
-        		"layout(location = 0) out vec4 outColor;     \n" +
-                "void main()                                 \n" +
-                "{                                           \n" +
-                "  outColor = v_color;                       \n" +
-                "}                                           \n";
-        
-        // Load the shaders and get a linked program object
-        mProgramObject = ESShader.loadProgram(vShaderStr, fShaderStr);
+   ///
+   // Initialize the shader and program object
+   //
+   public void onSurfaceCreated ( GL10 glUnused, EGLConfig config )
+   {
+      String vShaderStr =
+         "#version 300 es 							 \n" +
+         "uniform mat4 u_mvpMatrix;                   \n" +
+         "layout(location = 0) in vec4 a_position;    \n" +
+         "layout(location = 1) in vec4 a_color;       \n" +
+         "out vec4 v_color;                           \n" +
+         "void main()                                 \n" +
+         "{                                           \n" +
+         "   v_color = a_color;                       \n" +
+         "   gl_Position = u_mvpMatrix * a_position;  \n" +
+         "}                                           \n";
 
-        // Get the uniform locations
-        mMVPLoc = GLES30.glGetUniformLocation(mProgramObject, "u_mvpMatrix");
+      String fShaderStr =
+         "#version 300 es 							 \n" +
+         "precision mediump float;                    \n" +
+         "in vec4 v_color;                            \n" +
+         "layout(location = 0) out vec4 outColor;     \n" +
+         "void main()                                 \n" +
+         "{                                           \n" +
+         "  outColor = v_color;                       \n" +
+         "}                                           \n";
 
-        // Generate the vertex data
-        mCube.genCube(1.0f);
+      // Load the shaders and get a linked program object
+      mProgramObject = ESShader.loadProgram ( vShaderStr, fShaderStr );
 
-        // Starting rotation angle for the cube
-        mAngle = 45.0f;
+      // Get the uniform locations
+      mMVPLoc = GLES30.glGetUniformLocation ( mProgramObject, "u_mvpMatrix" );
 
-        GLES30.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    }
+      // Generate the vertex data
+      mCube.genCube ( 1.0f );
 
-    private void update()
-    {
-        if (mLastTime == 0)
-            mLastTime = SystemClock.uptimeMillis();
-        long curTime = SystemClock.uptimeMillis();
-        long elapsedTime = curTime - mLastTime;
-        float deltaTime = elapsedTime / 1000.0f;
-        mLastTime = curTime;
+      // Starting rotation angle for the cube
+      mAngle = 45.0f;
 
-        ESTransform perspective = new ESTransform();
-        ESTransform modelview = new ESTransform();
-        float aspect;
+      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+   }
 
-        // Compute a rotation angle based on time to rotate the cube
-        mAngle += (deltaTime * 40.0f);
-        if (mAngle >= 360.0f)
-            mAngle -= 360.0f;
+   private void update()
+   {
+      if ( mLastTime == 0 )
+      {
+         mLastTime = SystemClock.uptimeMillis();
+      }
 
-        // Compute the window aspect ratio
-        aspect = (float) mWidth / (float) mHeight;
+      long curTime = SystemClock.uptimeMillis();
+      long elapsedTime = curTime - mLastTime;
+      float deltaTime = elapsedTime / 1000.0f;
+      mLastTime = curTime;
 
-        // Generate a perspective matrix with a 60 degree FOV
-        perspective.matrixLoadIdentity();
-        perspective.perspective(60.0f, aspect, 1.0f, 20.0f);
+      ESTransform perspective = new ESTransform();
+      ESTransform modelview = new ESTransform();
+      float aspect;
 
-        // Generate a model view matrix to rotate/translate the cube
-        modelview.matrixLoadIdentity();
+      // Compute a rotation angle based on time to rotate the cube
+      mAngle += ( deltaTime * 40.0f );
 
-        // Translate away from the viewer
-        modelview.translate(0.0f, 0.0f, -2.0f);
+      if ( mAngle >= 360.0f )
+      {
+         mAngle -= 360.0f;
+      }
 
-        // Rotate the cube
-        modelview.rotate(mAngle, 1.0f, 0.0f, 1.0f);
+      // Compute the window aspect ratio
+      aspect = ( float ) mWidth / ( float ) mHeight;
 
-        // Compute the final MVP by multiplying the
-        // modevleiw and perspective matrices together
-        mMVPMatrix.matrixMultiply(modelview.get(), perspective.get());
-    }
+      // Generate a perspective matrix with a 60 degree FOV
+      perspective.matrixLoadIdentity();
+      perspective.perspective ( 60.0f, aspect, 1.0f, 20.0f );
 
-    ///
-    // Draw a triangle using the shader pair created in onSurfaceCreated()
-    //
-    public void onDrawFrame(GL10 glUnused)
-    {
-        update();
+      // Generate a model view matrix to rotate/translate the cube
+      modelview.matrixLoadIdentity();
 
-        // Set the viewport
-        GLES30.glViewport(0, 0, mWidth, mHeight);
+      // Translate away from the viewer
+      modelview.translate ( 0.0f, 0.0f, -2.0f );
 
-        // Clear the color buffer
-        GLES30.glClear(GLES30.GL_COLOR_BUFFER_BIT);
+      // Rotate the cube
+      modelview.rotate ( mAngle, 1.0f, 0.0f, 1.0f );
 
-        // Use the program object
-        GLES30.glUseProgram(mProgramObject);
+      // Compute the final MVP by multiplying the
+      // modevleiw and perspective matrices together
+      mMVPMatrix.matrixMultiply ( modelview.get(), perspective.get() );
+   }
 
-        // Load the vertex data
-        GLES30.glVertexAttribPointer(0, 3, GLES30.GL_FLOAT, false,
-                0, mCube.getVertices());
-        GLES30.glEnableVertexAttribArray(0);
-        
-     // Set the vertex color to red
-        GLES30.glVertexAttrib4f( 1, 1.0f, 0.0f, 0.0f, 1.0f );
+   ///
+   // Draw a triangle using the shader pair created in onSurfaceCreated()
+   //
+   public void onDrawFrame ( GL10 glUnused )
+   {
+      update();
 
-        // Load the MVP matrix
-        GLES30.glUniformMatrix4fv(mMVPLoc, 1, false,
-                mMVPMatrix.getAsFloatBuffer());
+      // Set the viewport
+      GLES30.glViewport ( 0, 0, mWidth, mHeight );
 
-        // Draw the cube
-        GLES30.glDrawElements(GLES30.GL_TRIANGLES, mCube.getNumIndices(),
-                GLES30.GL_UNSIGNED_SHORT, mCube.getIndices());
-    }
+      // Clear the color buffer
+      GLES30.glClear ( GLES30.GL_COLOR_BUFFER_BIT );
 
-    ///
-    // Handle surface changes
-    //
-    public void onSurfaceChanged(GL10 glUnused, int width, int height)
-    {
-        mWidth = width;
-        mHeight = height;
-    }
+      // Use the program object
+      GLES30.glUseProgram ( mProgramObject );
 
-    // Handle to a program object
-    private int mProgramObject;
-    
-    // Uniform locations
-    private int mMVPLoc;
+      // Load the vertex data
+      GLES30.glVertexAttribPointer ( 0, 3, GLES30.GL_FLOAT, false,
+                                     0, mCube.getVertices() );
+      GLES30.glEnableVertexAttribArray ( 0 );
 
-    // Vertex data
-    private ESShapes mCube = new ESShapes();
+      // Set the vertex color to red
+      GLES30.glVertexAttrib4f ( 1, 1.0f, 0.0f, 0.0f, 1.0f );
 
-    // Rotation angle
-    private float mAngle;
+      // Load the MVP matrix
+      GLES30.glUniformMatrix4fv ( mMVPLoc, 1, false,
+                                  mMVPMatrix.getAsFloatBuffer() );
 
-    // MVP matrix
-    private ESTransform mMVPMatrix = new ESTransform();
+      // Draw the cube
+      GLES30.glDrawElements ( GLES30.GL_TRIANGLES, mCube.getNumIndices(),
+                              GLES30.GL_UNSIGNED_SHORT, mCube.getIndices() );
+   }
 
-    // Additional Member variables
-    private int mWidth;
-    private int mHeight;
-    private long mLastTime = 0;
+   ///
+   // Handle surface changes
+   //
+   public void onSurfaceChanged ( GL10 glUnused, int width, int height )
+   {
+      mWidth = width;
+      mHeight = height;
+   }
+
+   // Handle to a program object
+   private int mProgramObject;
+
+   // Uniform locations
+   private int mMVPLoc;
+
+   // Vertex data
+   private ESShapes mCube = new ESShapes();
+
+   // Rotation angle
+   private float mAngle;
+
+   // MVP matrix
+   private ESTransform mMVPMatrix = new ESTransform();
+
+   // Additional Member variables
+   private int mWidth;
+   private int mHeight;
+   private long mLastTime = 0;
 }

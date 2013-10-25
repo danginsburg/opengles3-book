@@ -95,7 +95,7 @@ int InitMVP ( ESContext *esContext )
    ESMatrix model;
    ESMatrix view;
    float    aspect;
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    
    // Compute the window aspect ratio
    aspect = (GLfloat) esContext->width / (GLfloat) esContext->height;
@@ -177,7 +177,7 @@ int InitMVP ( ESContext *esContext )
 
 int InitShadowMap ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLenum none = GL_NONE;
    GLint defaultFramebuffer = 0;
 
@@ -232,7 +232,7 @@ int Init ( ESContext *esContext )
    GLfloat *positions;
    GLuint *indices;
 
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    const char vShadowMapShaderStr[] =  
       "#version 300 es                                  \n"
       "uniform mat4 u_mvpLightMatrix;                   \n"
@@ -379,7 +379,7 @@ void DrawScene ( ESContext *esContext,
                  GLint mvpLoc, 
                  GLint mvpLightLoc )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
  
    // Draw the ground
    // Load the vertex position
@@ -422,7 +422,7 @@ void DrawScene ( ESContext *esContext,
 
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLint defaultFramebuffer = 0;
 
    // Initialize matrices
@@ -480,7 +480,7 @@ void Draw ( ESContext *esContext )
 //
 void Shutdown ( ESContext *esContext )
 {
-   UserData *userData = (UserData *) esContext->userData;
+   UserData *userData = esContext->userData;
 
    glDeleteBuffers( 1, &userData->groundPositionVBO );
    glDeleteBuffers( 1, &userData->groundIndicesIBO );
@@ -507,7 +507,9 @@ int esMain ( ESContext *esContext )
    esCreateWindow ( esContext, "Shadow Rendering", 500, 500, ES_WINDOW_RGB | ES_WINDOW_DEPTH );
    
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );

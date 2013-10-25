@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -57,27 +57,36 @@ typedef struct
 ///
 //  From an RGB8 source image, generate the next level mipmap
 //
-GLboolean GenMipMap2D( GLubyte *src, GLubyte **dst, int srcWidth, int srcHeight, int *dstWidth, int *dstHeight )
+GLboolean GenMipMap2D ( GLubyte *src, GLubyte **dst, int srcWidth, int srcHeight, int *dstWidth, int *dstHeight )
 {
    int x,
        y;
    int texelSize = 3;
 
    *dstWidth = srcWidth / 2;
+
    if ( *dstWidth <= 0 )
+   {
       *dstWidth = 1;
+   }
 
    *dstHeight = srcHeight / 2;
-   if ( *dstHeight <= 0 )
-      *dstHeight = 1;
 
-   *dst = malloc ( sizeof(GLubyte) * texelSize * (*dstWidth) * (*dstHeight) );
+   if ( *dstHeight <= 0 )
+   {
+      *dstHeight = 1;
+   }
+
+   *dst = malloc ( sizeof ( GLubyte ) * texelSize * ( *dstWidth ) * ( *dstHeight ) );
+
    if ( *dst == NULL )
+   {
       return GL_FALSE;
+   }
 
    for ( y = 0; y < *dstHeight; y++ )
    {
-      for( x = 0; x < *dstWidth; x++ )
+      for ( x = 0; x < *dstWidth; x++ )
       {
          int srcIndex[4];
          float r = 0.0f,
@@ -87,14 +96,14 @@ GLboolean GenMipMap2D( GLubyte *src, GLubyte **dst, int srcWidth, int srcHeight,
 
          // Compute the offsets for 2x2 grid of pixels in previous
          // image to perform box filter
-         srcIndex[0] = 
-            (((y * 2) * srcWidth) + (x * 2)) * texelSize;
-         srcIndex[1] = 
-            (((y * 2) * srcWidth) + (x * 2 + 1)) * texelSize; 
-         srcIndex[2] = 
-            ((((y * 2) + 1) * srcWidth) + (x * 2)) * texelSize;
-         srcIndex[3] = 
-            ((((y * 2) + 1) * srcWidth) + (x * 2 + 1)) * texelSize;
+         srcIndex[0] =
+            ( ( ( y * 2 ) * srcWidth ) + ( x * 2 ) ) * texelSize;
+         srcIndex[1] =
+            ( ( ( y * 2 ) * srcWidth ) + ( x * 2 + 1 ) ) * texelSize;
+         srcIndex[2] =
+            ( ( ( ( y * 2 ) + 1 ) * srcWidth ) + ( x * 2 ) ) * texelSize;
+         srcIndex[3] =
+            ( ( ( ( y * 2 ) + 1 ) * srcWidth ) + ( x * 2 + 1 ) ) * texelSize;
 
          // Sum all pixels
          for ( sample = 0; sample < 4; sample++ )
@@ -110,9 +119,9 @@ GLboolean GenMipMap2D( GLubyte *src, GLubyte **dst, int srcWidth, int srcHeight,
          b /= 4.0;
 
          // Store resulting pixels
-         (*dst)[ ( y * (*dstWidth) + x ) * texelSize ] = (GLubyte)( r );
-         (*dst)[ ( y * (*dstWidth) + x ) * texelSize + 1] = (GLubyte)( g );
-         (*dst)[ ( y * (*dstWidth) + x ) * texelSize + 2] = (GLubyte)( b );
+         ( *dst ) [ ( y * ( *dstWidth ) + x ) * texelSize ] = ( GLubyte ) ( r );
+         ( *dst ) [ ( y * ( *dstWidth ) + x ) * texelSize + 1] = ( GLubyte ) ( g );
+         ( *dst ) [ ( y * ( *dstWidth ) + x ) * texelSize + 2] = ( GLubyte ) ( b );
       }
    }
 
@@ -122,14 +131,16 @@ GLboolean GenMipMap2D( GLubyte *src, GLubyte **dst, int srcWidth, int srcHeight,
 ///
 //  Generate an RGB8 checkerboard image
 //
-GLubyte* GenCheckImage( int width, int height, int checkSize )
+GLubyte *GenCheckImage ( int width, int height, int checkSize )
 {
    int x,
        y;
-   GLubyte *pixels = malloc( width * height * 3 );
-   
+   GLubyte *pixels = malloc ( width * height * 3 );
+
    if ( pixels == NULL )
+   {
       return NULL;
+   }
 
    for ( y = 0; y < height; y++ )
       for ( x = 0; x < width; x++ )
@@ -148,16 +159,16 @@ GLubyte* GenCheckImage( int width, int height, int checkSize )
             rColor = 255 * ( 1 - ( ( y / checkSize ) % 2 ) );
          }
 
-         pixels[(y * width + x) * 3] = rColor;
-         pixels[(y * width + x) * 3 + 1] = 0;
-         pixels[(y * width + x) * 3 + 2] = bColor; 
-      } 
+         pixels[ ( y * width + x ) * 3] = rColor;
+         pixels[ ( y * width + x ) * 3 + 1] = 0;
+         pixels[ ( y * width + x ) * 3 + 2] = bColor;
+      }
 
    return pixels;
 }
 
 ///
-// Create a mipmapped 2D texture image 
+// Create a mipmapped 2D texture image
 //
 GLuint CreateMipMappedTexture2D( )
 {
@@ -169,10 +180,13 @@ GLuint CreateMipMappedTexture2D( )
    GLubyte *pixels;
    GLubyte *prevImage;
    GLubyte *newImage;
-      
-   pixels = GenCheckImage( width, height, 8 );
+
+   pixels = GenCheckImage ( width, height, 8 );
+
    if ( pixels == NULL )
+   {
       return 0;
+   }
 
    // Generate a texture object
    glGenTextures ( 1, &textureId );
@@ -181,25 +195,25 @@ GLuint CreateMipMappedTexture2D( )
    glBindTexture ( GL_TEXTURE_2D, textureId );
 
    // Load mipmap level 0
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, width, height, 
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, width, height,
                   0, GL_RGB, GL_UNSIGNED_BYTE, pixels );
-   
+
    level = 1;
    prevImage = &pixels[0];
-   
+
    while ( width > 1 && height > 1 )
    {
       int newWidth,
           newHeight;
 
       // Generate the next mipmap level
-      GenMipMap2D( prevImage, &newImage, width, height, 
-                   &newWidth, &newHeight );
+      GenMipMap2D ( prevImage, &newImage, width, height,
+                    &newWidth, &newHeight );
 
       // Load the mipmap level
-      glTexImage2D( GL_TEXTURE_2D, level, GL_RGB, 
-                    newWidth, newHeight, 0, GL_RGB,
-                    GL_UNSIGNED_BYTE, newImage );
+      glTexImage2D ( GL_TEXTURE_2D, level, GL_RGB,
+                     newWidth, newHeight, 0, GL_RGB,
+                     GL_UNSIGNED_BYTE, newImage );
 
       // Free the previous image
       free ( prevImage );
@@ -242,7 +256,7 @@ int Init ( ESContext *esContext )
       "   gl_Position.x += u_offset;              \n"
       "   v_texCoord = a_texCoord;                \n"
       "}                                          \n";
-   
+
    char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
@@ -261,7 +275,7 @@ int Init ( ESContext *esContext )
    userData->samplerLoc = glGetUniformLocation ( userData->programObject, "s_texture" );
 
    // Get the offset location
-   userData->offsetLoc = glGetUniformLocation( userData->programObject, "u_offset" );
+   userData->offsetLoc = glGetUniformLocation ( userData->programObject, "u_offset" );
 
    // Load the texture
    userData->textureId = CreateMipMappedTexture2D ();
@@ -286,10 +300,10 @@ void Draw ( ESContext *esContext )
                             1.0f,  0.0f               // TexCoord 3
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
-      
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -297,11 +311,11 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glVertexAttribPointer ( 0, 4, GL_FLOAT, 
-                           GL_FALSE, 6 * sizeof(GLfloat), vVertices );
+   glVertexAttribPointer ( 0, 4, GL_FLOAT,
+                           GL_FALSE, 6 * sizeof ( GLfloat ), vVertices );
    // Load the texture coordinate
    glVertexAttribPointer ( 1, 2, GL_FLOAT,
-                           GL_FALSE, 6 * sizeof(GLfloat), &vVertices[4] );
+                           GL_FALSE, 6 * sizeof ( GLfloat ), &vVertices[4] );
 
    glEnableVertexAttribArray ( 0 );
    glEnableVertexAttribArray ( 1 );
@@ -315,7 +329,7 @@ void Draw ( ESContext *esContext )
 
    // Draw quad with nearest sampling
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-   glUniform1f ( userData->offsetLoc, -0.6f );   
+   glUniform1f ( userData->offsetLoc, -0.6f );
    glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, indices );
 
    // Draw quad with trilinear filtering
@@ -341,15 +355,17 @@ void ShutDown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "MipMap 2D", 320, 240, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterShutdownFunc ( esContext, ShutDown );
-   
+
    return GL_TRUE;
 }

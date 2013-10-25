@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -105,7 +105,7 @@ int Init ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
    int i;
-   
+
    char vShaderStr[] =
       "#version 300 es                                      \n"
       "uniform float u_time;                                \n"
@@ -129,7 +129,7 @@ int Init ( ESContext *esContext )
       "  v_lifetime = clamp ( v_lifetime, 0.0, 1.0 );       \n"
       "  gl_PointSize = ( v_lifetime * v_lifetime ) * 40.0; \n"
       "}";
-      
+
    char fShaderStr[] =
       "#version 300 es                                      \n"
       "precision mediump float;                             \n"
@@ -147,7 +147,7 @@ int Init ( ESContext *esContext )
 
    // Load the shaders and get a linked program object
    userData->programObject = esLoadProgram ( vShaderStr, fShaderStr );
-   
+
    // Get the uniform locations
    userData->timeLoc = glGetUniformLocation ( userData->programObject, "u_time" );
    userData->centerPositionLoc = glGetUniformLocation ( userData->programObject, "u_centerPosition" );
@@ -158,22 +158,23 @@ int Init ( ESContext *esContext )
 
    // Fill in particle data array
    srand ( 0 );
+
    for ( i = 0; i < NUM_PARTICLES; i++ )
    {
       float *particleData = &userData->particleData[i * PARTICLE_SIZE];
-   
+
       // Lifetime of particle
-      (*particleData++) = ( (float)(rand() % 10000) / 10000.0f );
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 10000.0f );
 
       // End position of particle
-      (*particleData++) = ( (float)(rand() % 10000) / 5000.0f ) - 1.0f;
-      (*particleData++) = ( (float)(rand() % 10000) / 5000.0f ) - 1.0f;
-      (*particleData++) = ( (float)(rand() % 10000) / 5000.0f ) - 1.0f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 5000.0f ) - 1.0f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 5000.0f ) - 1.0f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 5000.0f ) - 1.0f;
 
       // Start position of particle
-      (*particleData++) = ( (float)(rand() % 10000) / 40000.0f ) - 0.125f;
-      (*particleData++) = ( (float)(rand() % 10000) / 40000.0f ) - 0.125f;
-      (*particleData++) = ( (float)(rand() % 10000) / 40000.0f ) - 0.125f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 40000.0f ) - 0.125f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 40000.0f ) - 0.125f;
+      ( *particleData++ ) = ( ( float ) ( rand() % 10000 ) / 40000.0f ) - 0.125f;
 
    }
 
@@ -181,11 +182,12 @@ int Init ( ESContext *esContext )
    userData->time = 1.0f;
 
    userData->textureId = LoadTexture ( esContext->platformData, "smoke.tga" );
+
    if ( userData->textureId <= 0 )
    {
       return FALSE;
    }
-   
+
    return TRUE;
 }
 
@@ -195,7 +197,7 @@ int Init ( ESContext *esContext )
 void Update ( ESContext *esContext, float deltaTime )
 {
    UserData *userData = esContext->userData;
-  
+
    userData->time += deltaTime;
 
    glUseProgram ( userData->programObject );
@@ -208,16 +210,16 @@ void Update ( ESContext *esContext, float deltaTime )
       userData->time = 0.0f;
 
       // Pick a new start location and color
-      centerPos[0] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      centerPos[1] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      centerPos[2] = ( (float)(rand() % 10000) / 10000.0f ) - 0.5f;
-      
+      centerPos[0] = ( ( float ) ( rand() % 10000 ) / 10000.0f ) - 0.5f;
+      centerPos[1] = ( ( float ) ( rand() % 10000 ) / 10000.0f ) - 0.5f;
+      centerPos[2] = ( ( float ) ( rand() % 10000 ) / 10000.0f ) - 0.5f;
+
       glUniform3fv ( userData->centerPositionLoc, 1, &centerPos[0] );
 
       // Random color
-      color[0] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
-      color[1] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
-      color[2] = ( (float)(rand() % 10000) / 20000.0f ) + 0.5f;
+      color[0] = ( ( float ) ( rand() % 10000 ) / 20000.0f ) + 0.5f;
+      color[1] = ( ( float ) ( rand() % 10000 ) / 20000.0f ) + 0.5f;
+      color[2] = ( ( float ) ( rand() % 10000 ) / 20000.0f ) + 0.5f;
       color[3] = 0.5;
 
       glUniform4fv ( userData->colorLoc, 1, &color[0] );
@@ -233,10 +235,10 @@ void Update ( ESContext *esContext, float deltaTime )
 void Draw ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-      
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -244,19 +246,19 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex attributes
-   glVertexAttribPointer ( ATTRIBUTE_LIFETIME_LOCATION, 1, GL_FLOAT, 
-                           GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat), 
+   glVertexAttribPointer ( ATTRIBUTE_LIFETIME_LOCATION, 1, GL_FLOAT,
+                           GL_FALSE, PARTICLE_SIZE * sizeof ( GLfloat ),
                            userData->particleData );
-   
+
    glVertexAttribPointer ( ATTRIBUTE_ENDPOSITION_LOCATION, 3, GL_FLOAT,
-                           GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat),
+                           GL_FALSE, PARTICLE_SIZE * sizeof ( GLfloat ),
                            &userData->particleData[1] );
 
    glVertexAttribPointer ( ATTRIBUTE_STARTPOSITION_LOCATION, 3, GL_FLOAT,
-                           GL_FALSE, PARTICLE_SIZE * sizeof(GLfloat),
+                           GL_FALSE, PARTICLE_SIZE * sizeof ( GLfloat ),
                            &userData->particleData[4] );
 
-   
+
    glEnableVertexAttribArray ( ATTRIBUTE_LIFETIME_LOCATION );
    glEnableVertexAttribArray ( ATTRIBUTE_ENDPOSITION_LOCATION );
    glEnableVertexAttribArray ( ATTRIBUTE_STARTPOSITION_LOCATION );
@@ -272,7 +274,7 @@ void Draw ( ESContext *esContext )
    // Set the sampler texture unit to 0
    glUniform1i ( userData->samplerLoc, 0 );
 
-   glDrawArrays( GL_POINTS, 0, NUM_PARTICLES );
+   glDrawArrays ( GL_POINTS, 0, NUM_PARTICLES );
 }
 
 ///
@@ -292,16 +294,18 @@ void ShutDown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "ParticleSystem", 640, 480, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterUpdateFunc ( esContext, Update );
    esRegisterShutdownFunc ( esContext, ShutDown );
-   
+
    return GL_TRUE;
 }

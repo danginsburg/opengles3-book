@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -56,14 +56,16 @@ typedef struct
 ///
 //  Generate an RGB8 checkerboard image
 //
-GLubyte* GenCheckImage( int width, int height, int checkSize )
+GLubyte *GenCheckImage ( int width, int height, int checkSize )
 {
    int x,
        y;
-   GLubyte *pixels = malloc( width * height * 3 );
-   
+   GLubyte *pixels = malloc ( width * height * 3 );
+
    if ( pixels == NULL )
+   {
       return NULL;
+   }
 
    for ( y = 0; y < height; y++ )
       for ( x = 0; x < width; x++ )
@@ -82,16 +84,16 @@ GLubyte* GenCheckImage( int width, int height, int checkSize )
             rColor = 255 * ( 1 - ( ( y / checkSize ) % 2 ) );
          }
 
-         pixels[(y * width + x) * 3] = rColor;
-         pixels[(y * width + x) * 3 + 1] = 0;
-         pixels[(y * width + x) * 3 + 2] = bColor; 
-      } 
+         pixels[ ( y * width + x ) * 3] = rColor;
+         pixels[ ( y * width + x ) * 3 + 1] = 0;
+         pixels[ ( y * width + x ) * 3 + 2] = bColor;
+      }
 
    return pixels;
 }
 
 ///
-// Create a mipmapped 2D texture image 
+// Create a mipmapped 2D texture image
 //
 GLuint CreateTexture2D( )
 {
@@ -100,10 +102,13 @@ GLuint CreateTexture2D( )
    int    width = 256,
           height = 256;
    GLubyte *pixels;
-      
-   pixels = GenCheckImage( width, height, 64 );
+
+   pixels = GenCheckImage ( width, height, 64 );
+
    if ( pixels == NULL )
+   {
       return 0;
+   }
 
    // Generate a texture object
    glGenTextures ( 1, &textureId );
@@ -112,9 +117,9 @@ GLuint CreateTexture2D( )
    glBindTexture ( GL_TEXTURE_2D, textureId );
 
    // Load mipmap level 0
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, width, height, 
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_RGB, width, height,
                   0, GL_RGB, GL_UNSIGNED_BYTE, pixels );
-   
+
    // Set the filtering mode
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
@@ -142,7 +147,7 @@ int Init ( ESContext *esContext )
       "   gl_Position.x += u_offset;              \n"
       "   v_texCoord = a_texCoord;                \n"
       "}                                          \n";
-   
+
    char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
@@ -156,12 +161,12 @@ int Init ( ESContext *esContext )
 
    // Load the shaders and get a linked program object
    userData->programObject = esLoadProgram ( vShaderStr, fShaderStr );
-   
+
    // Get the sampler location
    userData->samplerLoc = glGetUniformLocation ( userData->programObject, "s_texture" );
 
    // Get the offset location
-   userData->offsetLoc = glGetUniformLocation( userData->programObject, "u_offset" );
+   userData->offsetLoc = glGetUniformLocation ( userData->programObject, "u_offset" );
 
    // Load the texture
    userData->textureId = CreateTexture2D ();
@@ -177,19 +182,19 @@ void Draw ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
    GLfloat vVertices[] = { -0.3f,  0.3f, 0.0f, 1.0f,  // Position 0
-                           -1.0f,  -1.0f,              // TexCoord 0 
+                           -1.0f,  -1.0f,              // TexCoord 0
                            -0.3f, -0.3f, 0.0f, 1.0f, // Position 1
                            -1.0f,  2.0f,              // TexCoord 1
-                            0.3f, -0.3f, 0.0f, 1.0f, // Position 2
-                            2.0f,  2.0f,              // TexCoord 2
-                            0.3f,  0.3f, 0.0f, 1.0f,  // Position 3
-                            2.0f,  -1.0f               // TexCoord 3
+                           0.3f, -0.3f, 0.0f, 1.0f, // Position 2
+                           2.0f,  2.0f,              // TexCoord 2
+                           0.3f,  0.3f, 0.0f, 1.0f,  // Position 3
+                           2.0f,  -1.0f               // TexCoord 3
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
-      
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -197,11 +202,11 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glVertexAttribPointer ( 0, 4, GL_FLOAT, 
-                           GL_FALSE, 6 * sizeof(GLfloat), vVertices );
+   glVertexAttribPointer ( 0, 4, GL_FLOAT,
+                           GL_FALSE, 6 * sizeof ( GLfloat ), vVertices );
    // Load the texture coordinate
    glVertexAttribPointer ( 1, 2, GL_FLOAT,
-                           GL_FALSE, 6 * sizeof(GLfloat), &vVertices[4] );
+                           GL_FALSE, 6 * sizeof ( GLfloat ), &vVertices[4] );
 
    glEnableVertexAttribArray ( 0 );
    glEnableVertexAttribArray ( 1 );
@@ -216,7 +221,7 @@ void Draw ( ESContext *esContext )
    // Draw quad with repeat wrap mode
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-   glUniform1f ( userData->offsetLoc, -0.7f );   
+   glUniform1f ( userData->offsetLoc, -0.7f );
    glDrawElements ( GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, indices );
 
    // Draw quad with clamp to edge wrap mode
@@ -249,12 +254,14 @@ void ShutDown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "TextureWrap", 640, 480, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterShutdownFunc ( esContext, ShutDown );

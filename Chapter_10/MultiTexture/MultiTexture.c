@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -55,13 +55,14 @@ typedef struct
 ///
 // Load texture from disk
 //
-GLuint LoadTexture ( void* ioContext, char *fileName )
+GLuint LoadTexture ( void *ioContext, char *fileName )
 {
    int width,
        height;
 
-   char *buffer = esLoadTGA (ioContext, fileName, &width, &height );
+   char *buffer = esLoadTGA ( ioContext, fileName, &width, &height );
    GLuint texId;
+
    if ( buffer == NULL )
    {
       esLogMessage ( "Error loading (%s) image.\n", fileName );
@@ -100,7 +101,7 @@ int Init ( ESContext *esContext )
       "   gl_Position = a_position;               \n"
       "   v_texCoord = a_texCoord;                \n"
       "}                                          \n";
-   
+
    char fShaderStr[] =
       "#version 300 es                                     \n"
       "precision mediump float;                            \n"
@@ -126,11 +127,13 @@ int Init ( ESContext *esContext )
    userData->lightMapLoc = glGetUniformLocation ( userData->programObject, "s_lightMap" );
 
    // Load the textures
-   userData->baseMapTexId = LoadTexture (esContext->platformData, "basemap.tga" );
-   userData->lightMapTexId = LoadTexture (esContext->platformData, "lightmap.tga" );
+   userData->baseMapTexId = LoadTexture ( esContext->platformData, "basemap.tga" );
+   userData->lightMapTexId = LoadTexture ( esContext->platformData, "lightmap.tga" );
 
    if ( userData->baseMapTexId == 0 || userData->lightMapTexId == 0 )
+   {
       return FALSE;
+   }
 
    glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
    return TRUE;
@@ -152,10 +155,10 @@ void Draw ( ESContext *esContext )
                             1.0f,  0.0f         // TexCoord 3
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
-      
+
    // Set the viewport
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    // Clear the color buffer
    glClear ( GL_COLOR_BUFFER_BIT );
 
@@ -163,11 +166,11 @@ void Draw ( ESContext *esContext )
    glUseProgram ( userData->programObject );
 
    // Load the vertex position
-   glVertexAttribPointer ( 0, 3, GL_FLOAT, 
-                           GL_FALSE, 5 * sizeof(GLfloat), vVertices );
+   glVertexAttribPointer ( 0, 3, GL_FLOAT,
+                           GL_FALSE, 5 * sizeof ( GLfloat ), vVertices );
    // Load the texture coordinate
    glVertexAttribPointer ( 1, 2, GL_FLOAT,
-                           GL_FALSE, 5 * sizeof(GLfloat), &vVertices[3] );
+                           GL_FALSE, 5 * sizeof ( GLfloat ), &vVertices[3] );
 
    glEnableVertexAttribArray ( 0 );
    glEnableVertexAttribArray ( 1 );
@@ -182,7 +185,7 @@ void Draw ( ESContext *esContext )
    // Bind the light map
    glActiveTexture ( GL_TEXTURE1 );
    glBindTexture ( GL_TEXTURE_2D, userData->lightMapTexId );
-   
+
    // Set the light map sampler to texture unit 1
    glUniform1i ( userData->lightMapLoc, 1 );
 
@@ -206,12 +209,14 @@ void ShutDown ( ESContext *esContext )
 
 int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "MultiTexture", 320, 240, ES_WINDOW_RGB );
-   
+
    if ( !Init ( esContext ) )
+   {
       return GL_FALSE;
+   }
 
    esRegisterDrawFunc ( esContext, Draw );
    esRegisterShutdownFunc ( esContext, ShutDown );

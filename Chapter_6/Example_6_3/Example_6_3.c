@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -49,8 +49,8 @@ typedef struct
 //
 int Init ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
-   const char vShaderStr[] =  
+   UserData *userData = esContext->userData;
+   const char vShaderStr[] =
       "#version 300 es                            \n"
       "layout(location = 0) in vec4 a_color;      \n"
       "layout(location = 1) in vec4 a_position;   \n"
@@ -61,7 +61,7 @@ int Init ( ESContext *esContext )
       "    gl_Position = a_position;              \n"
       "}";
 
-   
+
    const char fShaderStr[] =
       "#version 300 es            \n"
       "precision mediump float;   \n"
@@ -76,9 +76,11 @@ int Init ( ESContext *esContext )
 
    // Create the program object
    programObject = esLoadProgram ( vShaderStr, fShaderStr );
-   
+
    if ( programObject == 0 )
+   {
       return GL_FALSE;
+   }
 
    // Store the program object
    userData->programObject = programObject;
@@ -92,18 +94,18 @@ int Init ( ESContext *esContext )
 //
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = (UserData*) esContext->userData;
+   UserData *userData = esContext->userData;
    GLfloat color[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
    // 3 vertices, with (x,y,z) per-vertex
-   GLfloat vertexPos[3 * 3] = 
-   {  
-       0.0f,  0.5f, 0.0f, // v0
+   GLfloat vertexPos[3 * 3] =
+   {
+      0.0f,  0.5f, 0.0f, // v0
       -0.5f, -0.5f, 0.0f, // v1
-       0.5f, -0.5f, 0.0f  // v2
+      0.5f, -0.5f, 0.0f  // v2
    };
-      
+
    glViewport ( 0, 0, esContext->width, esContext->height );
-   
+
    glClear ( GL_COLOR_BUFFER_BIT );
 
    glUseProgram ( userData->programObject );
@@ -121,20 +123,22 @@ void Shutdown ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
 
-   glDeleteProgram( userData->programObject );
+   glDeleteProgram ( userData->programObject );
 }
 
-int esMain( ESContext *esContext )
+int esMain ( ESContext *esContext )
 {
-   esContext->userData = malloc ( sizeof( UserData ) );
+   esContext->userData = malloc ( sizeof ( UserData ) );
 
    esCreateWindow ( esContext, "Example 6-3", 320, 240, ES_WINDOW_RGB );
-   
-   if ( !Init ( esContext ) )
-      return GL_FALSE;
 
-   esRegisterShutdownFunc( esContext, Shutdown );
+   if ( !Init ( esContext ) )
+   {
+      return GL_FALSE;
+   }
+
+   esRegisterShutdownFunc ( esContext, Shutdown );
    esRegisterDrawFunc ( esContext, Draw );
-   
+
    return GL_TRUE;
 }
