@@ -131,7 +131,7 @@ public class MultiTextureRenderer implements GLSurfaceView.Renderer
       mBaseMapTexId = loadTextureFromAsset ( "textures/basemap.png" );
       mLightMapTexId = loadTextureFromAsset ( "textures/lightmap.png" );
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    // /

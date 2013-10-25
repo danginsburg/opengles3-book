@@ -100,7 +100,7 @@ public class SimpleVertexShaderRenderer implements GLSurfaceView.Renderer
       // Starting rotation angle for the cube
       mAngle = 45.0f;
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    private void update()

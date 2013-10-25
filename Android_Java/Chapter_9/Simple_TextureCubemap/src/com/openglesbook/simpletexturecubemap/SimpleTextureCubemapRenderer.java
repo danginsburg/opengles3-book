@@ -159,7 +159,7 @@ public class SimpleTextureCubemapRenderer implements GLSurfaceView.Renderer
       // Generate the vertex data
       mSphere.genSphere ( 20, 0.75f );
 
-      GLES30.glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
+      GLES30.glClearColor ( 1.0f, 1.0f, 1.0f, 0.0f );
    }
 
    ///
