@@ -195,9 +195,9 @@ int InitShadowMap ( ESContext *esContext )
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE );
    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL );
         
-   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16,
+   glTexImage2D ( GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24,
                   userData->shadowMapTextureWidth, userData->shadowMapTextureHeight, 
-                  0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL );
+                  0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL );
 
    glBindTexture ( GL_TEXTURE_2D, 0 );
 
@@ -444,7 +444,7 @@ void Draw ( ESContext *esContext )
 
    // reduce shadow rendering artifact
    glEnable ( GL_POLYGON_OFFSET_FILL );
-   glPolygonOffset( 4.0f, 100.0f );
+   glPolygonOffset( 5.0f, 100.0f );
 
    glUseProgram ( userData->shadowMapProgramObject );
    DrawScene ( esContext, userData->shadowMapMvpLoc, userData->shadowMapMvpLightLoc );
