@@ -100,25 +100,25 @@ __attribute__ ( ( packed ) )
 #ifndef __APPLE__
 
 ///
-// IsEGLKHRCreateContextSupported()
+// GetContextRenderableType()
 //
-//    Check whether EGL_KHR_create_context extension is supported
+//    Check whether EGL_KHR_create_context extension is supported.  If so,
+//    return EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT
 //
-EGLBoolean IsEGLKHRCreateContextSupported (const EGLDisplay *eglDisplay )
+EGLint GetContextRenderableType ( EGLDisplay *eglDisplay )
 {
-    const char *extensions = eglQueryString ( eglDisplay, EGL_EXTENSIONS );
+#ifdef EGL_KHR_create_context
+   const char *extensions = eglQueryString ( eglDisplay, EGL_EXTENSIONS );
 
-    // check whether EGL_KHR_create_context is in the extension string
-    if ( strstr( extensions, "EGL_KHR_create_context" ) )
-    {
-       // extension is supported
-       return EGL_TRUE;
-    }
-    else
-    {
-       // extension is not supported
-       return EGL_FALSE;
-    }
+   // check whether EGL_KHR_create_context is in the extension string
+   if ( extensions != NULL && strstr( extensions, "EGL_KHR_create_context" ) )
+   {
+      // extension is supported
+      return EGL_OPENGL_ES3_BIT_KHR;
+   }
+#endif
+   // extension is not supported
+   return EGL_OPENGL_ES2_BIT;
 }
 
 ///
@@ -126,38 +126,22 @@ EGLBoolean IsEGLKHRCreateContextSupported (const EGLDisplay *eglDisplay )
 //
 //    Creates an EGL rendering context and all associated elements
 //
-EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay,
+EGLBoolean CreateEGLContext ( EGLDisplay display, EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay,
                               EGLDisplay *eglDisplay, EGLContext *eglContext, EGLSurface *eglSurface,
                               EGLint attribList[] )
 {
    EGLint numConfigs = 0;
    EGLint majorVersion;
    EGLint minorVersion;
-   EGLDisplay display;
    EGLContext context;
    EGLSurface surface;
    EGLConfig config;
    EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
 
-   // Get Display
-   display = eglGetDisplay ( eglNativeDisplay );
-
    if ( display == EGL_NO_DISPLAY )
    {
       return EGL_FALSE;
    }
-
-   // if EGL_KHR_create_context extension is supported, then we will use
-   // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
-#ifdef EGL_KHR_create_context
-   if ( IsEGLKHRCreateContextSupported ( display ) )
-   {
-      // attribList[14] should be EGL_RENDERABLE_TYPE
-       assert ( attribList[14] == EGL_RENDERABLE_TYPE );
-
-      attribList[15] = EGL_OPENGL_ES3_BIT_KHR;
-   }
-#endif
 
    // Initialize EGL
    if ( !eglInitialize ( display, &majorVersion, &minorVersion ) )
@@ -235,6 +219,7 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
 GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags )
 {
 #ifndef __APPLE__
+   EGLDisplay display = eglGetDisplay( esContext->eglNativeDisplay );
    EGLint attribList[] =
    {
       EGL_RED_SIZE,       5,
@@ -244,11 +229,9 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, G
       EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
       EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
       EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
-
-      // the 14th and 15th element of this array should not be changed to different attributes
-      // as in CreateEGLContext(), we will update the EGL_OPENGL_ES2_BIT with EGL_OPENGL_ES3_BIT_KHR
-      // if EGL_KHR_create_context extension is supported by the implementation
-      EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+      // if EGL_KHR_create_context extension is supported, then we will use
+      // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
+      EGL_RENDERABLE_TYPE, GetContextRenderableType ( display ),
 
       EGL_NONE
    };
@@ -273,8 +256,7 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, G
       return GL_FALSE;
    }
 
-
-   if ( !CreateEGLContext ( esContext->eglNativeWindow,
+   if ( !CreateEGLContext ( display, esContext->eglNativeWindow,
                             esContext->eglNativeDisplay,
                             &esContext->eglDisplay,
                             &esContext->eglContext,
