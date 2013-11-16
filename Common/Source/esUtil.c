@@ -43,7 +43,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include <assert.h>
 #include "esUtil.h"
 #include "esUtil_win.h"
 
@@ -105,7 +104,7 @@ __attribute__ ( ( packed ) )
 //    Check whether EGL_KHR_create_context extension is supported.  If so,
 //    return EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT
 //
-EGLint GetContextRenderableType ( EGLDisplay *eglDisplay )
+EGLint GetContextRenderableType ( EGLDisplay eglDisplay )
 {
 #ifdef EGL_KHR_create_context
    const char *extensions = eglQueryString ( eglDisplay, EGL_EXTENSIONS );
