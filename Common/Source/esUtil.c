@@ -43,6 +43,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <assert.h>
 #include "esUtil.h"
 #include "esUtil_win.h"
 
@@ -97,6 +98,29 @@ __attribute__ ( ( packed ) )
 #endif
 
 #ifndef __APPLE__
+
+///
+// IsEGLKHRCreateContextSupported()
+//
+//    Check whether EGL_KHR_create_context extension is supported
+//
+EGLBoolean IsEGLKHRCreateContextSupported (const EGLDisplay *eglDisplay )
+{
+    const char *extensions = eglQueryString ( eglDisplay, EGL_EXTENSIONS );
+
+    // check whether EGL_KHR_create_context is in the extension string
+    if ( strstr( extensions, "EGL_KHR_create_context" ) )
+    {
+       // extension is supported
+       return EGL_TRUE;
+    }
+    else
+    {
+       // extension is not supported
+       return EGL_FALSE;
+    }
+}
+
 ///
 // CreateEGLContext()
 //
@@ -122,6 +146,18 @@ EGLBoolean CreateEGLContext ( EGLNativeWindowType eglNativeWindow, EGLNativeDisp
    {
       return EGL_FALSE;
    }
+
+   // if EGL_KHR_create_context extension is supported, then we will use
+   // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
+#ifdef EGL_KHR_create_context
+   if ( IsEGLKHRCreateContextSupported ( display ) )
+   {
+      // attribList[14] should be EGL_RENDERABLE_TYPE
+       assert ( attribList[14] == EGL_RENDERABLE_TYPE );
+
+      attribList[15] = EGL_OPENGL_ES3_BIT_KHR;
+   }
+#endif
 
    // Initialize EGL
    if ( !eglInitialize ( display, &majorVersion, &minorVersion ) )
@@ -208,7 +244,12 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, G
       EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
       EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
       EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
+
+      // the 14th and 15th element of this array should not be changed to different attributes
+      // as in CreateEGLContext(), we will update the EGL_OPENGL_ES2_BIT with EGL_OPENGL_ES3_BIT_KHR
+      // if EGL_KHR_create_context extension is supported by the implementation
       EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+
       EGL_NONE
    };
 
