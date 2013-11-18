@@ -401,7 +401,7 @@ static int esFileRead ( esFile *pFile, int bytesToRead, void *buffer )
 ///
 // esLoadTGA()
 //
-//    Loads a 24-bit TGA image from a file
+//    Loads a 8-bit, 24-bit or 32-bit TGA image from a file
 //
 char *ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, int *height )
 {
