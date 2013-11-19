@@ -119,82 +119,6 @@ EGLint GetContextRenderableType ( EGLDisplay eglDisplay )
    // extension is not supported
    return EGL_OPENGL_ES2_BIT;
 }
-
-///
-// CreateEGLContext()
-//
-//    Creates an EGL rendering context and all associated elements
-//
-EGLBoolean CreateEGLContext ( EGLDisplay display, EGLNativeWindowType eglNativeWindow, EGLNativeDisplayType eglNativeDisplay,
-                              EGLDisplay *eglDisplay, EGLContext *eglContext, EGLSurface *eglSurface,
-                              EGLint attribList[] )
-{
-   EGLint numConfigs = 0;
-   EGLint majorVersion;
-   EGLint minorVersion;
-   EGLContext context;
-   EGLSurface surface;
-   EGLConfig config;
-   EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
-
-   if ( display == EGL_NO_DISPLAY )
-   {
-      return EGL_FALSE;
-   }
-
-   // Initialize EGL
-   if ( !eglInitialize ( display, &majorVersion, &minorVersion ) )
-   {
-      return EGL_FALSE;
-   }
-
-   // Choose config
-   if ( !eglChooseConfig ( display, attribList, &config, 1, &numConfigs ) )
-   {
-      return EGL_FALSE;
-   }
-
-   if ( numConfigs < 1 )
-   {
-      return EGL_FALSE;
-   }
-
-#ifdef ANDROID
-   // For Android, need to get the EGL_NATIVE_VISUAL_ID and set it using ANativeWindow_setBuffersGeometry
-   {
-      EGLint format = 0;
-      eglGetConfigAttrib ( display, config, EGL_NATIVE_VISUAL_ID, &format );
-      ANativeWindow_setBuffersGeometry ( eglNativeWindow, 0, 0, format );
-   }
-#endif // ANDROID
-
-   // Create a surface
-   surface = eglCreateWindowSurface ( display, config, eglNativeWindow, NULL );
-
-   if ( surface == EGL_NO_SURFACE )
-   {
-      return EGL_FALSE;
-   }
-
-   // Create a GL context
-   context = eglCreateContext ( display, config, EGL_NO_CONTEXT, contextAttribs );
-
-   if ( context == EGL_NO_CONTEXT )
-   {
-      return EGL_FALSE;
-   }
-
-   // Make the context current
-   if ( !eglMakeCurrent ( display, surface, surface, context ) )
-   {
-      return EGL_FALSE;
-   }
-
-   *eglDisplay = display;
-   *eglSurface = surface;
-   *eglContext = context;
-   return EGL_TRUE;
-}
 #endif
 
 //////////////////////////////////////////////////////////////////
@@ -218,22 +142,10 @@ EGLBoolean CreateEGLContext ( EGLDisplay display, EGLNativeWindowType eglNativeW
 GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags )
 {
 #ifndef __APPLE__
-   EGLDisplay display = eglGetDisplay( esContext->eglNativeDisplay );
-   EGLint attribList[] =
-   {
-      EGL_RED_SIZE,       5,
-      EGL_GREEN_SIZE,     6,
-      EGL_BLUE_SIZE,      5,
-      EGL_ALPHA_SIZE,     ( flags & ES_WINDOW_ALPHA ) ? 8 : EGL_DONT_CARE,
-      EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
-      EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
-      EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
-      // if EGL_KHR_create_context extension is supported, then we will use
-      // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
-      EGL_RENDERABLE_TYPE, GetContextRenderableType ( display ),
-
-      EGL_NONE
-   };
+   EGLConfig config;
+   EGLint majorVersion;
+   EGLint minorVersion;
+   EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
 
    if ( esContext == NULL )
    {
@@ -255,18 +167,83 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, G
       return GL_FALSE;
    }
 
-   if ( !CreateEGLContext ( display, esContext->eglNativeWindow,
-                            esContext->eglNativeDisplay,
-                            &esContext->eglDisplay,
-                            &esContext->eglContext,
-                            &esContext->eglSurface,
-                            attribList ) )
+   esContext->eglDisplay = eglGetDisplay( esContext->eglNativeDisplay );
+   if ( esContext->eglDisplay == EGL_NO_DISPLAY )
+   {
+      return GL_FALSE;
+   }
+
+   // Initialize EGL
+   if ( !eglInitialize ( esContext->eglDisplay, &majorVersion, &minorVersion ) )
+   {
+      return GL_FALSE;
+   }
+
+   {
+      EGLint numConfigs = 0;
+      EGLint attribList[] =
+      {
+         EGL_RED_SIZE,       5,
+         EGL_GREEN_SIZE,     6,
+         EGL_BLUE_SIZE,      5,
+         EGL_ALPHA_SIZE,     ( flags & ES_WINDOW_ALPHA ) ? 8 : EGL_DONT_CARE,
+         EGL_DEPTH_SIZE,     ( flags & ES_WINDOW_DEPTH ) ? 8 : EGL_DONT_CARE,
+         EGL_STENCIL_SIZE,   ( flags & ES_WINDOW_STENCIL ) ? 8 : EGL_DONT_CARE,
+         EGL_SAMPLE_BUFFERS, ( flags & ES_WINDOW_MULTISAMPLE ) ? 1 : 0,
+         // if EGL_KHR_create_context extension is supported, then we will use
+         // EGL_OPENGL_ES3_BIT_KHR instead of EGL_OPENGL_ES2_BIT in the attribute list
+         EGL_RENDERABLE_TYPE, GetContextRenderableType ( esContext->eglDisplay ),
+         EGL_NONE
+      };
+
+      // Choose config
+      if ( !eglChooseConfig ( esContext->eglDisplay, attribList, &config, 1, &numConfigs ) )
+      {
+         return GL_FALSE;
+      }
+
+      if ( numConfigs < 1 )
+      {
+         return GL_FALSE;
+      }
+   }
+
+
+#ifdef ANDROID
+   // For Android, need to get the EGL_NATIVE_VISUAL_ID and set it using ANativeWindow_setBuffersGeometry
+   {
+      EGLint format = 0;
+      eglGetConfigAttrib ( esContext->eglDisplay, config, EGL_NATIVE_VISUAL_ID, &format );
+      ANativeWindow_setBuffersGeometry ( esContext->eglNativeWindow, 0, 0, format );
+   }
+#endif // ANDROID
+
+   // Create a surface
+   esContext->eglSurface = eglCreateWindowSurface ( esContext->eglDisplay, config, 
+                                                    esContext->eglNativeWindow, NULL );
+
+   if ( esContext->eglSurface == EGL_NO_SURFACE )
+   {
+      return GL_FALSE;
+   }
+
+   // Create a GL context
+   esContext->eglContext = eglCreateContext ( esContext->eglDisplay, config, 
+                                              EGL_NO_CONTEXT, contextAttribs );
+
+   if ( esContext->eglContext == EGL_NO_CONTEXT )
+   {
+      return GL_FALSE;
+   }
+
+   // Make the context current
+   if ( !eglMakeCurrent ( esContext->eglDisplay, esContext->eglSurface, 
+                          esContext->eglSurface, esContext->eglContext ) )
    {
       return GL_FALSE;
    }
 
 #endif // #ifndef __APPLE__
-
 
    return GL_TRUE;
 }
