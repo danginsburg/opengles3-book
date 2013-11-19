@@ -32,9 +32,9 @@
 // MRTs.c
 //
 //    This is an example to demonstrate Multiple Render Targets and framebuffer blits.
-//    The first rendering pass will output four colors (red, green, blue, gray)
+//    First, we will render a quad that outputs four colors (red, green, blue, gray)
 //    per fragment using MRTs.
-//    The second pass will copy the four color buffers into four screen quadrant
+//    Then, we will copy the four color buffers into four screen quadrants
 //    using framebuffer blits.
 //
 #include <stdlib.h>
@@ -236,27 +236,20 @@ void Draw ( ESContext *esContext )
       GL_COLOR_ATTACHMENT2,
       GL_COLOR_ATTACHMENT3 
    };
-   GLenum back[4] = 
-   {
-       GL_BACK,
-       GL_BACK,
-       GL_BACK,
-       GL_BACK 
-   };
    
    glGetIntegerv ( GL_FRAMEBUFFER_BINDING, &defaultFramebuffer );
 
-   // FIRST PASS: use MRTs to output four colors to four buffers
+   // FIRST: use MRTs to output four colors to four buffers
    glBindFramebuffer ( GL_FRAMEBUFFER, userData->fbo );
+   glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
    glDrawBuffers ( 4, attachments );
    DrawGeometry ( esContext );
 
-   // SECOND PASS: draw the four output textures into four quadrant of windows
+   // SECOND: copy the four output buffers into four window quadrants
    // with framebuffer blits
+
    // Restore the default framebuffer
    glBindFramebuffer ( GL_DRAW_FRAMEBUFFER, defaultFramebuffer );
-   glDrawBuffers ( 4, back );
-   glClear ( GL_COLOR_BUFFER_BIT );
    BlitTextures ( esContext );
 }
 
