@@ -1,7 +1,7 @@
 #ifndef __gl2platform_h_
 #define __gl2platform_h_
 
-/* $Revision: #1 $ on $Date: 2012/07/11 $ */
+/* $Revision: 23328 $ on $Date:: 2013-10-02 02:28:28 -0700 #$ */
 
 /*
  * This document is licensed under the SGI Free Software B License Version
@@ -9,7 +9,6 @@
  */
 
 /* Platform-specific types and definitions for OpenGL ES 2.X  gl2.h
- * Last modified on 2008/12/19
  *
  * Adopters may modify khrplatform.h and this file to suit their platform.
  * You are encouraged to submit all modifications to the Khronos group so that
@@ -20,30 +19,12 @@
 
 #include <KHR/khrplatform.h>
 
-
-#if (defined(_WIN32) || defined(__VC32__)) && !defined(_WIN32_WCE) /* Win32 */
-#   if defined (_DLL_EXPORTS)
-#       define GL_APICALL __declspec(dllexport)
-#   else
-#       define GL_APICALL __declspec(dllimport)
-#   endif
-#elif defined(_WIN32_WCE)             /* WinCE */
-#   define GL_APICALL
-#elif defined (__ARMCC_VERSION)                      /* ADS */
-#   define GL_APICALL
-#elif defined (__SYMBIAN32__) && defined (__GCC32__) /* Symbian GCC */
-#   define GL_APICALL __declspec(dllexport)
-#elif defined (__GNUC__)                             /* GCC dependencies (kludge) */
-#   define GL_APICALL
+#ifndef GL_APICALL
+#define GL_APICALL  KHRONOS_APICALL
 #endif
 
-
-#if (defined(_WIN32) || defined(__VC32__)) && !defined(_WIN32_WCE) /* Win32 */
-#define GL_APIENTRY __stdcall
-#else
-#define GL_APIENTRY
+#ifndef GL_APIENTRY
+#define GL_APIENTRY KHRONOS_APIENTRY
 #endif
-
-
 
 #endif /* __gl2platform_h_ */
