@@ -162,10 +162,10 @@ int Init ( ESContext *esContext )
 void DrawGeometry ( ESContext *esContext )
 {
    UserData *userData = esContext->userData;
-   GLfloat vVertices[] = { -0.5f,  0.5f, 0.0f,  
-                           -0.5f, -0.5f, 0.0f,  
-                            0.5f, -0.5f, 0.0f,  
-                            0.5f,  0.5f, 0.0f, 
+   GLfloat vVertices[] = { -1.0f,  1.0f, 0.0f,
+                           -1.0f, -1.0f, 0.0f,
+                            1.0f, -1.0f, 0.0f,
+                            1.0f,  1.0f, 0.0f,
                          };
    GLushort indices[] = { 0, 1, 2, 0, 2, 3 };
 
@@ -196,28 +196,28 @@ void BlitTextures ( ESContext *esContext )
 
    // set the fbo for reading
    glBindFramebuffer ( GL_READ_FRAMEBUFFER, userData->fbo );
-
+ 
    // Copy the output red buffer to lower left quadrant
    glReadBuffer ( GL_COLOR_ATTACHMENT0 );
-   glBlitFramebuffer ( 0, 0, esContext->width, esContext->height,
+   glBlitFramebuffer ( 0, 0, userData->textureWidth, userData->textureHeight,
                        0, 0, esContext->width/2, esContext->height/2, 
                        GL_COLOR_BUFFER_BIT, GL_LINEAR );
 
    // Copy the output green buffer to lower right quadrant
    glReadBuffer ( GL_COLOR_ATTACHMENT1 );
-   glBlitFramebuffer ( 0, 0, esContext->width, esContext->height,
+   glBlitFramebuffer ( 0, 0, userData->textureWidth, userData->textureHeight,
                        esContext->width/2, 0, esContext->width, esContext->height/2, 
                        GL_COLOR_BUFFER_BIT, GL_LINEAR );
 
    // Copy the output blue buffer to upper left quadrant
    glReadBuffer ( GL_COLOR_ATTACHMENT2 );
-   glBlitFramebuffer ( 0, 0, esContext->width, esContext->height,
+   glBlitFramebuffer ( 0, 0, userData->textureWidth, userData->textureHeight,
                        0, esContext->height/2, esContext->width/2, esContext->height, 
                        GL_COLOR_BUFFER_BIT, GL_LINEAR );
 
    // Copy the output gray buffer to upper right quadrant
    glReadBuffer ( GL_COLOR_ATTACHMENT3 );
-   glBlitFramebuffer ( 0, 0, esContext->width, esContext->height,
+   glBlitFramebuffer ( 0, 0, userData->textureWidth, userData->textureHeight,
                        esContext->width/2, esContext->height/2, esContext->width, esContext->height, 
                        GL_COLOR_BUFFER_BIT, GL_LINEAR );
 }
