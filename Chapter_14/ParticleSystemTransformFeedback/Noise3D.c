@@ -43,7 +43,7 @@
 #define NOISE_TABLE_MASK   255
 
 #define FLOOR(x)           ((int)(x) - ((x) < 0 && (x) != (int)(x)))
-#define smoothstep(t)      ( t * t * (3.0f - 2.0f * t) )
+#define smoothstep(t)      ( t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f ) )
 #define lerp(t, a, b)      ( a + t * (b - a) )
 #ifdef _WIN32
 #define srandom srand
