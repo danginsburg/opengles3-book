@@ -164,7 +164,12 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
 
    // Set the ESContext* to the GWL_USERDATA so that it is available to the
    // ESWindowProc
-   SetWindowLongPtr (  esContext->eglNativeWindow, GWL_USERDATA, ( LONG ) ( LONG_PTR ) esContext );
+#ifdef _WIN64
+   //In LLP64 LONG is stll 32bit.
+   SetWindowLongPtr( esContext->eglNativeWindow, GWL_USERDATA, ( LONGLONG ) ( LONG_PTR )esContext);
+#else
+   SetWindowLongPtr ( esContext->eglNativeWindow, GWL_USERDATA, ( LONG ) ( LONG_PTR ) esContext );
+#endif
 
 
    if ( esContext->eglNativeWindow == NULL )
