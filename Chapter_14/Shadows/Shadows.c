@@ -186,7 +186,7 @@ int InitShadowMap ( ESContext *esContext )
 
    glGenTextures ( 1, &userData->shadowMapTextureId );
    glBindTexture ( GL_TEXTURE_2D, userData->shadowMapTextureId );
-   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+   glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     GL_CLAMP_TO_EDGE );
    glTexParameteri ( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_CLAMP_TO_EDGE );
@@ -281,7 +281,7 @@ int Init ( ESContext *esContext )
       "   float pixelSize = 0.002; // 1/500                           \n"
       "   vec4 offset = vec4 ( x * pixelSize * v_shadowCoord.w,       \n"
       "                        y * pixelSize * v_shadowCoord.w,       \n"
-      "                        0.0, 0.0 );                            \n"
+      "                        -0.005 * v_shadowCoord.w, 0.0 );       \n"
       "   return textureProj ( s_shadowMap, v_shadowCoord + offset ); \n"
       "}                                                              \n"
       "                                                               \n"
