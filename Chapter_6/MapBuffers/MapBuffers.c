@@ -232,7 +232,7 @@ int esMain ( ESContext *esContext )
 {
    esContext->userData = malloc ( sizeof ( UserData ) );
 
-   esCreateWindow ( esContext, "VertexBufferObjects", 320, 240, ES_WINDOW_RGB );
+   esCreateWindow ( esContext, "MapBuffers", 320, 240, ES_WINDOW_RGB );
 
    if ( !Init ( esContext ) )
    {
