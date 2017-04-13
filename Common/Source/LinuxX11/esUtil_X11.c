@@ -29,6 +29,7 @@
 
 // X11 related local variables
 static Display *x_display = NULL;
+static Atom s_wmDeleteMessage;
 
 //////////////////////////////////////////////////////////////////
 //
@@ -79,6 +80,8 @@ EGLBoolean WinCreate(ESContext *esContext, const char *title)
                CopyFromParent, InputOutput,
                CopyFromParent, CWEventMask,
                &swa );
+    s_wmDeleteMessage = XInternAtom(x_display, "WM_DELETE_WINDOW", False);
+    XSetWMProtocols(x_display, win, &s_wmDeleteMessage, 1);
 
     xattr.override_redirect = FALSE;
     XChangeWindowAttributes ( x_display, win, CWOverrideRedirect, &xattr );
@@ -136,6 +139,11 @@ GLboolean userInterrupt(ESContext *esContext)
             {
                 if (esContext->keyFunc != NULL)
                     esContext->keyFunc(esContext, text, 0, 0);
+            }
+        }
+        if (xev.type == ClientMessage) {
+            if (xev.xclient.data.l[0] == s_wmDeleteMessage) {
+                userinterrupt = GL_TRUE;
             }
         }
         if ( xev.type == DestroyNotify )
