@@ -175,7 +175,7 @@ int Init ( ESContext *esContext )
 //
 void Draw ( ESContext *esContext )
 {
-   UserData *userData = esContext->userData;
+   UserData *userData = (UserData *) esContext->userData;
    GLfloat vVertices[] = {  0.0f,  0.5f, 0.0f,
                             -0.5f, -0.5f, 0.0f,
                             0.5f, -0.5f, 0.0f
@@ -199,7 +199,7 @@ void Draw ( ESContext *esContext )
 
 void Shutdown ( ESContext *esContext )
 {
-   UserData *userData = esContext->userData;
+   UserData *userData = (UserData *) esContext->userData;
 
    glDeleteProgram ( userData->programObject );
 }
