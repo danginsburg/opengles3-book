@@ -16,6 +16,7 @@ void ObjModel::parse(string file)
 
     getline(&line, &len, fptr);
     sscanf(line, "# vertex count = %d", &numVertices);
+    numVertices++;
     getline(&line, &len, fptr);
     sscanf(line, "# face count = %d", &numTriangles);
 
@@ -24,14 +25,9 @@ void ObjModel::parse(string file)
         vertexArray = new GLfloat[numVertices*6];
         vcnt = (unsigned char*)calloc(numVertices, 1);
         printf("allocate Vertices %d %p\n", numVertices, vertexArray);
-        for(int i = 0; i < numVertices*6; i+=6){
+        for(int i = 6; i < numVertices*6; i+=6){
             getline(&line, &len, fptr);
             sscanf(line, "v %f %f %f", vertexArray+i, vertexArray+i+1, vertexArray+i+2);
-            /*
-            *(vertexArray+i) *= 5.0f;
-            *(vertexArray+i+1) *= 5.0f;
-            *(vertexArray+i+2) *= 5.0f;
-            */
         }
     }
     if(numTriangles > 0){
@@ -41,9 +37,6 @@ void ObjModel::parse(string file)
         for(int i = 0; i < numTriangles*3; i+=3){
             getline(&line, &len, fptr);
             sscanf(line, "f %d %d %d", indexArray+i, indexArray+i+1, indexArray+i+2);
-            *(indexArray+i) -= 1;
-            *(indexArray+i+1) -= 1;
-            *(indexArray+i+2) -= 1;
 
             #if 1
             //calculate normal
@@ -53,9 +46,7 @@ void ObjModel::parse(string file)
                 vfloat3 v1 = (vfloat3){ *(vertexArray+vidx[0]*6), *(vertexArray+vidx[0]*6+1), *(vertexArray+vidx[0]*6+2) };
                 vfloat3 v2 = (vfloat3){ *(vertexArray+vidx[1]*6), *(vertexArray+vidx[1]*6+1), *(vertexArray+vidx[1]*6+2) };
                 vfloat3 v3 = (vfloat3){ *(vertexArray+vidx[2]*6), *(vertexArray+vidx[2]*6+1), *(vertexArray+vidx[2]*6+2) };
-                //vfloat3 v1 = *((vfloat3*)( vertexArray + vidx[0]*6 )));
-                //vfloat3 v2 = *((vfloat3*)( vertexArray + vidx[1]*6 ));
-                //vfloat3 v3 = *((vfloat3*)( vertexArray + vidx[2]*6 ));
+
                 #if 1
                 vfloat3 c1 = v3 - v2;
                 vfloat3 c2 = v1 - v2;
