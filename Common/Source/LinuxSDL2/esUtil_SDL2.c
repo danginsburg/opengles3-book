@@ -63,9 +63,6 @@ EGLBoolean WinCreate(ESContext *esContext, const char *title)
 
     glc = SDL_GL_CreateContext(win);
 
-    rdr = SDL_CreateRenderer(
-        win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
-
     SDL_SysWMinfo sysInfo;
     SDL_VERSION(&sysInfo.version);
     SDL_GetWindowWMInfo(win, &sysInfo);
@@ -90,17 +87,17 @@ GLboolean userInterrupt(ESContext *esContext)
     SDL_Event e;
     while(SDL_PollEvent(&e)){
         switch(e.type){
-			case SDL_QUIT: 
+            case SDL_QUIT: 
                 userinterrupt = GL_TRUE;
                 break;
-			case SDL_KEYDOWN:
-				text = e.key.keysym.sym;
-				printf("key %c pressed\n", text);
+            case SDL_KEYDOWN:
+                text = e.key.keysym.sym;
+                printf("key %c pressed\n", text);
                 if (esContext->keyFunc != NULL)
                     esContext->keyFunc(esContext, text, 0, 0);
                 break;
 
-		}
+        }
     }
 
     return userinterrupt;
@@ -147,21 +144,21 @@ extern int esMain( ESContext *esContext );
 //
 int main ( int argc, char *argv[] )
 {
-   ESContext esContext;
+    ESContext esContext;
    
-   memset ( &esContext, 0, sizeof( esContext ) );
+    memset ( &esContext, 0, sizeof( esContext ) );
 
 
-   if ( esMain ( &esContext ) != GL_TRUE )
-      return 1;   
+    if ( esMain ( &esContext ) != GL_TRUE )
+        return 1;   
  
-   WinLoop ( &esContext );
+    WinLoop ( &esContext );
 
-   if ( esContext.shutdownFunc != NULL )
-	   esContext.shutdownFunc ( &esContext );
+    if ( esContext.shutdownFunc != NULL )
+        esContext.shutdownFunc ( &esContext );
 
-   if ( esContext.userData != NULL )
-	   free ( esContext.userData );
+    if ( esContext.userData != NULL )
+        free ( esContext.userData );
 
-   return 0;
+    return 0;
 }
