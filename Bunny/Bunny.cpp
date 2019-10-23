@@ -209,6 +209,21 @@ void KeyFunc( ESContext *esContext, unsigned char keyval, int dummy0, int dummy1
     }
 }
 
+void MouseFunc( ESContext *esContext, ESMouseHandle *handle)
+{
+    switch(handle->event){
+        case ES_MOUSE_BUTTON_DOWN:
+            printf("button[%d] down at (%d, %d) clicks %d\n", handle->button, handle->x, handle->y, handle->clicks);
+            break;
+        case ES_MOUSE_BUTTON_UP:
+            printf("button[%d] up at (%d, %d) clicks %d\n", handle->button, handle->x, handle->y, handle->clicks);
+            break;
+        case ES_MOUSE_MOTION:
+            printf("moving MV(%d, %d) to (%d, %d)\n", handle->mv_x, handle->mv_y, handle->x, handle->y);
+            break;
+    }
+}
+
 ///
 // Cleanup
 //
@@ -239,6 +254,7 @@ int esMain ( ESContext *esContext )
     esRegisterUpdateFunc ( esContext, Update );
     esRegisterDrawFunc ( esContext, Draw );
     esRegisterKeyFunc( esContext, KeyFunc );
+    esRegisterMouseFunc( esContext, MouseFunc );
 
     return GL_TRUE;
 }

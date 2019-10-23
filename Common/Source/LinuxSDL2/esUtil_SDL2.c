@@ -85,6 +85,8 @@ GLboolean userInterrupt(ESContext *esContext)
     char text;
 
     SDL_Event e;
+    int mouse_evt = 0;
+    ESMouseHandle handle = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     while(SDL_PollEvent(&e)){
         switch(e.type){
             case SDL_QUIT: 
@@ -96,8 +98,53 @@ GLboolean userInterrupt(ESContext *esContext)
                 if (esContext->keyFunc != NULL)
                     esContext->keyFunc(esContext, text, 0, 0);
                 break;
-
+            case SDL_MOUSEBUTTONDOWN:
+            case SDL_MOUSEBUTTONUP:
+                mouse_evt = 1;
+                handle.event = e.type == SDL_MOUSEBUTTONDOWN ? ES_MOUSE_BUTTON_DOWN : ES_MOUSE_BUTTON_UP;
+                handle.x = e.button.x;
+                handle.y = e.button.y;
+                handle.clicks = e.button.clicks;
+                handle.state = e.button.state == SDL_PRESSED ? ES_MOUSE_BUTTON_PRESSED : ES_MOUSE_BUTTON_RELEASED;
+                switch(e.button.button){
+                    case SDL_BUTTON_LEFT:
+                        handle.button = ES_MOUSE_BUTTON_LEFT;
+                        break;
+                    case SDL_BUTTON_MIDDLE:
+                        handle.button = ES_MOUSE_BUTTON_MIDDLE;
+                        break;
+                    case SDL_BUTTON_RIGHT:
+                        handle.button = ES_MOUSE_BUTTON_RIGHT;
+                        break;
+                }
+                break;
+            case SDL_MOUSEWHEEL:
+                mouse_evt = 1;
+                handle.event = ES_MOUSE_WHEEL;
+                handle.x = e.wheel.x;
+                handle.y = e.wheel.y;
+                if(e.wheel.direction == SDL_MOUSEWHEEL_FLIPPED){
+                    handle.x *= -1;
+                    handle.y *= -1;
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                mouse_evt = 1;
+                handle.event = ES_MOUSE_MOTION;
+                handle.x = e.motion.x;
+                handle.y = e.motion.y;
+                handle.mv_x = e.motion.xrel;
+                handle.mv_y = e.motion.yrel;
+                if(e.motion.state & SDL_BUTTON_LMASK)
+                    handle.state |= ES_MOUSE_BUTTON_LMASK;
+                if(e.motion.state & SDL_BUTTON_MMASK)
+                    handle.state |= ES_MOUSE_BUTTON_MMASK;
+                if(e.motion.state & SDL_BUTTON_RMASK)
+                    handle.state |= ES_MOUSE_BUTTON_RMASK;
+                break;
         }
+        if(mouse_evt && esContext->mouseFunc != NULL)
+            esContext->mouseFunc(esContext, &handle);
     }
 
     return userinterrupt;
@@ -145,7 +192,7 @@ extern int esMain( ESContext *esContext );
 int main ( int argc, char *argv[] )
 {
     ESContext esContext;
-   
+
     memset ( &esContext, 0, sizeof( esContext ) );
 
 

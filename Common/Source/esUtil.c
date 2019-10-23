@@ -272,6 +272,13 @@ void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void ( ESCALLBACK *
    esContext->updateFunc = updateFunc;
 }
 
+///
+//  esRegisterMouseFunc()
+//
+void ESUTIL_API esRegisterMouseFunc ( ESContext *esContext, void ( ESCALLBACK *mouseFunc ) ( ESContext *, ESMouseHandle *) )
+{
+    esContext->mouseFunc = mouseFunc;
+}
 
 ///
 //  esRegisterKeyFunc()
