@@ -1,6 +1,6 @@
 R"(
 
-#version 300 es
+#version 320 es
 precision mediump float;
 in vec4 v_pos;
 in vec2 v_texcoord;

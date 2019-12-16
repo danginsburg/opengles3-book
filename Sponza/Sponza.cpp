@@ -61,6 +61,10 @@ typedef struct
     // MVP matrix
     GLfloat     angle;
     ESMatrix    mvpMatrix;
+    bool        rotate;
+    GLfloat     angle_x;
+    GLfloat     angle_y;
+    GLfloat     distant;
 
     //ObjModel    obj;
 } UserData;
@@ -195,6 +199,10 @@ int Init ( ESContext *esContext)
     // Get the uniform locations
     userData->mvpLoc = glGetUniformLocation ( userData->programObject, "u_mvpMatrix" );
     userData->samplerLoc = glGetUniformLocation( userData->programObject, "s_texture" );
+    userData->angle_x = 0;
+    userData->angle_y = 0;
+    userData->rotate = false;
+    userData->distant = 0.5;
 
     Assimp::Importer importer;
     printf("load %s\n", modelpath.c_str());
@@ -314,10 +322,12 @@ void Update ( ESContext *esContext, float deltaTime )
     esMatrixLoadIdentity ( &modelview );
 
     // Translate away from the viewer
-    esTranslate ( &modelview, 0.0, -0.3, -0.5 );
+    esTranslate ( &modelview, 0.0, -0.3, -(userData->distant) );
 
     // Rotate the cube
-    esRotate ( &modelview, -90, 0.0, 1.0, 0.0 );
+    //esRotate ( &modelview, -90, 0.0, 1.0, 0.0 );
+    esRotate ( &modelview, userData->angle_y, 1.0, 0.0, 0.0 );
+    esRotate ( &modelview, userData->angle_x, 0.0, 1.0, 0.0 );
     esScale( &modelview, 0.001, 0.001, 0.001 );
 
     // Compute the final MVP by multiplying the
@@ -385,15 +395,33 @@ void KeyFunc( ESContext *esContext, unsigned char keyval, int dummy0, int dummy1
 
 void MouseFunc( ESContext *esContext, ESMouseHandle *handle)
 {
+    UserData *userData = (UserData*)(esContext->userData);
     switch(handle->event){
         case ES_MOUSE_BUTTON_DOWN:
-            printf("button[%d] down at (%d, %d) clicks %d\n", handle->button, handle->x, handle->y, handle->clicks);
+            userData->rotate = true;
             break;
         case ES_MOUSE_BUTTON_UP:
-            printf("button[%d] up at (%d, %d) clicks %d\n", handle->button, handle->x, handle->y, handle->clicks);
+            userData->rotate = false;
             break;
         case ES_MOUSE_MOTION:
-            printf("moving MV(%d, %d) to (%d, %d)\n", handle->mv_x, handle->mv_y, handle->x, handle->y);
+            if(userData->rotate){
+                userData->angle_x -= handle->mv_x * 0.1;
+                userData->angle_x = userData->angle_x > 360 ? 
+                    userData->angle_x - 360 : 
+                        userData->angle_x < 0 ? 
+                            userData->angle_x + 360 : 
+                            userData->angle_x;
+                userData->angle_y -= handle->mv_y * 0.1;
+                userData->angle_y = userData->angle_y > 360 ? 
+                    userData->angle_y - 360 : 
+                        userData->angle_y < 0 ? 
+                            userData->angle_y + 360 : 
+                            userData->angle_y;
+            }
+            break;
+        case ES_MOUSE_WHEEL:
+            userData->distant -= handle->y * 0.02;
+            userData->distant = userData->distant < 0.1 ? 0.1 : userData->distant > 8 ? 8 : userData->distant;
             break;
     }
 }

@@ -1,6 +1,6 @@
 R"(
 
-#version 300 es
+#version 320 es
 precision highp float;
 uniform mat4 u_mvpMatrix;
 layout(location = 0) in vec4 a_position;
