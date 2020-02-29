@@ -3,9 +3,11 @@ project( ES3_Book )
 
 include_directories( External/Include )
 include_directories( Common/Include )
+include_directories( stb )
 
 find_library( OPENGLES3_LIBRARY GLESv2 "OpenGL ES v3.0 library")
 find_library( EGL_LIBRARY EGL "EGL 1.4 library" )
+find_package(assimp REQUIRED)
  
 SUBDIRS( Common
          Chapter_2/Hello_Triangle
@@ -26,5 +28,7 @@ SUBDIRS( Common
          Chapter_14/ParticleSystem
          Chapter_14/ParticleSystemTransformFeedback 
          Chapter_14/Shadows 
-         Chapter_14/TerrainRendering )	
-		
+         Chapter_14/TerrainRendering 
+         Bunny
+         Sponza )
+

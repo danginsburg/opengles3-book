@@ -97,6 +97,45 @@ typedef struct
 
 typedef struct ESContext ESContext;
 
+typedef enum
+{
+    ES_MOUSE_BUTTON_DOWN = 0,
+    ES_MOUSE_BUTTON_UP,
+    ES_MOUSE_MOTION,
+    ES_MOUSE_WHEEL
+} ESMouseEvent;
+
+typedef enum
+{
+    ES_MOUSE_BUTTON_LEFT = 1,
+    ES_MOUSE_BUTTON_MIDDLE,
+    ES_MOUSE_BUTTON_RIGHT
+} ESMouseButton;
+
+typedef enum
+{
+    ES_MOUSE_BUTTON_PRESSED = 0,
+    ES_MOUSE_BUTTON_RELEASED,
+    ES_MOUSE_BUTTON_LMASK = 1 << ES_MOUSE_BUTTON_LEFT,
+    ES_MOUSE_BUTTON_MMASK = 1 << ES_MOUSE_BUTTON_MIDDLE,
+    ES_MOUSE_BUTTON_RMASK = 1 << ES_MOUSE_BUTTON_RIGHT
+} ESMouseState;
+
+typedef struct
+{
+    ESMouseEvent event;
+    ESMouseButton button;
+    ESMouseState state;
+
+    int x;
+    int y;
+    int clicks;
+
+    int mv_x;
+    int mv_y;
+    int mv_mask;
+} ESMouseHandle;
+
 struct ESContext
 {
    /// Put platform specific data here
@@ -132,6 +171,7 @@ struct ESContext
    void ( ESCALLBACK *drawFunc ) ( ESContext * );
    void ( ESCALLBACK *shutdownFunc ) ( ESContext * );
    void ( ESCALLBACK *keyFunc ) ( ESContext *, unsigned char, int, int );
+   void ( ESCALLBACK *mouseFunc ) ( ESContext *, ESMouseHandle *);
    void ( ESCALLBACK *updateFunc ) ( ESContext *, float deltaTime );
 };
 
@@ -175,6 +215,8 @@ void ESUTIL_API esRegisterShutdownFunc ( ESContext *esContext, void ( ESCALLBACK
 /// \param updateFunc Update callback function that will be used to render the scene
 //
 void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void ( ESCALLBACK *updateFunc ) ( ESContext *, float ) );
+
+void ESUTIL_API esRegisterMouseFunc ( ESContext *esContext, void ( ESCALLBACK *mouseFunc ) ( ESContext *, ESMouseHandle *) );
 
 //
 /// \brief Register a keyboard input processing callback function

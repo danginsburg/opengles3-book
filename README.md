@@ -7,6 +7,7 @@ This repository contains the sample code for the OpenGL ES 3.0 Programming Guide
 The sample code for the OpenGL ES 3.0 Programming Guide currently builds on the following platforms:
 
 * Microsoft Windows 
+* Linux SDL2
 * Linux X11
 * Android 4.3+ NDK (C/C++)
 * Android 4.3+ SDK (Java)
