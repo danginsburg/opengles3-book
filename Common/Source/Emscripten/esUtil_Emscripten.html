@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>OpenGL ES 3.0 Programming Guide</title>
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        border: 0;
+        overflow: hidden; /* Disable scrollbar */
+        display: block; /* No floating content on sides */
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body onresize="Module.ccall('c_reshape_window');">
+    <canvas id='canvas'></canvas>
+    <script type='text/javascript'>
+      var Module = {
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+          return canvas;
+        })()
+      };
+    </script>
+    {{{ SCRIPT }}}
+  </body>
+</html>
