@@ -496,8 +496,7 @@ void Shutdown ( ESContext *esContext )
       free ( userData->indices );
    }
 
-   if ( userData->texCoords != NULL );
-
+   if ( userData->texCoords != NULL )
    {
       free ( userData->texCoords );
    }
