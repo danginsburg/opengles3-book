@@ -159,10 +159,6 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
    // For Emscripten, get the width/height from the window rather than what the
    // application requested.
    c_reshape_window();
-   //esContext->width = js_get_window_width();
-   //esContext->height = js_get_window_height();
-   // Set canvas size
-   //emscripten_set_canvas_element_size("canvas", esContext->width, esContext->height);
 
    return GL_TRUE;
 }
