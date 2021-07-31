@@ -414,6 +414,18 @@ char *ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, 
       {
          bytesRead = esFileRead ( fp, bytesToRead, buffer );
          esFileClose ( fp );
+         
+         // Convert BGR to RGB, BGRA to RGBA
+         if ( Header.ColorDepth == 24 || Header.ColorDepth == 32 )
+         {
+            int i;
+            for ( i = 0; i < bytesToRead; i += Header.ColorDepth / 8 )
+            {
+               char tmp = buffer[i];
+               buffer[i] = buffer[i + 2];
+               buffer[i + 2] = tmp;
+            }
+         }
 
          return ( buffer );
       }
