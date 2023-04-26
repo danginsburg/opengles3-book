@@ -139,6 +139,7 @@ struct ESContext
 ///
 //  Public Functions
 //
+int esMain ( ESContext *esContext );
 
 //
 /// \brief Create a window with the specified parameters

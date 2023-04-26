@@ -47,8 +47,8 @@
 #include "esUtil_win.h"
 
 #ifdef ANDROID
+#include <game-activity/native_app_glue/android_native_app_glue.h>
 #include <android/log.h>
-#include <android_native_app_glue.h>
 #include <android/asset_manager.h>
 typedef AAsset esFile;
 #else
@@ -403,7 +403,7 @@ char *ESUTIL_API esLoadTGA ( void *ioContext, const char *fileName, int *width, 
    *height = Header.Height;
 
    if ( Header.ColorDepth == 8 ||
-         Header.ColorDepth == 24 || Header.ColorDepth == 32 )
+        Header.ColorDepth == 24 || Header.ColorDepth == 32 )
    {
       int bytesToRead = sizeof ( char ) * ( *width ) * ( *height ) * Header.ColorDepth / 8;
 

@@ -1,0 +1,39 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 33
+    ndkVersion '25.1.8937393'
+
+    defaultConfig {
+        applicationId = 'com.openglesbook.ParticleSystem'
+        minSdkVersion 19
+        targetSdkVersion 33
+        externalNativeBuild {
+            cmake.arguments '-DANDROID_STL=c++_static'
+        }
+    }
+
+    externalNativeBuild {
+        cmake.path 'src/main/cpp/CMakeLists.txt'
+        cmake.version '3.22.1'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures.prefab true
+    buildTypes.release.minifyEnabled true
+    namespace 'com.openglesbook.ParticleSystem'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.startup:startup-runtime:1.1.1'
+    implementation 'androidx.core:core:1.10.0'
+    implementation 'androidx.games:games-activity:2.0.1'
+}

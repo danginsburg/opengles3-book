@@ -65,17 +65,17 @@ GLuint CreateSimpleTextureCubemap( )
    GLubyte cubePixels[6][3] =
    {
       // Face 0 - Red
-      255, 0, 0,
+           {255, 0, 0},
       // Face 1 - Green,
-      0, 255, 0,
+           {0, 255, 0},
       // Face 2 - Blue
-      0, 0, 255,
+           {0, 0, 255},
       // Face 3 - Yellow
-      255, 255, 0,
+           {255, 255, 0},
       // Face 4 - Purple
-      255, 0, 255,
+           {255, 0, 255},
       // Face 5 - White
-      255, 255, 255
+           {255, 255, 255},
    };
 
    // Generate a texture object
