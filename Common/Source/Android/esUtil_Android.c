@@ -38,7 +38,8 @@
 // Includes
 //
 #include <android/log.h>
-#include <android_native_app_glue.h>
+#include <game-activity/native_app_glue/android_native_app_glue.h>
+#include <string.h>
 #include <time.h>
 #include "esUtil.h"
 
@@ -116,6 +117,35 @@ static void HandleCommand ( struct android_app *pApp, int32_t cmd )
    }
 }
 
+// Implement input event handling function.
+static int32_t HandleInput(struct android_app* app) {
+   // ESContext *esContext = (struct ESContext *) app->userData;
+   struct android_input_buffer *ib = android_app_swap_input_buffers(app);
+
+   if (!ib) return 0;
+
+   if (ib->motionEventsCount) {
+      for (int i = 0; i < ib->motionEventsCount; i++) {
+         struct GameActivityMotionEvent *event = &ib->motionEvents[i];
+         int32_t ptrIdx = 0;
+         switch (event->action & AMOTION_EVENT_ACTION_MASK) {
+            case AMOTION_EVENT_ACTION_POINTER_DOWN:
+            case AMOTION_EVENT_ACTION_POINTER_UP:
+               // Retrieve the index for the starting and the ending of any secondary pointers
+               ptrIdx = (event->action & AMOTION_EVENT_ACTION_POINTER_INDEX_MASK) >>
+                                                                                  AMOTION_EVENT_ACTION_POINTER_INDEX_SHIFT;
+            case AMOTION_EVENT_ACTION_DOWN:
+            case AMOTION_EVENT_ACTION_UP:
+               break;
+            case AMOTION_EVENT_ACTION_MOVE:
+               break;
+         }
+      }
+      android_app_clear_motion_events(ib);
+      android_app_clear_key_events(ib);
+   }
+   return 0;
+}
 ///
 //  Global extern.  The application must declare this function
 //  that runs the application.
@@ -138,9 +168,6 @@ void android_main ( struct android_app *pApp )
    ESContext esContext;
    float lastTime;
 
-   // Make sure glue isn't stripped.
-   app_dummy();
-
    // Initialize the context
    memset ( &esContext, 0, sizeof ( ESContext ) );
 
@@ -150,6 +177,10 @@ void android_main ( struct android_app *pApp )
    pApp->userData = &esContext;
 
    lastTime = GetCurrentTime();
+
+   android_app_set_key_event_filter(pApp, NULL);
+   android_app_set_motion_event_filter(pApp, NULL);
+
 
    while ( 1 )
    {
@@ -171,6 +202,8 @@ void android_main ( struct android_app *pApp )
          }
 
       }
+      // Process input events if there are any.
+      HandleInput(pApp);
 
       if ( esContext.eglNativeWindow == NULL )
       {

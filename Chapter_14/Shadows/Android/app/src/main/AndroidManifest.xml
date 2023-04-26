@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- note that we can not have the following for the application setting:
+        android:hasCode="false"
+        GameActivity is androidx class, outside of framework library, app loader
+        has to search in the APK's dex file.
+    -->
+<application
+    android:label="@string/app_name"
+    android:theme="@style/Application.Fullscreen">
+     <activity android:name="com.google.androidgamesdk.GameActivity"
+               android:launchMode="singleTask"
+               android:configChanges="orientation|keyboardHidden"
+               android:exported="true">
+        <meta-data android:name="android.app.lib_name"
+            android:value="Shadows" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <provider
+        android:name="androidx.startup.InitializationProvider"
+        android:authorities="${applicationId}.androidx-startup"
+        tools:node="remove" />
+</application>
+<uses-feature android:glEsVersion="0x00030000"/>
+</manifest>
